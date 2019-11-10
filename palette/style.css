@@ -148,7 +148,7 @@
 .canvas {
   width: 512px;
   height: 512px;
-  background: #c4c4c4;
+  background: white;
   border: 1px solid #c4c4c4;
 }
 
@@ -182,7 +182,7 @@
   margin: 0 35px 0 20px;
 }
 
-.switcher__option-p {
+.switcher__option-size {
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
