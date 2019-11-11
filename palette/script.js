@@ -5,10 +5,10 @@ const canvas = document.querySelector('.canvas');
 canvas.width = 512;
 canvas.height = 512;
 const ctx = canvas.getContext('2d');
-const currentColor = document.querySelector('.current-color');
 const previousColor = document.querySelector('.prev-color');
 const colors = document.querySelectorAll('.colors__color');
 const tools = document.querySelectorAll('.tools__tool');
+const colorPicker = document.querySelector('.colors__color-picker');
 const activeSize = 'active-size';
 const activeSquare = 'active-square';
 const activeTool = 'active-tool';
@@ -91,10 +91,10 @@ class Canvas {
       row.forEach((cell, idxCol) => {
         ctx.fillStyle = cell;
         ctx.fillRect(
-          this.cellWidth * idxCol,
-          this.cellHeight * idxRow,
-          this.cellWidth,
-          this.cellHeight,
+          this.cellSize * idxCol,
+          this.cellSize * idxRow,
+          this.cellSize,
+          this.cellSize,
         );
       });
     });
@@ -105,13 +105,13 @@ class Canvas {
     this.currColor = color;
     localStorage.setItem(prevColor, this.prevColor);
     localStorage.setItem(currColor, this.currColor);
-    currentColor.style.backgroundColor = this.currColor;
+    colorPicker.value = this.currColor;
     previousColor.style.backgroundColor = this.prevColor;
   }
 
   drawWithPencil() {
     ctx.strokeStyle = this.currColor;
-    ctx.lineWidth = this.cellWidth;
+    ctx.lineWidth = this.cellSize;
     let isDrawing = false;
     let lastX = 0;
     let lastY = 0;
@@ -143,6 +143,7 @@ class Canvas {
   fill() {
     canvas.addEventListener('click', () => {
       ctx.fillStyle = this.currColor;
+      ctx.fillRect(0, 0, 512, 512);
     });
     canvas.addEventListener('mousemove', () => {
       canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
@@ -153,7 +154,7 @@ class Canvas {
 const drawingField = new Canvas();
 
 window.onload = () => {
-  currentColor.style.backgroundColor = drawingField.currColor;
+  colorPicker.value = drawingField.currColor;
   previousColor.style.backgroundColor = drawingField.prevColor;
   tools[2].classList.add(activeTool);
   selectActiveSize(drawingField.size);
@@ -214,6 +215,10 @@ colors.forEach((color, index) => {
   });
 });
 
+colorPicker.onchange = () => {
+  drawingField.setCurrentColor(colorPicker.value);
+};
+
 tools.forEach((tool, ind) => {
   tool.addEventListener('click', () => {
     tools.forEach((t) => t.classList.remove(activeTool));
@@ -246,15 +251,15 @@ tools.forEach((tool, ind) => {
 });
 
 
-/* function activateFirstImage(ctx, cellWidth, cellHeight) {
+/* function activateFirstImage(ctx, cellSize, cellSize) {
   firstPic.forEach((row, idxRow) => {
     row.forEach((cell, idxCol) => {
       ctx.fillStyle = "#" + cell;
       ctx.fillRect(
-        cellWidth * idxCol,
-        cellHeight * idxRow,
-        cellWidth,
-        cellHeight
+        cellSize * idxCol,
+        cellSize * idxRow,
+        cellSize,
+        cellSize
       );
     });
   });
