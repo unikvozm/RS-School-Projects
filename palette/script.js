@@ -179,6 +179,13 @@ tools.forEach((tool, ind) => {
       switch (ind) {
         case 0:
           drawingField.activeTool = 'paint-bucket';
+          canvas.addEventListener(
+            'mousemove',
+            () => {
+              canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
+            },
+            false,
+          );
           break;
         case 1:
           canvas.addEventListener(
@@ -188,21 +195,17 @@ tools.forEach((tool, ind) => {
             },
             false,
           );
-          document.addEventListener(
-            'click',
-            (event) => {
-              drawingField.setCurrentColor(
-                window
-                  .getComputedStyle(event.target)
-                  .getPropertyValue('background-color'),
-              );
-            },
-            false,
-          );
           drawingField.activeTool = 'color-picker';
           break;
         case 2:
           drawingField.activeTool = 'pencil';
+          canvas.addEventListener(
+            'mousemove',
+            () => {
+              canvas.style.cursor = 'url(./assets/pencil.svg), auto';
+            },
+            false,
+          );
           break;
         default:
           break;
@@ -219,8 +222,12 @@ function drawWithPencil(event) {
   if (isDrawing) {
     const cell = event.target.getBoundingClientRect();
 
-    const xCell = Math.floor((event.clientX - cell.left) / drawingField.cellSize);
-    const yCell = Math.floor((event.clientY - cell.top) / drawingField.cellSize);
+    const xCell = Math.floor(
+      (event.clientX - cell.left) / drawingField.cellSize,
+    );
+    const yCell = Math.floor(
+      (event.clientY - cell.top) / drawingField.cellSize,
+    );
 
     ctx.fillStyle = drawingField.currColor;
     ctx.fillRect(
@@ -231,6 +238,7 @@ function drawWithPencil(event) {
     );
   }
 }
+
 canvas.addEventListener(
   'mousemove',
   () => {
@@ -280,12 +288,45 @@ canvas.addEventListener(
     if (drawingField.activeTool === 'paint-bucket') {
       canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
       ctx.fillStyle = drawingField.currColor;
-      ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height,
-      );
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+  },
+  false,
+);
+
+// Color-picker
+const rgbToHex = (rgb) => {
+  let hex = Number(rgb).toString(16);
+  if (hex.length < 2) hex = `0${hex}`;
+  return hex;
+};
+
+const fullColorHex = (r, g, b) => {
+  const red = rgbToHex(r);
+  const green = rgbToHex(g);
+  const blue = rgbToHex(b);
+  return `#${red}${green}${blue}`;
+};
+
+function findColor(event) {
+  const cell = event.target.getBoundingClientRect();
+
+  const xCell = Math.floor((event.clientX - cell.left) / drawingField.cellSize);
+  const yCell = Math.floor((event.clientY - cell.top) / drawingField.cellSize);
+
+  const colorData = ctx.getImageData(xCell, yCell, 1, 1);
+  drawingField.setCurrentColor(
+    fullColorHex(colorData.data[0], colorData.data[1], colorData.data[2]),
+  );
+}
+
+canvas.addEventListener(
+  'click',
+  (event) => {
+    if (drawingField.activeTool === 'color-picker') {
+      canvas.style.cursor = 'url(./assets/color-picker.svg), auto';
+      findColor(event);
+      drawingField.activeTool = 'pencil';
     }
   },
   false,
