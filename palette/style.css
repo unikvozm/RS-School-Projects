@@ -121,11 +121,11 @@
 }
 
 .current-color {
-  background: #FFC107;
+  background: #41f795;
 }
 
 .prev-color {
-  background: #FFEB3B;
+  background: #c4c4c4;
 }
 
 .red {
@@ -150,6 +150,7 @@
   height: 512px;
   background: white;
   border: 1px solid #c4c4c4;
+  image-rendering: pixelated;
 }
 
 .switcher {
@@ -173,6 +174,10 @@
 
 .active-square {
   background: black;
+}
+
+.active-tool {
+  background: rgba(0, 0, 0, 0.141327);
 }
 
 .switcher__option-square {
