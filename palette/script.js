@@ -311,8 +311,8 @@ const fullColorHex = (r, g, b) => {
 function findColor(event) {
   const cell = event.target.getBoundingClientRect();
 
-  const xCell = Math.floor((event.clientX - cell.left) / drawingField.cellSize);
-  const yCell = Math.floor((event.clientY - cell.top) / drawingField.cellSize);
+  const xCell = event.clientX - cell.left;
+  const yCell = event.clientY - cell.top;
 
   const colorData = ctx.getImageData(xCell, yCell, 1, 1);
   drawingField.setCurrentColor(
@@ -326,7 +326,6 @@ canvas.addEventListener(
     if (drawingField.activeTool === 'color-picker') {
       canvas.style.cursor = 'url(./assets/color-picker.svg), auto';
       findColor(event);
-      drawingField.activeTool = 'pencil';
     }
   },
   false,
