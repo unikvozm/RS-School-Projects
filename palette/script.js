@@ -64,40 +64,21 @@ class Canvas {
       localStorage.setItem(sizeStr, this.size);
     } else this.size = localStorage.getItem(sizeStr);
 
-    this.cellSize = 0;
-
-    this.image = [];
+    this.cellSize = Math.round(canvas.width / this.size);
+    this.activeTool = 'pencil';
   }
 
   setSize(size) {
     this.size = size;
     this.cellSize = Math.round(canvas.width / this.size);
     localStorage.setItem(sizeStr, this.size);
-    this.image = new Array(this.size).fill(new Array(this.size));
   }
 
   clearCanvas() {
-    this.image = [];
-    localStorage.setItem('image', this.image);
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, 512, 512);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     selectActiveSize(this.size.toString());
     squares[7].classList.remove(activeSquare);
     options[7].classList.remove(activeSize);
-  }
-
-  drawImage(image) {
-    image.forEach((row, idxRow) => {
-      row.forEach((cell, idxCol) => {
-        ctx.fillStyle = cell;
-        ctx.fillRect(
-          this.cellSize * idxCol,
-          this.cellSize * idxRow,
-          this.cellSize,
-          this.cellSize,
-        );
-      });
-    });
   }
 
   setCurrentColor(color) {
@@ -108,47 +89,6 @@ class Canvas {
     colorPicker.value = this.currColor;
     previousColor.style.backgroundColor = this.prevColor;
   }
-
-  drawWithPencil() {
-    ctx.strokeStyle = this.currColor;
-    ctx.lineWidth = this.cellSize;
-    let isDrawing = false;
-    let lastX = 0;
-    let lastY = 0;
-
-    function draw() {
-      if (!isDrawing) return;
-      ctx.beginPath();
-      // start from
-      ctx.moveTo(lastX, lastY);
-      // go to
-      ctx.lineTo(event.offsetX, event.offsetY);
-      ctx.stroke();
-      [lastX, lastY] = [event.offsetX, event.offsetY];
-    }
-
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mousedown', () => {
-      isDrawing = true;
-      [lastX, lastY] = [event.offsetX, event.offsetY];
-    });
-    canvas.addEventListener('mouseup', () => {
-      isDrawing = false;
-    });
-    canvas.addEventListener('mouseout', () => {
-      isDrawing = false;
-    });
-  }
-
-  fill() {
-    canvas.addEventListener('click', () => {
-      ctx.fillStyle = this.currColor;
-      ctx.fillRect(0, 0, 512, 512);
-    });
-    canvas.addEventListener('mousemove', () => {
-      canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
-    });
-  }
 }
 
 const drawingField = new Canvas();
@@ -157,7 +97,17 @@ window.onload = () => {
   colorPicker.value = drawingField.currColor;
   previousColor.style.backgroundColor = drawingField.prevColor;
   tools[2].classList.add(activeTool);
+  const img = new Image();
+  img.src = localStorage.getItem('canvasImage');
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+  };
+
   selectActiveSize(drawingField.size);
+};
+
+window.onbeforeunload = () => {
+  localStorage.setItem('canvasImage', canvas.toDataURL());
 };
 
 options.forEach((option, ind) => {
@@ -166,6 +116,7 @@ options.forEach((option, ind) => {
     options.forEach((opt) => opt.classList.remove(activeSize));
     option.classList.add(activeSize);
     squares[ind].classList.add(activeSquare);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch (ind) {
       case 0:
         drawingField.setSize(4);
@@ -220,48 +171,120 @@ colorPicker.onchange = () => {
 };
 
 tools.forEach((tool, ind) => {
-  tool.addEventListener('click', () => {
-    tools.forEach((t) => t.classList.remove(activeTool));
-    tool.classList.add(activeTool);
-    switch (ind) {
-      case 0:
-        canvas.addEventListener('mousemove', () => {
-          canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
-        });
-        drawingField.fill();
-        break;
-      case 1:
-        canvas.addEventListener('mousemove', () => {
-          canvas.style.cursor = 'url(./assets/color-picker.svg), auto';
-        });
-        document.addEventListener('click', (event) => {
-          drawingField.setCurrentColor(event.target.style.backgroundColor);
-        });
-        break;
-      case 2:
-        canvas.addEventListener('mousemove', () => {
-          canvas.style.cursor = 'url(./assets/pencil.svg), auto';
-        });
-        drawingField.drawWithPencil();
-        break;
-      default:
-        break;
-    }
-  });
+  tool.addEventListener(
+    'click',
+    () => {
+      tools.forEach((t) => t.classList.remove(activeTool));
+      tool.classList.add(activeTool);
+      switch (ind) {
+        case 0:
+          canvas.addEventListener(
+            'mousemove',
+            () => {
+              canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
+            },
+            false,
+          );
+          drawingField.activeTool = 'floodFill';
+          break;
+        case 1:
+          canvas.addEventListener(
+            'mousemove',
+            () => {
+              canvas.style.cursor = 'url(./assets/color-picker.svg), auto';
+            },
+            false,
+          );
+          document.addEventListener(
+            'click',
+            (event) => {
+              drawingField.setCurrentColor(
+                window
+                  .getComputedStyle(event.target)
+                  .getPropertyValue('background-color'),
+              );
+            },
+            false,
+          );
+          drawingField.activeTool = 'color-picker';
+          break;
+        case 2:
+          canvas.addEventListener(
+            'mousemove',
+            () => {
+              canvas.style.cursor = 'url(./assets/pencil.svg), auto';
+            },
+            false,
+          );
+          drawingField.activeTool = 'pencil';
+          break;
+        default:
+          break;
+      }
+    },
+    false,
+  );
 });
 
+// Pencil tool
+let isDrawing = false;
 
-/* function activateFirstImage(ctx, cellSize, cellSize) {
-  firstPic.forEach((row, idxRow) => {
-    row.forEach((cell, idxCol) => {
-      ctx.fillStyle = "#" + cell;
-      ctx.fillRect(
-        cellSize * idxCol,
-        cellSize * idxRow,
-        cellSize,
-        cellSize
-      );
-    });
-  });
+function drawWithPencil(event) {
+  if (isDrawing) {
+    const cell = event.target.getBoundingClientRect();
+
+    const xCell = Math.floor((event.clientX - cell.left) / drawingField.cellSize);
+    const yCell = Math.floor((event.clientY - cell.top) / drawingField.cellSize);
+
+    ctx.fillStyle = drawingField.currColor;
+    ctx.fillRect(
+      xCell * drawingField.cellSize,
+      yCell * drawingField.cellSize,
+      drawingField.cellSize,
+      drawingField.cellSize,
+    );
+  }
 }
-*/
+canvas.addEventListener(
+  'mousemove',
+  () => {
+    if (drawingField.activeTool === 'pencil') {
+      drawWithPencil(event);
+      canvas.style.cursor = 'url(./assets/pencil.svg), auto';
+    }
+  },
+  false,
+);
+canvas.addEventListener(
+  'mousedown',
+  () => {
+    if (drawingField.activeTool === 'pencil') {
+      isDrawing = true;
+      drawWithPencil(event);
+      canvas.style.cursor = 'url(./assets/pencil.svg), auto';
+    }
+  },
+  false,
+);
+canvas.addEventListener(
+  'mouseup',
+  () => {
+    if (drawingField.activeTool === 'pencil') {
+      canvas.style.cursor = 'url(./assets/pencil.svg), auto';
+      isDrawing = false;
+    }
+  },
+  false,
+);
+canvas.addEventListener(
+  'mouseout',
+  () => {
+    if (drawingField.activeTool === 'pencil') {
+      canvas.style.cursor = 'url(./assets/pencil.svg), auto';
+      isDrawing = false;
+    }
+  },
+  false,
+);
+
+// Paint bucket tool
