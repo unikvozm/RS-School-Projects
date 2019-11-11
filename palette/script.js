@@ -178,14 +178,7 @@ tools.forEach((tool, ind) => {
       tool.classList.add(activeTool);
       switch (ind) {
         case 0:
-          canvas.addEventListener(
-            'mousemove',
-            () => {
-              canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
-            },
-            false,
-          );
-          drawingField.activeTool = 'floodFill';
+          drawingField.activeTool = 'paint-bucket';
           break;
         case 1:
           canvas.addEventListener(
@@ -209,13 +202,6 @@ tools.forEach((tool, ind) => {
           drawingField.activeTool = 'color-picker';
           break;
         case 2:
-          canvas.addEventListener(
-            'mousemove',
-            () => {
-              canvas.style.cursor = 'url(./assets/pencil.svg), auto';
-            },
-            false,
-          );
           drawingField.activeTool = 'pencil';
           break;
         default:
@@ -288,3 +274,19 @@ canvas.addEventListener(
 );
 
 // Paint bucket tool
+canvas.addEventListener(
+  'click',
+  () => {
+    if (drawingField.activeTool === 'paint-bucket') {
+      canvas.style.cursor = 'url(./assets/paint-bucket.svg), auto';
+      ctx.fillStyle = drawingField.currColor;
+      ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+      );
+    }
+  },
+  false,
+);
