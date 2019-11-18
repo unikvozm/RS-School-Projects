@@ -1,0 +1,27 @@
+{
+  "name": "unikvozm-rs2019q3",
+  "version": "1.0.0",
+  "description": "Private repository for @unikvozm",
+  "main": "index.js",
+  "dependencies": {
+    "webpack": "^4.41.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/unikvozm-RS2019Q3.git"
+  },
+  "author": "Natalia Volkova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/unikvozm-RS2019Q3/issues"
+  },
+  "homepage": "https://github.com/rolling-scopes-school/unikvozm-RS2019Q3#readme"
+}
