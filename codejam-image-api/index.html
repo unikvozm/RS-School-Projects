@@ -12,7 +12,112 @@
     />
   </head>
   <body>
-    
+    <header class="header">
+      <div class="header__icon">
+        <div class="header__icon-stick"></div>
+        <div class="header__icon-stick"></div>
+        <div class="header__icon-stick"></div>
+      </div>
+      <h1 class="header__title">CodeJam - Image API</h1>
+      <div class="header__dots">
+        <div class="header__dots-dot"></div>
+        <div class="header__dots-dot"></div>
+        <div class="header__dots-dot"></div>
+      </div>
+    </header>
+    <main class="main">
+      <section class="menu">
+        <div class="tools">
+          <div class="tools__tool">
+            <img
+              src="./assets/paint-bucket.svg"
+              alt="paint bucket"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-name">Fill bucket</p>
+          </div>
+          <div class="tools__tool">
+            <img
+              src="./assets/color-picker.svg"
+              alt="color picker"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-name">Choose color</p>
+          </div>
+          <div class="tools__tool">
+            <img
+              src="./assets/pencil.svg"
+              alt="pencil"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-name">Pencil</p>
+          </div>
+          <div class="tools__tool inactive">
+            <img src="./assets/move.svg" alt="move" class="tools__tool-icon" />
+            <p class="tools__tool-name">Move</p>
+          </div>
+          <div class="tools__tool inactive">
+            <img
+              src="./assets/transform.svg"
+              alt="transform"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-name">Transform</p>
+          </div>
+        </div>
+        <div class="colors">
+          <div class="colors__color">
+            <div class="colors__color-circle current-color">
+              <input type="color" class="colors__color-picker" />
+            </div>
+            <p class="colors__color-name">Current color</p>
+          </div>
+          <div class="colors__color">
+            <div class="colors__color-circle prev-color"></div>
+            <p class="colors__color-name">Prev color</p>
+          </div>
+          <div class="colors__color">
+            <div class="colors__color-circle red"></div>
+            <p class="colors__color-name">red</p>
+          </div>
+          <div class="colors__color">
+            <div class="colors__color-circle blue"></div>
+            <p class="colors__color-name">blue</p>
+          </div>
+        </div>
+      </section>
+      <section class="drawing-area">
+        <div class="drawing-area__buttons">
+          <div class="drawing-area__buttons--image-load">
+            <button type="submit" class="drawing-area__buttons--load">
+              Load
+            </button>
+            <div class="drawing-area__buttons--location-container">
+              <img src="./assets/magnifier.svg" alt="magnifier-icon" />
+              <input
+                type="text"
+                class="drawing-area__buttons--location"
+                placeholder="Enter a city"
+              />
+            </div>
+          </div>
+          <button type="button" class="drawing-area__buttons--b-w">B&W</button>
+        </div>
+        <canvas class="drawing-area__canvas"
+          >Your browser doesn't support canvas</canvas
+        >
+        <input
+          type="range"
+          class="drawing-area__slider"
+          name="slider"
+          min="128"
+          max="512"
+          value="128"
+          step="128"
+        />
+        <label for="slider" class="drawing-area__slider-value">128</label>
+      </section>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
