@@ -1,12 +1,10 @@
-const slider = document.querySelector('.drawing-area__slider');
 const value = document.querySelector('.drawing-area__slider-value');
+const slider = document.querySelector('.drawing-area__slider');
 
-let size;
-
-slider.onchange = () => {
-  size = this.value;
-  const newPoint = (this.value - this.getAttribute('min'))
-    / (this.getAttribute('max') - this.getAttribute('min'));
+function setValueInRange() {
+  const size = slider.value;
+  const newPoint = (slider.value - slider.getAttribute('min'))
+    / (slider.getAttribute('max') - slider.getAttribute('min'));
   let offset;
   switch (size) {
     case '128':
@@ -24,7 +22,8 @@ slider.onchange = () => {
     default:
       break;
   }
-
   value.innerHTML = size;
   value.style.left = `${512 * newPoint + offset}px`;
-};
+}
+
+export default setValueInRange;
