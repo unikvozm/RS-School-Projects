@@ -5,7 +5,7 @@ const storage = {
 
   getSize: () => {
     if (localStorage.getItem('size') === null) {
-      this.setSize(128);
+      storage.setSize(128);
       return 128;
     }
     return localStorage.getItem('size');
@@ -17,7 +17,7 @@ const storage = {
 
   getPrevColor: () => {
     if (localStorage.getItem('previous color') === null) {
-      this.setPrevColor('#c4c4c4');
+      storage.setPrevColor('#c4c4c4');
       return '#c4c4c4';
     }
     return localStorage.getItem('previous color');
@@ -29,7 +29,7 @@ const storage = {
 
   getCurColor: () => {
     if (localStorage.getItem('current color') === null) {
-      this.setCurColor('#41f795');
+      storage.setCurColor('#41f795');
       return '#41f795';
     }
     return localStorage.getItem('current color');
@@ -39,7 +39,12 @@ const storage = {
     localStorage.setItem('canvasImage', canvas.toDataURL());
   },
 
-  getImage: () => localStorage.getItem('canvasImage'),
+  getImage: () => {
+    if (localStorage.getItem('canvasImage') !== null) {
+      return localStorage.getItem('canvasImage');
+    }
+    return '';
+  },
 
   setActiveTool: (tool) => {
     localStorage.setItem('active tool', tool);
@@ -47,7 +52,7 @@ const storage = {
 
   getActiveTool: () => {
     if (localStorage.getItem('active tool') === null) {
-      this.setActiveTool('pencil');
+      storage.setActiveTool('pencil');
       return 'pencil';
     }
     return localStorage.getItem('active tool');

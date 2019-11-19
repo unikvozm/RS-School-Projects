@@ -1,24 +1,27 @@
 import setValueInRange from './size-slider';
 import storage from './localStorage';
+import drawingArea from './canvas';
 
 const slider = document.querySelector('.drawing-area__slider');
 const canvas = document.querySelector('.drawing-area__canvas');
-canvas.width = 512;
-canvas.height = 512;
 const ctx = canvas.getContext('2d');
+const previousColor = document.querySelector('.prev-color');
+const colorPicker = document.querySelector('.colors__color-picker');
 
 // Event listeners
 slider.onchange = () => setValueInRange();
 
 window.onload = () => {
-  // colorPicker.value = drawingField.currColor;
-  // previousColor.style.backgroundColor = drawingField.prevColor;
+  colorPicker.value = drawingArea.currColor;
+  previousColor.style.backgroundColor = drawingArea.prevColor;
   // tools[2].classList.add(activeTool);
   const img = new Image();
   img.src = storage.getImage();
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-  };
+  if (img.src !== null) {
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0);
+    };
+  }
 };
 
 window.onbeforeunload = () => {
