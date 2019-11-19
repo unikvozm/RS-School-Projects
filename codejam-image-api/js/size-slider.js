@@ -1,8 +1,11 @@
+import storage from './localStorage';
+
 const value = document.querySelector('.drawing-area__slider-value');
 const slider = document.querySelector('.drawing-area__slider');
 
 function setValueInRange() {
   const size = slider.value;
+  storage.setSize(size);
   const newPoint = (slider.value - slider.getAttribute('min'))
     / (slider.getAttribute('max') - slider.getAttribute('min'));
   let offset;
