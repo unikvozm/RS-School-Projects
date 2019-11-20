@@ -30,6 +30,11 @@ const drawingArea = {
     colorPicker.value = drawingArea.currColor;
     previousColor.style.backgroundColor = drawingArea.prevColor;
   },
+
+  setActiveTool: (tool) => {
+    drawingArea.activeTool = tool;
+    storage.setActiveTool(tool);
+  },
 };
 
 export default drawingArea;
