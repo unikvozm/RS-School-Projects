@@ -12,7 +12,9 @@ const colorPicker = document.querySelector('.colors__color-picker');
 const colors = document.querySelectorAll('.colors__color');
 const tools = document.querySelectorAll('.tools__tool');
 const loadBtn = document.querySelector('.drawing-area__buttons--load');
-const locationInput = document.querySelector('.drawing-area__buttons--location');
+const locationInput = document.querySelector(
+  '.drawing-area__buttons--location',
+);
 const bwBtn = document.querySelector('.drawing-area__buttons--b-w');
 
 const ctx = canvas.getContext('2d');
@@ -63,10 +65,26 @@ colors.forEach((color, index) => {
   });
 });
 
-// Listeners for an active tool
-tools[0].addEventListener('click', setActiveTool(0));
-tools[1].addEventListener('click', setActiveTool(1));
-tools[2].addEventListener('click', setActiveTool(2));
+// Listeners for an active tool: 0 - paint-bucket, 1 - color-picker, 2 - pencil
+tools[0].addEventListener('click', () => setActiveTool(0));
+tools[1].addEventListener('click', () => setActiveTool(1));
+tools[2].addEventListener('click', () => setActiveTool(2));
+
+document.addEventListener('keyup', (event) => {
+  switch (event.code) {
+    case 'KeyB':
+      setActiveTool(0);
+      break;
+    case 'KeyP':
+      setActiveTool(2);
+      break;
+    case 'KeyC':
+      setActiveTool(1);
+      break;
+    default:
+      break;
+  }
+});
 
 // Listener for image loading
 loadBtn.addEventListener('click', () => {

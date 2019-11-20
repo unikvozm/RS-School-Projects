@@ -218,6 +218,7 @@
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
   margin-top: 50px;
+  cursor: pointer;
 }
 
 .drawing-area__slider:hover {

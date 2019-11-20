@@ -8,7 +8,6 @@ const tools = document.querySelectorAll('.tools__tool');
 
 // Pencil tool
 function drawingLine(event) {
-  canvas.style.cursor = 'url(../assets/pencil.svg), auto';
   const cellSize = Math.round(canvas.width / drawingArea.size);
 
   let lastX = event.offsetX;
@@ -55,11 +54,9 @@ function drawingLine(event) {
   canvas.addEventListener('mouseup', removeListeners);
 }
 
-
 // Paint bucket tool
 function colorCanvas() {
   if (drawingArea.activeTool === 'paint-bucket') {
-    canvas.style.cursor = 'url(../assets/paint-bucket.svg), auto';
     ctx.fillStyle = drawingArea.currColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
@@ -92,7 +89,6 @@ function findColor(event) {
 }
 
 function pickColor(event) {
-  document.style.cursor = 'url(../assets/color-picker.svg), auto';
   findColor(event);
 }
 
@@ -117,18 +113,24 @@ function setActiveTool(ind) {
   switch (ind) {
     case 0:
       drawingArea.setActiveTool('paint-bucket');
+      document.body.style.cursor = 'url(../assets/paint-bucket.svg), auto';
+      canvas.style.cursor = 'url(../assets/paint-bucket.svg), auto';
       canvas.addEventListener('click', colorCanvas);
       canvas.removeEventListener('click', pickColor);
       canvas.removeEventListener('mousedown', drawingLine);
       break;
     case 1:
       drawingArea.setActiveTool('color-picker');
+      document.body.style.cursor = 'url(../assets/color-picker.svg), auto';
+      canvas.style.cursor = 'url(../assets/color-picker.svg), auto';
       canvas.addEventListener('click', pickColor);
       canvas.removeEventListener('click', colorCanvas);
       canvas.removeEventListener('mousedown', drawingLine);
       break;
     case 2:
       drawingArea.setActiveTool('pencil');
+      document.body.style.cursor = 'url(../assets/pencil.svg), auto';
+      canvas.style.cursor = 'url(../assets/pencil.svg), auto';
       canvas.addEventListener('mousedown', drawingLine);
       canvas.removeEventListener('click', colorCanvas);
       canvas.removeEventListener('click', pickColor);
