@@ -8,6 +8,7 @@ canvas.height = 512;
 const ctx = canvas.getContext('2d');
 
 const drawingArea = {
+  imageLoaded: storage.getImageLoaded(),
   prevColor: storage.getPrevColor(),
   currColor: storage.getCurColor(),
   size: storage.getSize(),
@@ -59,6 +60,11 @@ const drawingArea = {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       });
     });
+  },
+
+  setImageLoaded: (data) => {
+    drawingArea.imageLoaded = data;
+    storage.setImageLoaded(data);
   },
 };
 

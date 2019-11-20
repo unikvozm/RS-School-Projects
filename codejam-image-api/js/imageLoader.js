@@ -39,6 +39,7 @@ async function imageLoad() {
       height = canvas.size;
     }
     ctx.drawImage(img, positionX, positionY, width, height);
+    drawingArea.setImageLoaded(true);
   }
 
   img.addEventListener('load', setImageSize);

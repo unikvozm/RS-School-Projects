@@ -3,6 +3,7 @@ import storage from './localStorage';
 import drawingArea from './canvas';
 import { getIndexForActive, setActiveTool } from './tools';
 import imageLoad from './imageLoader';
+import greyScale from './black&white';
 
 const slider = document.querySelector('.drawing-area__slider');
 const canvas = document.querySelector('.drawing-area__canvas');
@@ -12,6 +13,7 @@ const colors = document.querySelectorAll('.colors__color');
 const tools = document.querySelectorAll('.tools__tool');
 const loadBtn = document.querySelector('.drawing-area__buttons--load');
 const locationInput = document.querySelector('.drawing-area__buttons--location');
+const bwBtn = document.querySelector('.drawing-area__buttons--b-w');
 
 const ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = false;
@@ -72,3 +74,6 @@ loadBtn.addEventListener('click', () => {
   if (!locationInput.value) alert('Type the city first');
   else imageLoad();
 });
+
+// Listener for greyscale
+bwBtn.addEventListener('click', greyScale);

@@ -57,6 +57,18 @@ const storage = {
     }
     return localStorage.getItem('active tool');
   },
+
+  setImageLoaded: (data) => {
+    localStorage.setItem('image loaded', data);
+  },
+
+  getImageLoaded: () => {
+    if (localStorage.getItem('image loaded') === null) {
+      storage.setImageLoaded(false);
+      return false;
+    }
+    return localStorage.getItem('image loaded');
+  },
 };
 
 export default storage;
