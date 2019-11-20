@@ -1,5 +1,3 @@
-const canvas = document.querySelector('.drawing-area__canvas');
-
 const storage = {
   setSize: (size) => {
     localStorage.setItem('size', size);
@@ -37,8 +35,8 @@ const storage = {
     return localStorage.getItem('current color');
   },
 
-  setImage: () => {
-    localStorage.setItem('canvasImage', canvas.toDataURL());
+  setImage: (data) => {
+    localStorage.setItem('canvasImage', data);
   },
 
   getImage: () => {

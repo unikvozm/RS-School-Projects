@@ -1,17 +1,20 @@
 import setValueInRange from './size-slider';
 import storage from './localStorage';
 import drawingArea from './canvas';
-import {
-  drawWithPencil, colorCanvas, pickColor, getIndexForActive, setActiveTool,
-} from './tools';
+import { getIndexForActive, setActiveTool } from './tools';
+import imageLoad from './imageLoader';
 
 const slider = document.querySelector('.drawing-area__slider');
 const canvas = document.querySelector('.drawing-area__canvas');
-const ctx = canvas.getContext('2d');
 const previousColor = document.querySelector('.prev-color');
 const colorPicker = document.querySelector('.colors__color-picker');
 const colors = document.querySelectorAll('.colors__color');
 const tools = document.querySelectorAll('.tools__tool');
+const loadBtn = document.querySelector('.drawing-area__buttons--load');
+const locationInput = document.querySelector('.drawing-area__buttons--location');
+
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
 
 // Event listeners
 slider.onchange = () => setValueInRange();
@@ -37,6 +40,7 @@ window.onbeforeunload = () => {
 
 colorPicker.onchange = () => {
   drawingArea.setCurrentColor(colorPicker.value);
+  drawingArea.renderCanvas();
 };
 
 colors.forEach((color, index) => {
@@ -58,47 +62,13 @@ colors.forEach((color, index) => {
 });
 
 // Listeners for an active tool
-tools.forEach((tool, ind) => {
-  tool.addEventListener('click', setActiveTool(ind), false);
-  tool.classList.add('active-tool');
+tools[0].addEventListener('click', setActiveTool(0));
+tools[1].addEventListener('click', setActiveTool(1));
+tools[2].addEventListener('click', setActiveTool(2));
+
+// Listener for image loading
+loadBtn.addEventListener('click', () => {
+  // eslint-disable-next-line no-alert
+  if (!locationInput.value) alert('Type the city first');
+  else imageLoad();
 });
-
-// event listeners to Pencil Tool
-canvas.addEventListener(
-  'mousemove',
-  (event) => {
-    if (drawingArea.activeTool === 'pencil') drawWithPencil(event, 'mousemove');
-  },
-  false,
-);
-canvas.addEventListener(
-  'mousedown',
-  (event) => {
-    if (drawingArea.activeTool === 'pencil') drawWithPencil(event, 'mousedown');
-  },
-  false,
-);
-canvas.addEventListener(
-  'mouseup',
-  (event) => {
-    if (drawingArea.activeTool === 'pencil') drawWithPencil(event, 'mouseup');
-  },
-  false,
-);
-canvas.addEventListener(
-  'mouseout',
-  (event) => {
-    if (drawingArea.activeTool === 'pencil') drawWithPencil(event, 'mouseout');
-  },
-  false,
-);
-
-// event listeners to Paint Bucket and Color Picker Tools
-canvas.addEventListener(
-  'click',
-  (event) => {
-    if (drawingArea.activeTool === 'paint-bucket') colorCanvas();
-    else if (drawingArea.activeTool === 'color-picker') pickColor(event);
-  },
-  false,
-);

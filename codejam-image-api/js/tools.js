@@ -1,5 +1,4 @@
 import drawingArea from './canvas';
-import storage from './localStorage';
 
 const canvas = document.querySelector('.drawing-area__canvas');
 canvas.width = 512;
@@ -8,41 +7,54 @@ const ctx = canvas.getContext('2d');
 const tools = document.querySelectorAll('.tools__tool');
 
 // Pencil tool
-
-let isDrawing = false;
-
-function drawing(event) {
-  if (isDrawing) {
-    const cellSize = Math.round(canvas.width / drawingArea.size);
-    const cell = event.target.getBoundingClientRect();
-
-    const xCell = Math.floor((event.clientX - cell.left) / cellSize);
-    const yCell = Math.floor((event.clientY - cell.top) / cellSize);
-
-    ctx.fillStyle = drawingArea.currColor;
-    ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
-  }
-}
-
-function drawWithPencil(event, how) {
+function drawingLine(event) {
   canvas.style.cursor = 'url(../assets/pencil.svg), auto';
-  switch (how) {
-    case 'mousemove':
-      drawing(event);
-      break;
-    case 'mousedown':
-      isDrawing = true;
-      drawing(event);
-      break;
-    case 'mouseup':
-    case 'mouseout':
-      isDrawing = false;
-      storage.setImage();
-      break;
-    default:
-      break;
+  const cellSize = Math.round(canvas.width / drawingArea.size);
+
+  let lastX = event.offsetX;
+  let lastY = event.offsetY;
+  let xCell = Math.floor(lastX / cellSize);
+  let yCell = Math.floor(lastY / cellSize);
+
+  ctx.fillStyle = drawingArea.currColor;
+  ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
+
+  function drawing(e) {
+    const currX = e.offsetX;
+    const currY = e.offsetY;
+
+    const deltaX = Math.abs(currX - lastX);
+    const deltaY = Math.abs(currY - lastY);
+    let error = deltaX - deltaY;
+
+    const stepX = lastX < currX ? 1 : -1;
+    const stepY = lastY < currY ? 1 : -1;
+
+    while (lastX !== currX || lastY !== currY) {
+      if (error * 2 > -deltaY) {
+        error -= deltaY;
+        lastX += stepX;
+      } else if (error * 2 < deltaX) {
+        error += deltaX;
+        lastY += stepY;
+      }
+      xCell = Math.floor(lastX / cellSize);
+      yCell = Math.floor(lastY / cellSize);
+      ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
+    }
   }
+
+  function removeListeners() {
+    canvas.removeEventListener('mousemove', drawing);
+    canvas.removeEventListener('mouseout', removeListeners);
+    canvas.removeEventListener('mouseup', removeListeners);
+  }
+
+  canvas.addEventListener('mousemove', drawing);
+  canvas.addEventListener('mouseout', removeListeners);
+  canvas.addEventListener('mouseup', removeListeners);
 }
+
 
 // Paint bucket tool
 function colorCanvas() {
@@ -80,10 +92,11 @@ function findColor(event) {
 }
 
 function pickColor(event) {
-  canvas.style.cursor = 'url(../assets/color-picker.svg), auto';
+  document.style.cursor = 'url(../assets/color-picker.svg), auto';
   findColor(event);
 }
 
+// Active Tool selection
 function getIndexForActive(tool) {
   switch (tool) {
     case 'paint-bucket':
@@ -98,46 +111,31 @@ function getIndexForActive(tool) {
   return -1;
 }
 
-
 function setActiveTool(ind) {
   tools.forEach((t) => t.classList.remove('active-tool'));
+  tools[ind].classList.add('active-tool');
   switch (ind) {
     case 0:
       drawingArea.setActiveTool('paint-bucket');
-      canvas.addEventListener(
-        'mousemove',
-        () => {
-          canvas.style.cursor = 'url(../assets/paint-bucket.svg), auto';
-        },
-        false,
-      );
+      canvas.addEventListener('click', colorCanvas);
+      canvas.removeEventListener('click', pickColor);
+      canvas.removeEventListener('mousedown', drawingLine);
       break;
     case 1:
       drawingArea.setActiveTool('color-picker');
-      canvas.addEventListener(
-        'mousemove',
-        () => {
-          canvas.style.cursor = 'url(../assets/color-picker.svg), auto';
-        },
-        false,
-      );
-
+      canvas.addEventListener('click', pickColor);
+      canvas.removeEventListener('click', colorCanvas);
+      canvas.removeEventListener('mousedown', drawingLine);
       break;
     case 2:
       drawingArea.setActiveTool('pencil');
-      canvas.addEventListener(
-        'mousemove',
-        () => {
-          canvas.style.cursor = 'url(../assets/pencil.svg), auto';
-        },
-        false,
-      );
+      canvas.addEventListener('mousedown', drawingLine);
+      canvas.removeEventListener('click', colorCanvas);
+      canvas.removeEventListener('click', pickColor);
       break;
     default:
       break;
   }
 }
 
-export {
-  drawWithPencil, colorCanvas, pickColor, getIndexForActive, setActiveTool,
-};
+export { getIndexForActive, setActiveTool };

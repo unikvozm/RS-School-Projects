@@ -19,6 +19,7 @@ const drawingArea = {
   },
 
   clearCanvas: () => {
+    storage.setImage('');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   },
 
@@ -34,6 +35,30 @@ const drawingArea = {
   setActiveTool: (tool) => {
     drawingArea.activeTool = tool;
     storage.setActiveTool(tool);
+  },
+
+  renderCanvas: () => {
+    const canv = document.createElement('canvas');
+    canv.width = drawingArea.size;
+    canv.height = drawingArea.size;
+    canv.style.imageRendering = 'pixelated';
+
+    const canvCtx = canv.getContext('2d');
+    canvCtx.imageSmoothingEnabled = false;
+    let canvSrc = canvas.toDataURL();
+
+    const tempImg = new Image();
+    tempImg.src = canvSrc;
+    tempImg.addEventListener('load', () => {
+      canvCtx.drawImage(tempImg, 0, 0, drawingArea.size, drawingArea.size);
+      canvSrc = canv.toDataURL();
+
+      const img = new Image();
+      img.src = canvSrc;
+      img.addEventListener('load', () => {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      });
+    });
   },
 };
 
