@@ -1,0 +1,29 @@
+@import "./reset.scss";
+@import "./menu.scss";
+@import "./fonts";
+@import "./variables";
+
+html,
+body,
+.wrapper {
+  width: 100%;
+  font-family: $main-font;
+  color: $main-color;
+}
+
+body {
+  background-image: url("../img/default-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.wrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 15, 26, 0.59) 0%,
+    rgba(17, 17, 46, 0.46) 100%
+  );
+  padding: 2%;
+  height: 100vh;
+}

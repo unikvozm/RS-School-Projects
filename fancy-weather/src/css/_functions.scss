@@ -1,0 +1,3 @@
+@function size($originalWidth) {
+  @return $originalWidth * 100vw / 1440px;
+}
