@@ -1,9 +1,13 @@
+import {C, F} from './constants';
+
 class Weather {
-  constructor(unit) {
-    this.unit = unit;
+  constructor(storage) {
+	this.unit = storage.getUnit();
+	this.storage = storage;
   }
-  setUnit(newUnit) {
-    this.unit = newUnit;
+  changeUnit() {
+	this.unit = this.unit === C ? F : C;
+	this.storage.setUnit(this.unit);
   }
 }
 
