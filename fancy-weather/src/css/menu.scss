@@ -91,22 +91,23 @@
     width: 44px;
     background: rgba(174, 181, 185, 0.5);
     font-size: 14px;
-	line-height: 17px;
-	font-size: 18px;
-	line-height: 44px;
-	text-align: center;
-	cursor: pointer;
+    line-height: 17px;
+    font-size: 18px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
 
     @media (min-width: $desktop) {
       width: size(44px);
       font-size: size(14px);
-	  line-height: size(17px);
-	  font-size: size(18px);
-	  line-height: size(44px);
-	}
-	
-	&.selected {
-	  background-color: rgb(68, 71, 73);
-	}
+      line-height: size(17px);
+      font-size: size(18px);
+      line-height: size(44px);
+    }
+
+    &.selected {
+      background: rgba(76, 82, 85, 0.4);
+      border-radius: 5px;
+    }
   }
 }
