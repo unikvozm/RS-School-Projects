@@ -26,6 +26,10 @@ function getTemplate(location, time) {
         ${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}
       </p>
     </section>
+    <section class="coords">
+      <p class="coords__lat"></p>
+      <p class="coords__long"></p>
+  </section>
   </main>
 </div>
 `;

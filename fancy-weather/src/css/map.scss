@@ -1,0 +1,15 @@
+@import "./functions";
+@import "./variables";
+
+.coords {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+
+  text-align: right;
+  text-transform: capitalize;
+
+  @media (min-width: $desktop) {
+	font-size: size(20px);
+  }
+}

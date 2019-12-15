@@ -3,18 +3,12 @@ import { getTemplate, updateTimeEl } from "./dom";
 import { styleTemp } from "./temperature";
 import { Weather } from "./weather";
 import storage from "./localStorage";
-import { getLocation } from "./location";
+import { location, setCurCoords } from "./location";
 import { Time } from "./time";
 import { layout } from "./constants";
 
 const weather = new Weather(storage);
 const time = new Time(new Date(), layout[weather.language]);
-
-//TODO:
-const location = {
-  town: "Moscow",
-  country: "Russia"
-};
 
 window.onload = () => {
   getTemplate(location, time);
@@ -30,7 +24,8 @@ window.onload = () => {
     updateTimeEl(time);
   }, 1000);
 
-  //console.log(getLocation());
+  setCurCoords(layout[weather.language]);
+
   document.querySelector(".units").addEventListener("click", () => {
     document.querySelectorAll(".units__unit").forEach(unitEl => {
       styleTemp(unitEl);
@@ -43,5 +38,6 @@ window.onload = () => {
     storage.setLang(this.value);
     time.updateLayout(layout[weather.language]);
     updateTimeEl(time);
+    setCurCoords(layout[weather.language]);
   });
 };

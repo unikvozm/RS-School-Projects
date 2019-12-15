@@ -13,4 +13,6 @@ class Weather {
   }
 }
 
+//async function getWeather
+
 export { Weather };
