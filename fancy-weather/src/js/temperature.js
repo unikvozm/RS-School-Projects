@@ -6,9 +6,5 @@ function styleTemp(el) {
   el.classList.toggle("selected");
 }
 
-function setActiveUnit(lastUnit) {
-  if (lastUnit === C) CBtn.classList.add("selected");
-  else FBtn.classList.add("selected");
-}
 
-export { styleTemp, setActiveUnit };
+export { styleTemp };

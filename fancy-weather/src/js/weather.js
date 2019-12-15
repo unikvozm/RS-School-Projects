@@ -5,6 +5,7 @@ class Weather {
 	this.unit = storage.getUnit();
 	this.storage = storage;
 	this.language = storage.getLang();
+	this.location;
   }
   changeUnit() {
 	this.unit = this.unit === C ? F : C;

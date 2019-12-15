@@ -1,5 +1,6 @@
 @import "./reset.scss";
 @import "./menu.scss";
+@import "./current-data.scss";
 @import "./fonts";
 @import "./variables";
 
@@ -26,4 +27,13 @@ body {
   );
   padding: 2%;
   height: 100vh;
+}
+
+main {
+  width: 100%;
+  display: flex;
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
 }

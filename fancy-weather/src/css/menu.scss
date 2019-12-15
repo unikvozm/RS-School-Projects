@@ -90,6 +90,8 @@
   &__unit {
     width: 44px;
     background: rgba(174, 181, 185, 0.5);
+    box-shadow: 0.3vw 0.3vw 0.2vw 0 rgb(63, 62, 63);
+    border-radius: 5px;
     font-size: 14px;
     line-height: 17px;
     font-size: 18px;
@@ -107,7 +109,7 @@
 
     &.selected {
       background: rgba(76, 82, 85, 0.4);
-      border-radius: 5px;
+      box-shadow: 0 0 0 0 rgb(63, 62, 63);
     }
   }
 }
