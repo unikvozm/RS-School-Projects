@@ -1,15 +1,15 @@
 import { normCoords, fromFtoC } from "./_helpers";
 
-function getTemplate(location, time) {
+function getTemplate() {
   const template = `
 <div class="wrapper">
   <section class="menu">
     <div class="tools">
       <div class="refresh">&#x21bb;</div>
       <select class="lang">
-        <option value="EN" class="lang__option">EN</option>
-        <option value="RU" class="lang__option">RU</option>
-        <option value="BE" class="lang__option">BE</option>
+        <option value="EN" class="lang__option">en</option>
+        <option value="RU" class="lang__option">ru</option>
+        <option value="BE" class="lang__option">be</option>
       </select>
       <div class="units">
         <div class="units__unit selected" id="celcius">°C</div>
@@ -23,9 +23,9 @@ function getTemplate(location, time) {
   </section>
   <main>
     <section class="current-data">
-      <p class="current-data__town">${location.town}, ${location.country}</p>
+      <p class="current-data__town">town</p>
       <p class="current-data__date">
-        ${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}
+        date and time
       </p>
       <section class="current-weather">
         <p class="current-weather__container"><span class="current-weather__temp"></span>
@@ -34,29 +34,33 @@ function getTemplate(location, time) {
       </section>
       <section class="forecast">
         <div class="forecast__info">
-          <p class="forecast__info-day" id="day1">${time.nextDay}</p>
+          <p class="forecast__info-day" id="day1">next day</p>
           <p class="forecast__info-temp" id="temp1"></p>
           <canvas class="forecast__info-icon" id="day1-icon" width="64" height="64"></canvas>
         </div>
         <div class="forecast__info">
-          <p class="forecast__info-day" id="day2">${time.next2Day}</p>
+          <p class="forecast__info-day" id="day2">second next</p>
           <p class="forecast__info-temp" id="temp2"></p>
           <canvas class="forecast__info-icon" id="day2-icon" width="64" height="64"></canvas>
         </div>
         <div class="forecast__info">
-          <p class="forecast__info-day" id="day3">${time.next3Day}</p>
+          <p class="forecast__info-day" id="day3">third next</p>
           <p class="forecast__info-temp" id="temp3"></p>
           <canvas class="forecast__info-icon" id="day3-icon" width="64" height="64"></canvas>
         </div>
       </section>
     </section>
-    <section class="coords">
-      <p class="coords__lat"></p>
-      <p class="coords__long"></p>
+    <section class="location">
+      <div class="location__map" id="map"></div>
+      <div class="location__coords">
+        <p class="coords__lat"></p>
+        <p class="coords__long"></p>
+      </div>
     </section>
   </main>
 </div>
 `;
+
   document.body.innerHTML = template;
 }
 
@@ -110,4 +114,21 @@ function updateCoords(layout, lat, long) {
   }: ${normCoords(lat)}`;
 }
 
-export { getTemplate, updateTimeEl, updateWeatherEl, updateCoords };
+function displayMap(long = 0, lat = 0, language) {
+  mapboxgl.accessToken =
+    "pk.eyJ1IjoidW5pa3Zvem0iLCJhIjoiY2s0OGRweW5sMTE4YTNscGdhNzgyN2F2dCJ9.nlBqKqXBVoruZpwSgl76LA";
+  const map = new mapboxgl.Map({
+    container: "map", // container id
+    style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+    center: [long, lat], // starting position [lng, lat]
+    zoom: 9 // starting zoom
+  });
+  map.on("load", function() {
+    map.setLayoutProperty("country-label", "text-field", [
+      "get",
+      "name_" + language.toLowerCase()
+    ]);
+  });
+}
+
+export { getTemplate, updateTimeEl, updateWeatherEl, updateCoords, displayMap };

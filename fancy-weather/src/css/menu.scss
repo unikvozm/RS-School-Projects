@@ -68,6 +68,7 @@
   padding: 4%;
   color: $main-color;
   cursor: pointer;
+  text-transform: uppercase;
 
   @media (min-width: $desktop) {
     width: size(71px);

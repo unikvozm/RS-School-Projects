@@ -3,13 +3,13 @@ const C = "C";
 const F = "F";
 
 // languages
-const EN = "EN";
-const RU = "RU";
-const BE = "BE";
+const EN = "en";
+const RU = "ru";
+const BE = "be";
 
 // layout
 const layout = {
-	EN: {
+	en: {
 		day: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 		dayShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 		month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -18,7 +18,7 @@ const layout = {
 		weather: ['feels like:', 'wind:', 'humidity:'],
 		speed: 'm/s'
 	},
-	RU: {
+	ru: {
 		day: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
 		dayShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
 		month: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
@@ -27,7 +27,7 @@ const layout = {
 		weather: ['чувствуется как:', 'ветер:', 'влажность:'],
 		speed: 'м/с'
 	},
-	BE: {
+	be: {
 		day: ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацьвер', 'Пятніца', 'Сыбота'],
 		dayShort: ['Няд', 'Пнд', 'Аўт', 'Сер', 'Чцв', 'Пят', 'Суб'],
 		month: ['Студзень', 'Люты', 'Сакавiк', 'Красавiк', 'Май', 'Червень', 'Лiпень', 'Жнiвень', 'Верасень', 'Кастрычнiк', 'Лiстапад', 'Снежань'],

@@ -23,10 +23,10 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
   try {
     const req = await fetch(url);
     const data = await req.json();
-    console.log(data.currently.time);
+
     const currentWeather = {
       timezone: data.timezone,
-      time: data.currently.time, //1576423182
+      time: data.currently.time, //1576423182 in sec
       icon: data.currently.icon,
       summaryText: data.currently.summary,
       temperatureF: Math.round(data.currently.temperature),
@@ -36,7 +36,7 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next1DayWeather = {
-      time: data.daily.data[1].time, //1576423182
+      time: data.daily.data[1].time, 
       icon: data.daily.data[1].icon,
       temperatureF: Math.round(
         (data.daily.data[1].temperatureHigh +
@@ -46,7 +46,7 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next2DayWeather = {
-      time: data.daily.data[2].time, //1576423182
+      time: data.daily.data[2].time, 
       icon: data.daily.data[2].icon,
       temperatureF: Math.round(
         (data.daily.data[2].temperatureHigh +
@@ -56,7 +56,7 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next3DayWeather = {
-      time: data.daily.data[3].time, //1576423182
+      time: data.daily.data[3].time, 
       icon: data.daily.data[3].icon,
       temperatureF: Math.round(
         (data.daily.data[3].temperatureHigh +
