@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="menu">
+  <section class="menu">
     <div class="tools">
       <div class="refresh">&#x21bb;</div>
       <select class="lang">
@@ -16,13 +16,35 @@
       <input type="text" class="search__inpt" />
       <button class="search__btn">Search</button>
     </div>
-  </div>
+  </section>
   <main>
     <section class="current-data">
       <p class="current-data__town">${location.town}, ${location.country}</p>
       <p class="current-data__date">
         ${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}
       </p>
+      <section class="current-weather">
+        <p class="current-weather__temp"></p>
+        <img src="#" alt="current weather icon" class="current-weather__icon">
+        <div class="current-weather__info"></div>
+      </section>
+      <section class="forecast">
+        <div class="forecast__info">
+          <p class="forecast__info-day"></p>
+          <p class="forecast__info-temp"></p>
+          <img src="#" alt="forecast weather icon" class="forecast__info-icon">
+        </div>
+        <div class="forecast__info">
+          <p class="forecast__info-day"></p>
+          <p class="forecast__info-temp"></p>
+          <img src="#" alt="forecast weather icon" class="forecast__info-icon">
+        </div>
+        <div class="forecast__info">
+          <p class="forecast__info-day"></p>
+          <p class="forecast__info-temp"></p>
+          <img src="#" alt="forecast weather icon" class="forecast__info-icon">
+        </div>
+      </section>
     </section>
     <section class="coords">
       <p class="coords__lat"></p>

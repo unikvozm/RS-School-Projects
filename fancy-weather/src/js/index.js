@@ -1,9 +1,10 @@
 import "../css/style.scss";
-import { getTemplate, updateTimeEl } from "./dom";
+
+import { getTemplate, updateTimeEl, updateCoords } from "./dom";
 import { styleTemp } from "./temperature";
-import { Weather } from "./weather";
+import { Weather, getWeatherInfo } from "./weather";
 import storage from "./localStorage";
-import { location, setCurCoords } from "./location";
+import { location } from "./location";
 import { Time } from "./time";
 import { layout } from "./constants";
 
@@ -24,7 +25,16 @@ window.onload = () => {
     updateTimeEl(time);
   }, 1000);
 
-  setCurCoords(layout[weather.language]);
+  let lat = 0;
+  let long = 0;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      long = pos.coords.longitude;
+      lat = pos.coords.latitude;
+      updateCoords(layout[weather.language], lat, long)
+      getWeatherInfo(lat, long, weather.language, weather.unit);
+    });
+  }
 
   document.querySelector(".units").addEventListener("click", () => {
     document.querySelectorAll(".units__unit").forEach(unitEl => {

@@ -1,3 +1,6 @@
 @function size($originalWidth) {
+  @if ($originalWidth * 100vw / 1440px < 5vw) {
+    @return 5vw;
+  }
   @return $originalWidth * 100vw / 1440px;
 }

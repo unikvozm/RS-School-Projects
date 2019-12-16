@@ -2,6 +2,9 @@ class Time {
   constructor(time, layout) {
     this.layout = layout;
     (this.day = this.layout.dayShort[time.getDay()]),
+      (this.nextDay = this.layout.day[(time.getDay() + 1) % 12]),
+      (this.next2Day = this.layout.day[(time.getDay() + 2) % 12]),
+      (this.next3Day = this.layout.day[(time.getDay() + 3) % 12]),
       (this.date = time.getDate()),
       (this.month = this.layout.month[time.getMonth()]),
       (this.hour = time.getHours()),
