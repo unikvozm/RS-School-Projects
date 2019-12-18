@@ -26,7 +26,7 @@ function getTemplate(language, time) {
     <section class="current-data">
       <p class="current-data__town"></p>
       <p class="current-data__date">
-      ${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}:${time.seconds}
+      ${time.timeNow}
       </p>
       <section class="current-weather">
         <p class="current-weather__container"><span class="current-weather__temp"></span>
@@ -68,7 +68,10 @@ function getTemplate(language, time) {
 function updateTimeEl(time) {
   document.querySelector(
     ".current-data__date"
-  ).textContent = `${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}:${time.seconds}`;
+  ).textContent = time.timeNow;
+  document.querySelector("#day1").textContent = time.nextDay;
+  document.querySelector("#day2").textContent = time.next2Day;
+  document.querySelector("#day3").textContent = time.next3Day;
 }
 
 function updateWeatherEl(current, next1, next2, next3, layout, unit) {
@@ -142,12 +145,6 @@ function updateLocationEl(city, country) {
   ).textContent = `${city}, ${country}`;
 }
 
-function updateNextDaysEls(time) {
-  document.querySelector("#day1").textContent = time.nextDay;
-  document.querySelector("#day2").textContent = time.next2Day;
-  document.querySelector("#day3").textContent = time.next3Day;
-}
-
 function updateSearchEl(language) {
   document.querySelector(
     ".search"
@@ -162,6 +159,5 @@ export {
   updateCoordsEl,
   displayMapEl,
   updateLocationEl,
-  updateNextDaysEls,
   updateSearchEl
 };

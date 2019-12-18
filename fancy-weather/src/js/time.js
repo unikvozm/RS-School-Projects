@@ -1,38 +1,152 @@
+import { fromENtoBY } from "./_helpers";
+import { updateTimeEl } from './dom';
+
+function setLangCountry(language) {
+  switch (language) {
+    case "en":
+      return "en-US";
+    case "ru":
+      return "ru-RU";
+    default:
+      return "en-US";
+  }
+}
+
 class Time {
-  constructor(time, layout) {
-    this.layout = layout;
-    (this.day = this.layout.dayShort[time.getDay()]),
-      (this.nextDay = this.layout.day[(time.getDay() + 1) % 12]),
-      (this.next2Day = this.layout.day[(time.getDay() + 2) % 12]),
-      (this.next3Day = this.layout.day[(time.getDay() + 3) % 12]),
-      (this.date = time.getDate()),
-      (this.month = this.layout.month[time.getMonth()]),
-      (this.hour = time.getHours()),
-      (this.minutes =
-        time.getMinutes() > 9 ? time.getMinutes() : `0${time.getMinutes()}`),
-      (this.seconds =
-        time.getSeconds() > 9 ? time.getSeconds() : `0${time.getSeconds()}`);
+  constructor(language) {
+    this.language = language;
+    this.time = new Date().getTime();
+    this.lan = setLangCountry(this.language);
+    this.timezone;
+    this.timeNow = new Date(this.time)
+      .toLocaleString(this.lan, {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      })
+      .replace(/\,/g, "");
+    this.nextDay = new Date(this.time + 86400000).toLocaleString(this.lan, {
+      weekday: "long"
+    });
+    this.next2Day = new Date(this.time + 172800000).toLocaleString(this.lan, {
+      weekday: "long"
+    });
+    this.next3Day = new Date(this.time + 259200000).toLocaleString(this.lan, {
+      weekday: "long"
+    });
+    if (this.language === "be") {
+      this.timeNow = fromENtoBY(this.timeNow);
+      this.nextDay = fromENtoBY(this.nextDay);
+      this.next2Day = fromENtoBY(this.next2Day);
+      this.next3Day = fromENtoBY(this.next3Day);
+    }
   }
-  updateTime(curTime = new Date()) {
-    (this.day = this.layout.dayShort[curTime.getDay()]),
-      (this.date = curTime.getDate()),
-      (this.nextDay = this.layout.day[(curTime.getDay() + 1) % 12]),
-      (this.next2Day = this.layout.day[(curTime.getDay() + 2) % 12]),
-      (this.next3Day = this.layout.day[(curTime.getDay() + 3) % 12]),
-      (this.month = this.layout.month[curTime.getMonth()]),
-      (this.hour = curTime.getHours()),
-      (this.minutes =
-        curTime.getMinutes() > 9
-          ? curTime.getMinutes()
-          : `0${curTime.getMinutes()}`),
-      (this.seconds =
-        curTime.getSeconds() > 9
-          ? curTime.getSeconds()
-          : `0${curTime.getSeconds()}`);
+
+  updateTimeZone(newTimezone) {
+    this.timezone = newTimezone;
+    this.timeNow = new Date(this.time)
+      .toLocaleString(this.lan, {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZone: this.timezone
+      })
+      .replace(/\,/g, "");
+    this.nextDay = new Date(this.time + 86400000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    this.next2Day = new Date(this.time + 172800000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    this.next3Day = new Date(this.time + 259200000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    if (this.language === "be") {
+      this.timeNow = fromENtoBY(this.timeNow);
+      this.nextDay = fromENtoBY(this.nextDay);
+      this.next2Day = fromENtoBY(this.next2Day);
+      this.next3Day = fromENtoBY(this.next3Day);
+    }
   }
-  updateLayout(newLayout) {
-    this.layout = newLayout;
-    this.updateTime();
+
+  updateTime() {
+    this.time = this.time + 1000;
+    this.timeNow = new Date(this.time)
+      .toLocaleString(this.lan, {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZone: this.timezone
+      })
+      .replace(/\,/g, "");
+    this.nextDay = new Date(this.time + 86400000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    this.next2Day = new Date(this.time + 172800000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    this.next3Day = new Date(this.time + 259200000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    if (this.language === "be") {
+      this.timeNow = fromENtoBY(this.timeNow);
+      this.nextDay = fromENtoBY(this.nextDay);
+      this.next2Day = fromENtoBY(this.next2Day);
+      this.next3Day = fromENtoBY(this.next3Day);
+    }
+  }
+
+  updateLang(newLanguage) {
+    this.language = newLanguage;
+    this.lan = setLangCountry(this.language);
+    this.timeNow = new Date(this.time)
+      .toLocaleString(this.lan, {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZone: this.timezone
+      })
+      .replace(/\,/g, "");
+    this.nextDay = new Date(this.time + 86400000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    this.next2Day = new Date(this.time + 172800000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    this.next3Day = new Date(this.time + 259200000).toLocaleString(this.lan, {
+      weekday: "long",
+      timeZone: this.timezone
+    });
+    if (this.language === "be") {
+      this.timeNow = fromENtoBY(this.timeNow);
+      this.nextDay = fromENtoBY(this.nextDay);
+      this.next2Day = fromENtoBY(this.next2Day);
+      this.next3Day = fromENtoBY(this.next3Day);
+    }
   }
 }
 

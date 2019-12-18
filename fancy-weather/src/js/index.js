@@ -5,7 +5,6 @@ import {
   updateTimeEl,
   updateCoordsEl,
   displayMapEl,
-  updateNextDaysEls,
   updateSearchEl
 } from "./dom";
 import { styleTemp } from "./temperature";
@@ -19,7 +18,7 @@ import { Time } from "./time";
 import { layout } from "./constants";
 
 const weather = new Weather(storage);
-const time = new Time(new Date(), layout[weather.language]);
+export const time = new Time(storage.getLang());
 
 window.onload = () => {
   // creating DOM elements
@@ -39,6 +38,7 @@ window.onload = () => {
       getLocationDataFromCoords(long, lat, weather.language);
       updateCoordsEl(layout[weather.language], lat, long);
       displayMapEl(long, lat, weather.language);
+      updateTimeEl(time);
     });
   }
 
@@ -51,7 +51,7 @@ window.onload = () => {
   document.querySelector(".lang").value = weather.language;
 
   // update time every second
-  const timeChange = setInterval(() => {
+  setInterval(() => {
     time.updateTime();
     updateTimeEl(time);
   }, 1000);
@@ -76,8 +76,7 @@ window.onload = () => {
   document.querySelector(".lang").addEventListener("change", function() {
     weather.language = this.value;
     storage.setLang(this.value);
-
-    time.updateLayout(layout[weather.language]);
+    time.updateLang(this.value);
     updateTimeEl(time);
 
     getWeatherInfo(
@@ -104,8 +103,6 @@ window.onload = () => {
       storage.getLatitude(),
       weather.language
     );
-
-    updateNextDaysEls(time);
 
     updateSearchEl(weather.language);
   });

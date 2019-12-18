@@ -1,5 +1,6 @@
 import { C, F, layout } from "./constants";
-import { updateWeatherEl } from "./dom";
+import { updateWeatherEl, updateTimeEl } from "./dom";
+import { time } from './index';
 
 const WEATHER_TOKEN = "b09c5fb76da37a975c47e9a40842e089";
 
@@ -27,7 +28,6 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
 
     const currentWeather = {
       timezone: data.timezone,
-      time: data.currently.time, //1576423182 in sec
       icon: data.currently.icon,
       summary: data.currently.summary,
       temperatureC: Math.round(data.currently.temperature),
@@ -71,6 +71,9 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
       layout[language],
       unit
     );
+
+    time.updateTimeZone(currentWeather.timezone);
+    updateTimeEl(time);
   } catch (err) {
     throw new Error(err);
   }
