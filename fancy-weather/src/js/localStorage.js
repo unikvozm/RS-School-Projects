@@ -23,7 +23,27 @@ const storage = {
       return C;
     }
     return localStorage.getItem("unit");
-  }
+  },
+
+  setLongitude: (long) => {
+    localStorage.setItem("longitude", long);
+  },
+
+  getLongitude: () => {
+    if (localStorage.getItem("longitude")) {
+      return localStorage.getItem("longitude");
+    }
+  },
+
+  setLatitude: (lat) => {
+    localStorage.setItem("latitude", lat);
+  },
+
+  getLatitude: () => {
+    if (localStorage.getItem("latitude")) {
+      return localStorage.getItem("latitude");
+    }
+  },
 };
 
 export default storage;

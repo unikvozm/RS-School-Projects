@@ -10,7 +10,8 @@ class Time {
       (this.hour = time.getHours()),
       (this.minutes =
         time.getMinutes() > 9 ? time.getMinutes() : `0${time.getMinutes()}`),
-      (this.seconds = time.getSeconds());
+      (this.seconds =
+        time.getSeconds() > 9 ? time.getSeconds() : `0${time.getSeconds()}`);
   }
   updateTime(curTime = new Date()) {
     (this.day = this.layout.dayShort[curTime.getDay()]),
@@ -21,7 +22,10 @@ class Time {
         curTime.getMinutes() > 9
           ? curTime.getMinutes()
           : `0${curTime.getMinutes()}`),
-      (this.seconds = curTime.getSeconds());
+      (this.seconds =
+        curTime.getSeconds() > 9
+          ? curTime.getSeconds()
+          : `0${curTime.getSeconds()}`);
   }
   updateLayout(newLayout) {
     this.layout = newLayout;

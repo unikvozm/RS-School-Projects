@@ -8,7 +8,6 @@ class Weather {
     this.unit = storage.getUnit();
     this.storage = storage;
     this.language = storage.getLang();
-    this.location;
   }
   changeUnit() {
     this.unit = this.unit === C ? F : C;
@@ -32,11 +31,13 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
       temperatureF: Math.round(data.currently.temperature),
       apparentTemperatureF: Math.round(data.currently.apparentTemperature),
       humidity: `${Math.round(data.currently.humidity * 100)}%`,
-      wind: `${data.currently.windSpeed} ${layout[language].speed}`
+      wind: `${data.currently.windSpeed} ${
+        layout[language].speed
+      }`
     };
 
     const next1DayWeather = {
-      time: data.daily.data[1].time, 
+      time: data.daily.data[1].time,
       icon: data.daily.data[1].icon,
       temperatureF: Math.round(
         (data.daily.data[1].temperatureHigh +
@@ -46,7 +47,7 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next2DayWeather = {
-      time: data.daily.data[2].time, 
+      time: data.daily.data[2].time,
       icon: data.daily.data[2].icon,
       temperatureF: Math.round(
         (data.daily.data[2].temperatureHigh +
@@ -56,7 +57,7 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next3DayWeather = {
-      time: data.daily.data[3].time, 
+      time: data.daily.data[3].time,
       icon: data.daily.data[3].icon,
       temperatureF: Math.round(
         (data.daily.data[3].temperatureHigh +

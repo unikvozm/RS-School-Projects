@@ -1,15 +1,16 @@
 import { normCoords, fromFtoC } from "./_helpers";
+import { layout } from "./constants";
 
-function getTemplate() {
+function getTemplate(language, time) {
   const template = `
 <div class="wrapper">
   <section class="menu">
     <div class="tools">
       <div class="refresh">&#x21bb;</div>
       <select class="lang">
-        <option value="EN" class="lang__option">en</option>
-        <option value="RU" class="lang__option">ru</option>
-        <option value="BE" class="lang__option">be</option>
+        <option value="en" class="lang__option">EN</option>
+        <option value="ru" class="lang__option">RU</option>
+        <option value="be" class="lang__option">BE</option>
       </select>
       <div class="units">
         <div class="units__unit selected" id="celcius">°C</div>
@@ -17,15 +18,15 @@ function getTemplate() {
       </div>
     </div>
     <div class="search">
-      <input type="text" class="search__inpt" />
-      <button class="search__btn">Search</button>
+      <input type="text" class="search__inpt" placeholder=${layout[language].search[0]}/>
+      <button class="search__btn">${layout[language].search[1]}</button>
     </div>
   </section>
   <main>
     <section class="current-data">
-      <p class="current-data__town">town</p>
+      <p class="current-data__town"></p>
       <p class="current-data__date">
-        date and time
+      ${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}:${time.seconds}
       </p>
       <section class="current-weather">
         <p class="current-weather__container"><span class="current-weather__temp"></span>
@@ -34,17 +35,17 @@ function getTemplate() {
       </section>
       <section class="forecast">
         <div class="forecast__info">
-          <p class="forecast__info-day" id="day1">next day</p>
+          <p class="forecast__info-day" id="day1">${time.nextDay}</p>
           <p class="forecast__info-temp" id="temp1"></p>
           <canvas class="forecast__info-icon" id="day1-icon" width="64" height="64"></canvas>
         </div>
         <div class="forecast__info">
-          <p class="forecast__info-day" id="day2">second next</p>
+          <p class="forecast__info-day" id="day2">${time.next2Day}</p>
           <p class="forecast__info-temp" id="temp2"></p>
           <canvas class="forecast__info-icon" id="day2-icon" width="64" height="64"></canvas>
         </div>
         <div class="forecast__info">
-          <p class="forecast__info-day" id="day3">third next</p>
+          <p class="forecast__info-day" id="day3">${time.next3Day}</p>
           <p class="forecast__info-temp" id="temp3"></p>
           <canvas class="forecast__info-icon" id="day3-icon" width="64" height="64"></canvas>
         </div>
@@ -67,7 +68,7 @@ function getTemplate() {
 function updateTimeEl(time) {
   document.querySelector(
     ".current-data__date"
-  ).textContent = `${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}`;
+  ).textContent = `${time.day} ${time.date} ${time.month} ${time.hour}:${time.minutes}:${time.seconds}`;
 }
 
 function updateWeatherEl(current, next1, next2, next3, layout, unit) {
@@ -95,6 +96,10 @@ function updateWeatherEl(current, next1, next2, next3, layout, unit) {
     unit === "F" ? next3.temperatureF : fromFtoC(next3.temperatureF)
   }°`;
 
+  displayIcons(current, next1, next2, next3);
+}
+
+function displayIcons(current, next1, next2, next3) {
   const Skycons = require("../../node_modules/skycons")(window);
   let skycons = new Skycons({ color: "white" });
   skycons.add("day0-icon", current.icon);
@@ -105,7 +110,7 @@ function updateWeatherEl(current, next1, next2, next3, layout, unit) {
   skycons.play();
 }
 
-function updateCoords(layout, lat, long) {
+function updateCoordsEl(layout, lat, long) {
   document.querySelector(".coords__long").textContent = `${
     layout.coords[1]
   }: ${normCoords(long)}`;
@@ -114,7 +119,7 @@ function updateCoords(layout, lat, long) {
   }: ${normCoords(lat)}`;
 }
 
-function displayMap(long = 0, lat = 0, language) {
+function displayMapEl(long = 0, lat = 0, language) {
   mapboxgl.accessToken =
     "pk.eyJ1IjoidW5pa3Zvem0iLCJhIjoiY2s0OGRweW5sMTE4YTNscGdhNzgyN2F2dCJ9.nlBqKqXBVoruZpwSgl76LA";
   const map = new mapboxgl.Map({
@@ -131,4 +136,18 @@ function displayMap(long = 0, lat = 0, language) {
   });
 }
 
-export { getTemplate, updateTimeEl, updateWeatherEl, updateCoords, displayMap };
+function updateLocationEl(city, country) {
+  document.querySelector(
+    ".current-data__town"
+  ).textContent = `${city}, ${country}`;
+}
+
+
+export {
+  getTemplate,
+  updateTimeEl,
+  updateWeatherEl,
+  updateCoordsEl,
+  displayMapEl,
+  updateLocationEl
+};
