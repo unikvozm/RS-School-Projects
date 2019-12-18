@@ -17,10 +17,10 @@ function getTemplate(language, time) {
         <div class="units__unit" id="fahrenheit">°F</div>
       </div>
     </div>
-    <div class="search">
-      <input type="text" class="search__inpt" placeholder="${layout[language].search[0]}"/>
-      <button class="search__btn">${layout[language].search[1]}</button>
-    </div>
+    <form class="search">
+      <input type="text" class="search__inpt" id="geocoder" placeholder="${layout[language].search[0]}">
+      <button type="button" class="search__btn">${layout[language].search[1]}</button>
+    </form>
   </section>
   <main>
     <section class="current-data">
@@ -126,12 +126,12 @@ function displayMapEl(long = 0, lat = 0, language) {
     container: "map", // container id
     style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
     center: [long, lat], // starting position [lng, lat]
-    zoom: 9 // starting zoom
+    zoom: 13 // starting zoom
   });
   map.on("load", function() {
     map.setLayoutProperty("country-label", "text-field", [
       "get",
-      "name_" + language.toLowerCase()
+      "name_" + language
     ]);
   });
 }

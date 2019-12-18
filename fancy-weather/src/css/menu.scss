@@ -114,3 +114,33 @@
     }
   }
 }
+
+.search {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  &__inpt {
+    width: size(274px);
+    height: 100%;
+    background: rgba(76, 82, 85, 0.4);
+    border: 1px solid rgba(228, 227, 227, 0.2);
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 17px;
+    font-feature-settings: "cpsp" on;
+    color: $main-color;
+  }
+
+  &__btn {
+    background: rgba(174, 181, 185, 0.5);
+    height: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $main-color;
+  }
+}

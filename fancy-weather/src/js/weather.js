@@ -18,8 +18,9 @@ class Weather {
 async function getWeatherInfo(latitude, longitude, language, unit) {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const wheatherPath = "https://api.darksky.net/forecast/";
+  // optional parameters: language - to show summary in chosen language; units=si - to get data in celsius, sm and m/s
   const url = `${proxy}${wheatherPath}${WEATHER_TOKEN}/${latitude},${longitude}?exclude=minutely,hourly,flags&lang=${language}&units=si`;
-  console.log(url);
+
   try {
     const req = await fetch(url);
     const data = await req.json();
