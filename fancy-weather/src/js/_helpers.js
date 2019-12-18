@@ -1,6 +1,6 @@
 // finds celcius degrees from fahrenheit degrees
-function fromFtoC(fahr) {
-  return Math.round(((fahr - 32) * 5) / 9);
+function fromCtoF(celcius) {
+  return Math.round((celcius * 9) / 5 + 32);
 }
 
 // nornalize coordinates from grads to grads and minutes
@@ -34,4 +34,4 @@ function fromSecToSec(sec) {
   return date.getSeconds();
 }
 
-export { fromFtoC, normCoords, fromSecToDay };
+export { fromCtoF, normCoords, fromSecToDay };

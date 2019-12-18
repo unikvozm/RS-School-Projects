@@ -18,7 +18,8 @@ class Weather {
 async function getWeatherInfo(latitude, longitude, language, unit) {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const wheatherPath = "https://api.darksky.net/forecast/";
-  const url = `${proxy}${wheatherPath}${WEATHER_TOKEN}/${latitude},${longitude}?exclude=minutely,hourly,flags?lang=${language}`;
+  const url = `${proxy}${wheatherPath}${WEATHER_TOKEN}/${latitude},${longitude}?exclude=minutely,hourly,flags&lang=${language}&units=si`;
+  console.log(url);
   try {
     const req = await fetch(url);
     const data = await req.json();
@@ -27,19 +28,16 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
       timezone: data.timezone,
       time: data.currently.time, //1576423182 in sec
       icon: data.currently.icon,
-      summaryText: data.currently.summary,
-      temperatureF: Math.round(data.currently.temperature),
-      apparentTemperatureF: Math.round(data.currently.apparentTemperature),
+      summary: data.currently.summary,
+      temperatureC: Math.round(data.currently.temperature),
+      apparentTemperatureC: Math.round(data.currently.apparentTemperature),
       humidity: `${Math.round(data.currently.humidity * 100)}%`,
-      wind: `${data.currently.windSpeed} ${
-        layout[language].speed
-      }`
+      wind: `${data.currently.windSpeed} ${layout[language].speed}`
     };
 
     const next1DayWeather = {
-      time: data.daily.data[1].time,
       icon: data.daily.data[1].icon,
-      temperatureF: Math.round(
+      temperatureC: Math.round(
         (data.daily.data[1].temperatureHigh +
           data.daily.data[1].temperatureLow) /
           2
@@ -47,9 +45,8 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next2DayWeather = {
-      time: data.daily.data[2].time,
       icon: data.daily.data[2].icon,
-      temperatureF: Math.round(
+      temperatureC: Math.round(
         (data.daily.data[2].temperatureHigh +
           data.daily.data[2].temperatureLow) /
           2
@@ -57,9 +54,8 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     };
 
     const next3DayWeather = {
-      time: data.daily.data[3].time,
       icon: data.daily.data[3].icon,
-      temperatureF: Math.round(
+      temperatureC: Math.round(
         (data.daily.data[3].temperatureHigh +
           data.daily.data[3].temperatureLow) /
           2

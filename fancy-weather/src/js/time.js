@@ -16,6 +16,9 @@ class Time {
   updateTime(curTime = new Date()) {
     (this.day = this.layout.dayShort[curTime.getDay()]),
       (this.date = curTime.getDate()),
+      (this.nextDay = this.layout.day[(curTime.getDay() + 1) % 12]),
+      (this.next2Day = this.layout.day[(curTime.getDay() + 2) % 12]),
+      (this.next3Day = this.layout.day[(curTime.getDay() + 3) % 12]),
       (this.month = this.layout.month[curTime.getMonth()]),
       (this.hour = curTime.getHours()),
       (this.minutes =

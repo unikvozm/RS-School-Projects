@@ -1,4 +1,4 @@
-import { normCoords, fromFtoC } from "./_helpers";
+import { normCoords, fromCtoF } from "./_helpers";
 import { layout } from "./constants";
 
 function getTemplate(language, time) {
@@ -18,7 +18,7 @@ function getTemplate(language, time) {
       </div>
     </div>
     <div class="search">
-      <input type="text" class="search__inpt" placeholder=${layout[language].search[0]}/>
+      <input type="text" class="search__inpt" placeholder="${layout[language].search[0]}"/>
       <button class="search__btn">${layout[language].search[1]}</button>
     </div>
   </section>
@@ -73,27 +73,27 @@ function updateTimeEl(time) {
 
 function updateWeatherEl(current, next1, next2, next3, layout, unit) {
   document.querySelector(".current-weather__temp").textContent = `
-    ${unit === "F" ? current.temperatureF : fromFtoC(current.temperatureF)}°`;
+    ${unit === "C" ? current.temperatureC : fromCtoF(current.temperatureC)}°`;
   document.querySelector(".current-weather__info").innerHTML = `<p>${
-    current.summaryText
+    current.summary
   }</p><p>${layout.weather[0]} ${
-    unit === "F"
-      ? current.apparentTemperatureF
-      : fromFtoC(current.apparentTemperatureF)
+    unit === "C"
+      ? current.apparentTemperatureC
+      : fromCtoF(current.apparentTemperatureC)
   }°</p><p>${layout.weather[1]} ${current.wind}</p><p>${layout.weather[2]} ${
     current.humidity
   }</p>`;
 
   document.querySelector("#temp1").textContent = `${
-    unit === "F" ? next1.temperatureF : fromFtoC(next1.temperatureF)
+    unit === "C" ? next1.temperatureC : fromCtoF(next1.temperatureC)
   }°`;
 
   document.querySelector("#temp2").textContent = `${
-    unit === "F" ? next2.temperatureF : fromFtoC(next2.temperatureF)
+    unit === "C" ? next2.temperatureC : fromCtoF(next2.temperatureC)
   }°`;
 
   document.querySelector("#temp3").textContent = `${
-    unit === "F" ? next3.temperatureF : fromFtoC(next3.temperatureF)
+    unit === "C" ? next3.temperatureC : fromCtoF(next3.temperatureC)
   }°`;
 
   displayIcons(current, next1, next2, next3);
@@ -142,6 +142,18 @@ function updateLocationEl(city, country) {
   ).textContent = `${city}, ${country}`;
 }
 
+function updateNextDaysEls(time) {
+  document.querySelector("#day1").textContent = time.nextDay;
+  document.querySelector("#day2").textContent = time.next2Day;
+  document.querySelector("#day3").textContent = time.next3Day;
+}
+
+function updateSearchEl(language) {
+  document.querySelector(
+    ".search"
+  ).innerHTML = `<input type="text" class="search__inpt" placeholder="${layout[language].search[0]}"/>
+  <button class="search__btn">${layout[language].search[1]}</button>`;
+}
 
 export {
   getTemplate,
@@ -149,5 +161,7 @@ export {
   updateWeatherEl,
   updateCoordsEl,
   displayMapEl,
-  updateLocationEl
+  updateLocationEl,
+  updateNextDaysEls,
+  updateSearchEl
 };

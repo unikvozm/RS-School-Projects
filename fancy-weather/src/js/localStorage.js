@@ -1,7 +1,7 @@
 import { C, F, EN, RU, BE } from "./constants";
 
 const storage = {
-  setLang: (lang) => {
+  setLang: lang => {
     localStorage.setItem("language", lang);
   },
 
@@ -13,19 +13,19 @@ const storage = {
     return localStorage.getItem("language");
   },
 
-  setUnit: (unit) => {
+  setUnit: unit => {
     localStorage.setItem("unit", unit);
   },
 
   getUnit: () => {
     if (!localStorage.getItem("unit")) {
-		localStorage.setItem("unit", C);
+      localStorage.setItem("unit", C);
       return C;
     }
     return localStorage.getItem("unit");
   },
 
-  setLongitude: (long) => {
+  setLongitude: long => {
     localStorage.setItem("longitude", long);
   },
 
@@ -35,7 +35,7 @@ const storage = {
     }
   },
 
-  setLatitude: (lat) => {
+  setLatitude: lat => {
     localStorage.setItem("latitude", lat);
   },
 
@@ -43,7 +43,7 @@ const storage = {
     if (localStorage.getItem("latitude")) {
       return localStorage.getItem("latitude");
     }
-  },
+  }
 };
 
 export default storage;

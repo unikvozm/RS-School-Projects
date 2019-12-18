@@ -1,6 +1,13 @@
 import "../css/style.scss";
 
-import { getTemplate, updateTimeEl, updateCoordsEl, displayMapEl } from "./dom";
+import {
+  getTemplate,
+  updateTimeEl,
+  updateCoordsEl,
+  displayMapEl,
+  updateNextDaysEls,
+  updateSearchEl
+} from "./dom";
 import { styleTemp } from "./temperature";
 import { Weather, getWeatherInfo } from "./weather";
 import storage from "./localStorage";
@@ -55,7 +62,12 @@ window.onload = () => {
       styleTemp(unitEl);
     });
     weather.changeUnit();
-    getWeatherInfo(storage.getLatitude(), storage.getLongitude(), weather.language, weather.unit);
+    getWeatherInfo(
+      storage.getLatitude(),
+      storage.getLongitude(),
+      weather.language,
+      weather.unit
+    );
   });
 
   document.querySelector(".lang").addEventListener("change", function() {
@@ -63,6 +75,28 @@ window.onload = () => {
     storage.setLang(this.value);
     time.updateLayout(layout[weather.language]);
     updateTimeEl(time);
-    //setCurCoords(layout[weather.language]);
+    getWeatherInfo(
+      storage.getLatitude(),
+      storage.getLongitude(),
+      weather.language,
+      weather.unit
+    );
+    getLocationDataFromCoords(
+      storage.getLongitude(),
+      storage.getLatitude(),
+      weather.language
+    );
+    updateCoordsEl(
+      layout[weather.language],
+      storage.getLatitude(),
+      storage.getLongitude()
+    );
+    displayMapEl(
+      storage.getLongitude(),
+      storage.getLatitude(),
+      weather.language
+    );
+    updateNextDaysEls(time);
+    updateSearchEl(weather.language);
   });
 };
