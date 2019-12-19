@@ -28,6 +28,21 @@ function styleTemp(el) {
   el.classList.toggle('selected');
 }
 
+// find current season
+function getSeason(month) {
+  if (month === 12 || month <= 2) return 'winter';
+  if (month <= 5) return 'spring';
+  if (month <= 8) return 'summer';
+  return 'autumn';
+}
+
+// find current part of the day
+function getdayTime(hour) {
+  if (hour < 5) return 'night';
+  if (hour < 12) return 'morning';
+  if (hour < 17) return 'afternoon';
+  return 'evening';
+}
 export {
-  fromCtoF, normCoords, fromENtoBY, styleTemp,
+  fromCtoF, normCoords, fromENtoBY, styleTemp, getSeason, getdayTime,
 };

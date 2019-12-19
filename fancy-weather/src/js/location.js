@@ -1,7 +1,9 @@
 import { updateLocationEl, updateCoordsEl, displayMapEl } from './dom';
 import storage from './localStorage';
-import { getWeatherInfo } from './weather';
+import { getWeatherInfo, weather } from './weather';
 import { layout } from './constants';
+import time from './time';
+import updateImage from './imageLoader';
 
 const GEOCODER_TOKEN = 'cdb1e310abc5419f88c96b50bb013ea1';
 
@@ -76,6 +78,7 @@ function getLocationDataFromInput(input, language, unit) {
       getWeatherInfo(lat, long, language, unit);
       updateCoordsEl(layout[language], lat, long);
       displayMapEl(long, lat, language);
+      updateImage(time.time, time.timezone, weather.icon);
     } else if (request.status <= 500) {
       // We reached our target server, but it returned an error
       const data = JSON.parse(request.responseText);

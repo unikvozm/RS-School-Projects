@@ -1,6 +1,7 @@
 import { C, F, layout } from './constants';
 import { updateWeatherEl, updateTimeEl } from './dom';
 import time from './time';
+import storage from './localStorage';
 
 const WEATHER_TOKEN = 'b09c5fb76da37a975c47e9a40842e089';
 
@@ -16,6 +17,8 @@ class Weather {
     this.storage.setUnit(this.unit);
   }
 }
+
+const weather = new Weather(storage);
 
 async function getWeatherInfo(latitude, longitude, language, unit) {
   const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -74,6 +77,8 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
       unit,
     );
 
+    weather.icon = currentWeather.icon;
+
     time.updateTimeZone(currentWeather.timezone);
     updateTimeEl(time);
   } catch (err) {
@@ -81,4 +86,4 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
   }
 }
 
-export { Weather, getWeatherInfo };
+export { weather, getWeatherInfo };

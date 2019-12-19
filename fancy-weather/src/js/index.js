@@ -8,7 +8,7 @@ import {
   updateSearchEl,
 } from './dom';
 import { styleTemp } from './_helpers';
-import { Weather, getWeatherInfo } from './weather';
+import { weather, getWeatherInfo } from './weather';
 import storage from './localStorage';
 import {
   getLocationDataFromCoords,
@@ -16,8 +16,7 @@ import {
 } from './location';
 import time from './time';
 import { layout } from './constants';
-
-const weather = new Weather(storage);
+import updateImage from './imageLoader';
 
 window.onload = () => {
   // creating DOM elements
@@ -38,6 +37,7 @@ window.onload = () => {
       updateCoordsEl(layout[weather.language], lat, long);
       displayMapEl(long, lat, layout[weather.language]);
       updateTimeEl(time);
+      updateImage(time.time, time.timezone, weather.icon);
     });
   }
 
@@ -120,19 +120,6 @@ window.onload = () => {
     }
   });
 
-  // document.addEventListener('keyup', (event) => {
-  //   if (event.key === 'Enter') {
-  //     event.preventDefault();
-  //     const input = document.querySelector('#geocoder').value.trim();
-  //     if (input.length === 0 || Number(input) < 0) {
-  //       /* eslint-disable no-alert */
-  //       alert('Invalid input');
-  //     } else {
-  //       // get location, update weather, update map
-  //       getLocationDataFromInput(input, weather.language, weather.unit);
-  //       time.updateTimeZone(storage.getTimeZone());
-  //       updateTimeEl(time);
-  //     }
-  //   }
-  // });
+  // upload new image once click on refresh
+  document.querySelector('#refresh').addEventListener('click', () => { updateImage(time.time, time.timezone, weather.icon); });
 };

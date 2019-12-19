@@ -5,7 +5,7 @@ function getTemplate(time, layout) {
 <div class="wrapper">
   <section class="menu">
     <div class="tools">
-      <div class="refresh">&#x21bb;</div>
+      <div class="refresh" id="refresh">&#x21bb;</div>
       <select class="lang">
         <option value="en" class="lang__option">EN</option>
         <option value="ru" class="lang__option">RU</option>
@@ -18,7 +18,7 @@ function getTemplate(time, layout) {
     </div>
     <form class="search">
       <input type="text" class="search__inpt" id="geocoder" placeholder="${layout.search[0]}">
-      <button type="button" class="search__btn">${layout.search[1]}</button>
+      <button type="submit" class="search__btn">${layout.search[1]}</button>
     </form>
   </section>
   <main>
