@@ -2,13 +2,14 @@
 @import "./variables";
 
 .menu {
-  width: 80vw;
-  margin: size(40px) auto;
+  width: 100%;
+  margin: 2vh auto;
   display: flex;
   justify-content: space-between;
 
   @media (max-width: $mobile) {
     flex-direction: column;
+    height: 14vh;
   }
 }
 
@@ -19,7 +20,9 @@
   font-size: 14px;
 
   @media (max-width: $mobile) {
-    margin: 0 auto;
+    width: 100%;
+    margin: 1% auto;
+    justify-content: center;
   }
 
   @media (min-width: $desktop) {
@@ -45,6 +48,8 @@
 
   @media (min-width: $desktop) {
     width: size(44px);
+    font-size: size(30px);
+    line-height: size(44px);
   }
 
   &:active {
@@ -91,10 +96,8 @@
   &__unit {
     width: 44px;
     background: rgba(174, 181, 185, 0.5);
-    box-shadow: 0.3vw 0.3vw 0.2vw 0 rgb(63, 62, 63);
+    box-shadow: 0.7vmin 0.7vmin 0.5vmin 0 rgb(63, 62, 63);
     border-radius: 5px;
-    font-size: 14px;
-    line-height: 17px;
     font-size: 18px;
     line-height: 44px;
     text-align: center;
@@ -117,19 +120,29 @@
 
 .search {
   width: 50%;
+  margin: 0;
   display: flex;
   justify-content: center;
+
+  @media (max-width: $mobile) {
+    width: 100%;
+    height: 5vh;
+  }
 
   &__inpt {
     width: size(274px);
     height: 100%;
     background: rgba(76, 82, 85, 0.4);
-    border: 1px solid rgba(228, 227, 227, 0.2);
+    border: 0.3vmin solid rgba(228, 227, 227, 0.2);
     box-sizing: border-box;
     font-size: 14px;
     line-height: 17px;
     font-feature-settings: "cpsp" on;
     color: $main-color;
+
+    @media (max-width: $mobile) {
+      width: 50%;    
+    }
   }
 
   &__btn {

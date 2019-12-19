@@ -2,12 +2,13 @@
 @import "./functions";
 
 .current-data {
-  width: 50%;
-  margin: 0;
+  width: 60%;
+  margin: 0 auto;
 
   @media (max-width: $mobile) {
     width: 100%;
     margin: 0 auto;
+    text-align: center;
   }
 
   &__town {
@@ -42,11 +43,13 @@
 
   @media (max-width: $mobile) {
     width: 100%;
+    justify-content: center;
   }
 
   &__container {
     display: flex;
     align-items: center;
+    flex-direction: column;
   }
 
   &__icon {
@@ -66,13 +69,13 @@
     font-style: normal;
     font-weight: bold;
     font-size: size(22px);
-    line-height: or 168%;
+    line-height: 168%;
 
     text-transform: uppercase;
 
     @media (max-width: $mobile) {
-      font-size: 5vmin;
-      line-height: 6vmin;
+      font-size: 2vh;
+      line-height: 4vh;
     }
   }
 }
@@ -80,7 +83,6 @@
 .forecast {
   display: flex;
   justify-content: space-between;
-  margin-top: 5%;
   text-align: center;
 
   &__info-day {
@@ -91,15 +93,31 @@
     text-transform: uppercase;
 
     @media (max-width: $mobile) {
-      font-size: 4vmin;
-      line-height: 5vmin;
+      margin-top: 5%;
+      font-size: 2vh;
+      line-height: 3vh;
     }
   }
 
   &__info-temp {
     font-weight: 600;
-    font-size: 200%;
+    font-size: size(60px);
     line-height: size(98px);
     display: inline;
+
+    @media (max-width: $mobile) {
+      font-size: 5vh;
+      line-height: 6vh;
+    }
+  }
+
+  &__info-icon {
+    width: size(64px);
+    height: size(64px);
+
+    @media (max-width: $mobile) {
+      width: 6vh;
+      height: 6vh;
+    }
   }
 }

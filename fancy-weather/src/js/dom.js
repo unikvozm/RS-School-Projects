@@ -28,9 +28,11 @@ function getTemplate(time, layout) {
       ${time.timeNow}
       </p>
       <section class="current-weather">
-        <p class="current-weather__container"><span class="current-weather__temp"></span>
-        <canvas class="current-weather__icon" id="day0-icon" width="128" height="128"></canvas></p>
-        <div class="current-weather__info"></div>
+        <p class="current-weather__temp"></p>
+        <div class="current-weather__container">
+          <canvas class="current-weather__icon" id="day0-icon" width="128" height="128"></canvas>
+          <div class="current-weather__info"></div>
+        </div>
       </section>
       <section class="forecast">
         <div class="forecast__info">
@@ -129,7 +131,7 @@ function displayMapEl(long = 0, lat = 0, language) {
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
     center: [long, lat], // starting position [lng, lat]
-    zoom: 13, // starting zoom
+    zoom: 10, // starting zoom
   });
   map.on('load', () => {
     map.setLayoutProperty('country-label', 'text-field', [
