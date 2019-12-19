@@ -1,49 +1,45 @@
-import { C, F, EN, RU, BE } from "./constants";
+import { C, EN } from './constants';
 
 const storage = {
-  setLang: lang => {
-    localStorage.setItem("language", lang);
+  setLang: (lang) => {
+    localStorage.setItem('language', lang);
   },
 
   getLang: () => {
-    if (!localStorage.getItem("language")) {
+    if (!localStorage.getItem('language')) {
       storage.setLang(EN);
       return EN;
     }
-    return localStorage.getItem("language");
+    return localStorage.getItem('language');
   },
 
-  setUnit: unit => {
-    localStorage.setItem("unit", unit);
+  setUnit: (unit) => {
+    localStorage.setItem('unit', unit);
   },
 
   getUnit: () => {
-    if (!localStorage.getItem("unit")) {
-      localStorage.setItem("unit", C);
+    if (!localStorage.getItem('unit')) {
+      localStorage.setItem('unit', C);
       return C;
     }
-    return localStorage.getItem("unit");
+    return localStorage.getItem('unit');
   },
 
-  setLongitude: long => {
-    localStorage.setItem("longitude", long);
+  setLongitude: (long) => {
+    localStorage.setItem('longitude', long);
   },
 
-  getLongitude: () => {
-    if (localStorage.getItem("longitude")) {
-      return localStorage.getItem("longitude");
-    }
+  getLongitude: () => localStorage.getItem('longitude'),
+
+  setLatitude: (lat) => {
+    localStorage.setItem('latitude', lat);
   },
 
-  setLatitude: lat => {
-    localStorage.setItem("latitude", lat);
-  },
+  getLatitude: () => localStorage.getItem('latitude'),
 
-  getLatitude: () => {
-    if (localStorage.getItem("latitude")) {
-      return localStorage.getItem("latitude");
-    }
-  }
+  setTimeZone: (timezone) => { localStorage.setItem('timeZone', timezone); },
+
+  getTimeZone: () => localStorage.getItem('timeZone'),
 };
 
 export default storage;

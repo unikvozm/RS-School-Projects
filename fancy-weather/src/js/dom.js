@@ -1,7 +1,6 @@
-import { normCoords, fromCtoF } from "./_helpers";
-import { layout } from "./constants";
+import { normCoords, fromCtoF } from './_helpers';
 
-function getTemplate(language, time) {
+function getTemplate(time, layout) {
   const template = `
 <div class="wrapper">
   <section class="menu">
@@ -18,8 +17,8 @@ function getTemplate(language, time) {
       </div>
     </div>
     <form class="search">
-      <input type="text" class="search__inpt" id="geocoder" placeholder="${layout[language].search[0]}">
-      <button type="button" class="search__btn">${layout[language].search[1]}</button>
+      <input type="text" class="search__inpt" id="geocoder" placeholder="${layout.search[0]}">
+      <button type="button" class="search__btn">${layout.search[1]}</button>
     </form>
   </section>
   <main>
@@ -67,89 +66,90 @@ function getTemplate(language, time) {
 
 function updateTimeEl(time) {
   document.querySelector(
-    ".current-data__date"
+    '.current-data__date',
   ).textContent = time.timeNow;
-  document.querySelector("#day1").textContent = time.nextDay;
-  document.querySelector("#day2").textContent = time.next2Day;
-  document.querySelector("#day3").textContent = time.next3Day;
+  document.querySelector('#day1').textContent = time.nextDay;
+  document.querySelector('#day2').textContent = time.next2Day;
+  document.querySelector('#day3').textContent = time.next3Day;
+}
+
+function displayIcons(current, next1, next2, next3) {
+  /* eslint-disable global-require */
+  const Skycons = require('../../node_modules/skycons')(window);
+  const skycons = new Skycons({ color: 'white' });
+  skycons.add('day0-icon', current.icon);
+  skycons.add('day1-icon', next1.icon);
+  skycons.add('day2-icon', next2.icon);
+  skycons.add('day3-icon', next3.icon);
+
+  skycons.play();
 }
 
 function updateWeatherEl(current, next1, next2, next3, layout, unit) {
-  document.querySelector(".current-weather__temp").textContent = `
-    ${unit === "C" ? current.temperatureC : fromCtoF(current.temperatureC)}°`;
-  document.querySelector(".current-weather__info").innerHTML = `<p>${
+  document.querySelector('.current-weather__temp').textContent = `
+    ${unit === 'C' ? current.temperatureC : fromCtoF(current.temperatureC)}°`;
+  document.querySelector('.current-weather__info').innerHTML = `<p>${
     current.summary
   }</p><p>${layout.weather[0]} ${
-    unit === "C"
+    unit === 'C'
       ? current.apparentTemperatureC
       : fromCtoF(current.apparentTemperatureC)
   }°</p><p>${layout.weather[1]} ${current.wind}</p><p>${layout.weather[2]} ${
     current.humidity
   }</p>`;
 
-  document.querySelector("#temp1").textContent = `${
-    unit === "C" ? next1.temperatureC : fromCtoF(next1.temperatureC)
+  document.querySelector('#temp1').textContent = `${
+    unit === 'C' ? next1.temperatureC : fromCtoF(next1.temperatureC)
   }°`;
 
-  document.querySelector("#temp2").textContent = `${
-    unit === "C" ? next2.temperatureC : fromCtoF(next2.temperatureC)
+  document.querySelector('#temp2').textContent = `${
+    unit === 'C' ? next2.temperatureC : fromCtoF(next2.temperatureC)
   }°`;
 
-  document.querySelector("#temp3").textContent = `${
-    unit === "C" ? next3.temperatureC : fromCtoF(next3.temperatureC)
+  document.querySelector('#temp3').textContent = `${
+    unit === 'C' ? next3.temperatureC : fromCtoF(next3.temperatureC)
   }°`;
 
   displayIcons(current, next1, next2, next3);
 }
 
-function displayIcons(current, next1, next2, next3) {
-  const Skycons = require("../../node_modules/skycons")(window);
-  let skycons = new Skycons({ color: "white" });
-  skycons.add("day0-icon", current.icon);
-  skycons.add("day1-icon", next1.icon);
-  skycons.add("day2-icon", next2.icon);
-  skycons.add("day3-icon", next3.icon);
-
-  skycons.play();
-}
-
 function updateCoordsEl(layout, lat, long) {
-  document.querySelector(".coords__long").textContent = `${
+  document.querySelector('.coords__long').textContent = `${
     layout.coords[1]
   }: ${normCoords(long)}`;
-  document.querySelector(".coords__lat").textContent = `${
+  document.querySelector('.coords__lat').textContent = `${
     layout.coords[0]
   }: ${normCoords(lat)}`;
 }
 
 function displayMapEl(long = 0, lat = 0, language) {
-  mapboxgl.accessToken =
-    "pk.eyJ1IjoidW5pa3Zvem0iLCJhIjoiY2s0OGRweW5sMTE4YTNscGdhNzgyN2F2dCJ9.nlBqKqXBVoruZpwSgl76LA";
+  /* eslint-disable no-undef */
+  mapboxgl.accessToken = 'pk.eyJ1IjoidW5pa3Zvem0iLCJhIjoiY2s0OGRweW5sMTE4YTNscGdhNzgyN2F2dCJ9.nlBqKqXBVoruZpwSgl76LA';
   const map = new mapboxgl.Map({
-    container: "map", // container id
-    style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
     center: [long, lat], // starting position [lng, lat]
-    zoom: 13 // starting zoom
+    zoom: 13, // starting zoom
   });
-  map.on("load", function() {
-    map.setLayoutProperty("country-label", "text-field", [
-      "get",
-      "name_" + language
+  map.on('load', () => {
+    map.setLayoutProperty('country-label', 'text-field', [
+      'get',
+      `name_${language}`,
     ]);
   });
 }
 
 function updateLocationEl(city, country) {
   document.querySelector(
-    ".current-data__town"
+    '.current-data__town',
   ).textContent = `${city}, ${country}`;
 }
 
-function updateSearchEl(language) {
+function updateSearchEl(layout) {
   document.querySelector(
-    ".search"
-  ).innerHTML = `<input type="text" class="search__inpt" placeholder="${layout[language].search[0]}"/>
-  <button class="search__btn">${layout[language].search[1]}</button>`;
+    '.search',
+  ).innerHTML = `<input type="text" class="search__inpt" placeholder="${layout.search[0]}"/>
+  <button class="search__btn">${layout.search[1]}</button>`;
 }
 
 export {
@@ -159,5 +159,5 @@ export {
   updateCoordsEl,
   displayMapEl,
   updateLocationEl,
-  updateSearchEl
+  updateSearchEl,
 };
