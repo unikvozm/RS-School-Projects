@@ -12,7 +12,7 @@ async function updateImage(time, timezone, summary) {
   const dayTime = getdayTime(hour);
   const place = document.querySelector('.current-data__town').textContent;
 
-  const ACCESSKEY = 'd2bd80527522e12c2331b079c8a8aff0d0cad5290f6189a7fa4f128a0ec2030f';
+  const ACCESSKEY = '0e663130a12111e6a3b5cc0209ba6dc08248db2c699931ddb995de0bf2fde66d';
   const proxy = 'https://cors-anywhere.herokuapp.com/';
 
   const URL = `${proxy}http://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${
@@ -25,6 +25,7 @@ async function updateImage(time, timezone, summary) {
     img.crossOrigin = 'Anonymous';
     /* eslint-disable no-restricted-globals */
     const url = `${data.urls.raw}&w=${screen.width.toString()}&h=${screen.height.toString()}`;
+
     img.setAttribute('src', url);
     img.onload = () => {
       document.body.style.backgroundImage = `url(${url})`;

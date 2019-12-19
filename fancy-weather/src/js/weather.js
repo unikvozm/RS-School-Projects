@@ -78,7 +78,7 @@ async function getWeatherInfo(latitude, longitude, language, unit) {
     );
 
     weather.icon = currentWeather.icon;
-
+    storage.setTimeZone(currentWeather.timezone);
     time.updateTimeZone(currentWeather.timezone);
     updateTimeEl(time);
   } catch (err) {

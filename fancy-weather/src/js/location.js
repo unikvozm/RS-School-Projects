@@ -78,7 +78,7 @@ function getLocationDataFromInput(input, language, unit) {
       getWeatherInfo(lat, long, language, unit);
       updateCoordsEl(layout[language], lat, long);
       displayMapEl(long, lat, language);
-      updateImage(time.time, time.timezone, weather.icon);
+      updateImage(time.time, storage.getTimeZone(), weather.icon);
     } else if (request.status <= 500) {
       // We reached our target server, but it returned an error
       const data = JSON.parse(request.responseText);

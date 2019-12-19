@@ -109,6 +109,7 @@ window.onload = () => {
   // search handler
   document.querySelector('.search').addEventListener('submit', (e) => {
     const input = document.querySelector('#geocoder').value.trim();
+    e.preventDefault();
     if (input.length === 0 || Number(input) < 0) {
       /* eslint-disable no-alert */
       alert('Invalid input');
@@ -116,10 +117,11 @@ window.onload = () => {
       // get location, update weather, update map
       getLocationDataFromInput(input, weather.language, weather.unit);
       time.updateTimeZone(storage.getTimeZone());
-      e.preventDefault();
     }
   });
 
   // upload new image once click on refresh
-  document.querySelector('#refresh').addEventListener('click', () => { updateImage(time.time, time.timezone, weather.icon); });
+  document.querySelector('#refresh').addEventListener('click', () => {
+    updateImage(time.time, storage.getTimeZone(), weather.icon);
+  });
 };
