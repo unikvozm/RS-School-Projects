@@ -125,6 +125,7 @@ function updateCoordsEl(layout, lat, long) {
 }
 
 function displayMapEl(long = 0, lat = 0, language) {
+  document.querySelector('#map').innerHTML = '';
   /* eslint-disable no-undef */
   mapboxgl.accessToken = 'pk.eyJ1IjoidW5pa3Zvem0iLCJhIjoiY2s0OGRweW5sMTE4YTNscGdhNzgyN2F2dCJ9.nlBqKqXBVoruZpwSgl76LA';
   const map = new mapboxgl.Map({
