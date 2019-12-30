@@ -1,24 +1,26 @@
-import '../css/style.scss';
-import setValueInRange from './size-slider';
-import storage from './localStorage';
-import drawingArea from './canvas';
-import { getIndexForActive, setActiveTool } from './tools';
-import imageLoad from './imageLoader';
-import greyScale from './black&white';
+import "../css/style.scss";
+import setValueInRange from "./size-slider";
+import storage from "./localStorage";
+import drawingArea from "./canvas";
+import setActiveTool from "../components/tools/tools";
+import {
+  canvas,
+  penEl,
+  strokeEl,
+  paintBucketEl,
+  paintAllBucketEl,
+  colorPickerEl,
+  eraserEl,
+  toolsName,
+  keyShortcuts
+} from "../components/Constants";
 
-const slider = document.querySelector('.drawing-area__slider');
-const canvas = document.querySelector('.drawing-area__canvas');
-const previousColor = document.querySelector('.prev-color');
-const colorPicker = document.querySelector('.colors__color-picker');
-const colors = document.querySelectorAll('.colors__color');
-const tools = document.querySelectorAll('.tools__tool');
-const loadBtn = document.querySelector('.drawing-area__buttons--load');
-const locationInput = document.querySelector(
-  '.drawing-area__buttons--location',
-);
-const bwBtn = document.querySelector('.drawing-area__buttons--b-w');
+const slider = document.querySelector(".drawing-area__slider");
+const previousColor = document.querySelector(".prev-color");
+const colorPicker = document.querySelector(".colors__color-picker");
+const colors = document.querySelectorAll(".colors__color");
 
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
 // Event listeners
@@ -29,7 +31,9 @@ window.onload = () => {
   previousColor.style.backgroundColor = drawingArea.prevColor;
   slider.value = drawingArea.size;
   setValueInRange();
-  tools[getIndexForActive(drawingArea.activeTool)].classList.add('active-tool');
+  // TODO:
+  // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
+
   const img = new Image();
   img.src = storage.getImage();
   if (img.src !== null) {
@@ -49,16 +53,16 @@ colorPicker.onchange = () => {
 };
 
 colors.forEach((color, index) => {
-  color.addEventListener('click', () => {
+  color.addEventListener("click", () => {
     switch (index) {
       case 1:
         drawingArea.setCurrentColor(drawingArea.prevColor);
         break;
       case 2:
-        drawingArea.setCurrentColor('#f74141');
+        drawingArea.setCurrentColor("#f74141");
         break;
       case 3:
-        drawingArea.setCurrentColor('#00BCD4');
+        drawingArea.setCurrentColor("#00BCD4");
         break;
       default:
         break;
@@ -66,33 +70,42 @@ colors.forEach((color, index) => {
   });
 });
 
-// Listeners for an active tool: 0 - paint-bucket, 1 - color-picker, 2 - pencil
-tools[0].addEventListener('click', () => setActiveTool(0));
-tools[1].addEventListener('click', () => setActiveTool(1));
-tools[2].addEventListener('click', () => setActiveTool(2));
+// Listeners for an active tool
+penEl.addEventListener("click", () => setActiveTool(toolsName.pen));
+strokeEl.addEventListener("click", () => setActiveTool(toolsName.stroke));
+paintBucketEl.addEventListener("click", () =>
+  setActiveTool(toolsName.paintBucket)
+);
+paintAllBucketEl.addEventListener("click", () =>
+  setActiveTool(toolsName.paintAllBucket)
+);
+colorPickerEl.addEventListener("click", () =>
+  setActiveTool(toolsName.colorPicker)
+);
+eraserEl.addEventListener("click", () => setActiveTool(toolsName.eraser));
 
-document.addEventListener('keyup', (event) => {
+// Listeners for Keyboard Shortcuts
+document.addEventListener("keyup", event => {
   switch (event.code) {
-    case 'KeyB':
-      setActiveTool(0);
+    case keyShortcuts.pen:
+      setActiveTool(toolsName.pen);
       break;
-    case 'KeyP':
-      setActiveTool(2);
+    case keyShortcuts.stroke:
+      setActiveTool(toolsName.stroke);
       break;
-    case 'KeyC':
-      setActiveTool(1);
+    case keyShortcuts.paintBucket:
+      setActiveTool(toolsName.paintBucket);
+      break;
+    case keyShortcuts.paintAllBucket:
+      setActiveTool(toolsName.paintAllBucket);
+      break;
+    case keyShortcuts.colorPicker:
+      setActiveTool(toolsName.colorPicker);
+      break;
+    case keyShortcuts.eraser:
+      setActiveTool(toolsName.eraser);
       break;
     default:
       break;
   }
 });
-
-// Listener for image loading
-loadBtn.addEventListener('click', () => {
-  // eslint-disable-next-line no-alert
-  if (!locationInput.value) alert('Type the city first');
-  else imageLoad();
-});
-
-// Listener for greyscale
-bwBtn.addEventListener('click', greyScale);

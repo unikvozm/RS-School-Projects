@@ -1,3 +1,6 @@
+@import '../components/tools/tools.scss';
+@import '../components/pixel-size\ handler/pixel-size.scss';
+
 * {
   margin: 0;
 }
@@ -61,43 +64,6 @@
   justify-content: space-between;
   padding-top: 69px;
   margin: 0 auto;
-}
-
-.tools {
-  width: 228px;
-  height: 246px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
-
-  &__tool {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
-    &-icon {
-      width: 20px;
-      margin: 0 35px 0 20px;
-    }
-
-    &-name {
-      font-family: "Roboto", sans-serif;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 24px;
-      color: rgba(0, 0, 0, 0.541327);
-    }
-  }
-}
-
-.inactive {
-  opacity: 0.2;
-}
-
-.active-tool {
-  background: rgba(0, 0, 0, 0.141327);
 }
 
 .colors {
@@ -164,7 +130,8 @@
   &__canvas {
     width: 512px;
     height: 512px;
-    background: white;
+    background-image: url('../components/bg-image/data_image_png;base….png');
+    background-repeat: repeat;
     border: 1px solid #c4c4c4;
     image-rendering: pixelated;
   }
@@ -253,4 +220,24 @@
       left: 7px;
     }
   }
+}
+
+.cursor-pen {
+  cursor: url('../components/tools/pen/pen.png') 0 32, auto;
+}
+
+.cursor-stroke {
+  cursor: url('../components/tools/stroke/stroke.png') 0 32, auto;
+}
+
+.cursor-paint-bucket {
+  cursor: url('../components/tools/paint-bucket/paint-bucket.png') 0 32, auto;
+}
+
+.cursor-color-picker {
+  cursor: url('../components/tools/color-picker/dropper.png') 0 32, auto;
+}
+
+.cursor-eraser {
+  cursor: url('../components/tools/eraser/eraser.png') 0 32, auto;
 }

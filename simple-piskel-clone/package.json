@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --history-api-fallback --inline --open",
     "build": "npm run clear -s && webpack --progress",
     "lint": "eslint ./**/*.js",
-    "lint-fix": "eslint -fix ./**/*.js",
+    "lint-fix": "eslint --fix ./**/*.js",
     "clear": "del-cli dist"
   },
   "keywords": [],

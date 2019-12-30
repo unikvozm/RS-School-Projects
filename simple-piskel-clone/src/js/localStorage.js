@@ -5,10 +5,22 @@ const storage = {
 
   getSize: () => {
     if (localStorage.getItem('size') === null) {
-      storage.setSize(128);
-      return 128;
+      storage.setSize(32);
+      return 32;
     }
     return localStorage.getItem('size');
+  },
+
+  setPixelSize: (size) => {
+    localStorage.setItem('pixel-size', size);
+  },
+
+  getPixelSize: () => {
+    if (localStorage.getItem('pixel-size') === null) {
+      storage.setPixelSize(1);
+      return 1;
+    }
+    return localStorage.getItem('pixel-size');
   },
 
   setPrevColor: (prevColor) => {
@@ -52,22 +64,10 @@ const storage = {
 
   getActiveTool: () => {
     if (localStorage.getItem('active tool') === null) {
-      storage.setActiveTool('pencil');
-      return 'pencil';
+      storage.setActiveTool('pen');
+      return 'pen';
     }
     return localStorage.getItem('active tool');
-  },
-
-  setImageLoaded: (data) => {
-    localStorage.setItem('image loaded', data);
-  },
-
-  getImageLoaded: () => {
-    if (localStorage.getItem('image loaded') === null) {
-      storage.setImageLoaded(false);
-      return false;
-    }
-    return localStorage.getItem('image loaded');
   },
 };
 

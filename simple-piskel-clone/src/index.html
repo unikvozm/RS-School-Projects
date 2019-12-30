@@ -17,7 +17,7 @@
         <div class="header__icon-stick"></div>
         <div class="header__icon-stick"></div>
       </div>
-      <h1 class="header__title">CodeJam - Image API</h1>
+      <h1 class="header__title">Simple Piskel Clone</h1>
       <div class="header__dots">
         <div class="header__dots-dot"></div>
         <div class="header__dots-dot"></div>
@@ -26,42 +26,74 @@
     </header>
     <main class="main">
       <section class="menu">
+        <div class="size">
+          <p class="size__tip">Pencil size <br> from 1 to 4 pixels</p>
+          <div class="size__box size-1 size-selected"></div>
+          <div class="size__box size-2"></div>
+          <div class="size__box size-3"></div>
+          <div class="size__box size-4"></div>
+        </div>
         <div class="tools">
-          <div class="tools__tool">
+          <div id="pen" class="tools__tool">
             <img
-              src="./img/paint-bucket.svg"
+              src="./components/tools/pen/pen-icon.png"
+              alt="pen"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-tip">
+              Pen tool <span class="tools__tool-tip--key">(P)</span>
+            </p>
+          </div>
+          <div id="stroke" class="tools__tool">
+            <img
+              src="./components/tools/stroke/stroke-icon.png"
+              alt="stroke"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-tip">
+              Stroke tool <span class="tools__tool-tip--key">(L)</span>
+            </p>
+          </div>
+          <div id="paint-bucket" class="tools__tool">
+            <img
+              src="./components/tools/paint-bucket/paint-bucket-icon.png"
               alt="paint bucket"
               class="tools__tool-icon"
             />
-            <p class="tools__tool-name">Fill bucket</p>
+            <p class="tools__tool-tip">
+              Paint bucket tool <span class="tools__tool-tip--key">(B)</span>
+            </p>
           </div>
-          <div class="tools__tool">
+          <div id="paint-all-bucket" class="tools__tool">
             <img
-              src="./img/color-picker.svg"
+              src="./components/tools/paint-bucket/paint-all-icon.png"
+              alt="paint everything bucket"
+              class="tools__tool-icon"
+            />
+            <p class="tools__tool-tip">
+              Paint all pixels of the same color
+              <span class="tools__tool-tip--key">(A)</span>
+            </p>
+          </div>
+          <div id="color-picker" class="tools__tool">
+            <img
+              src="./components/tools/color-picker/color-picker-icon.png"
               alt="color picker"
               class="tools__tool-icon"
             />
-            <p class="tools__tool-name">Choose color</p>
+            <p class="tools__tool-tip">
+              Color picker <span class="tools__tool-tip--key">(O)</span>
+            </p>
           </div>
-          <div class="tools__tool">
+          <div id="eraser" class="tools__tool">
             <img
-              src="./img/pencil.svg"
-              alt="pencil"
+              src="./components/tools/eraser/eraser-icon.png"
+              alt="eraser"
               class="tools__tool-icon"
             />
-            <p class="tools__tool-name">Pencil</p>
-          </div>
-          <div class="tools__tool inactive">
-            <img src="./img/move.svg" alt="move" class="tools__tool-icon" />
-            <p class="tools__tool-name">Move</p>
-          </div>
-          <div class="tools__tool inactive">
-            <img
-              src="./img/transform.svg"
-              alt="transform"
-              class="tools__tool-icon"
-            />
-            <p class="tools__tool-name">Transform</p>
+            <p class="tools__tool-tip">
+              Eraser tool <span class="tools__tool-tip--key">(E)</span>
+            </p>
           </div>
         </div>
         <div class="colors">
@@ -86,23 +118,6 @@
         </div>
       </section>
       <section class="drawing-area">
-        <div class="drawing-area__buttons">
-          <div class="drawing-area__buttons--image-load">
-            <button type="submit" class="drawing-area__buttons--load">
-              Load
-            </button>
-            <div class="drawing-area__buttons--location-container">
-              <img src="./img/magnifier.svg" alt="magnifier-icon" />
-              <input
-                type="text"
-                class="drawing-area__buttons--location"
-                placeholder="Enter a city"
-                required
-              />
-            </div>
-          </div>
-          <button type="button" class="drawing-area__buttons--b-w">B&W</button>
-        </div>
         <canvas class="drawing-area__canvas"
           >Your browser doesn't support canvas</canvas
         >
@@ -110,12 +125,12 @@
           type="range"
           class="drawing-area__slider"
           name="slider"
-          min="128"
-          max="512"
-          value="128"
-          step="128"
+          min="32"
+          max="128"
+          value="32"
+          step="32"
         />
-        <label for="slider" class="drawing-area__slider-value">128</label>
+        <label for="slider" class="drawing-area__slider-value">32</label>
       </section>
     </main>
     <script src="bundle.js"></script>
