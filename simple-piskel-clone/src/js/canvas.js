@@ -66,11 +66,6 @@ const drawingArea = {
       });
     });
   },
-
-  setImageLoaded: (data) => {
-    drawingArea.imageLoaded = data;
-    storage.setImageLoaded(data);
-  },
 };
 
 export default drawingArea;

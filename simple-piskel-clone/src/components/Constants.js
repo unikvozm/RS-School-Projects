@@ -29,8 +29,6 @@ const keyShortcuts = {
   eraser: 'keyE',
 }
 
-const TRANSPARENT_COLOR = 'rgba(0, 0, 0, 0)';
-
 export {
   canvas,
   toolsEl,
@@ -41,6 +39,5 @@ export {
   colorPickerEl,
   eraserEl,
   toolsName,
-  keyShortcuts,
-  TRANSPARENT_COLOR
+  keyShortcuts
 };

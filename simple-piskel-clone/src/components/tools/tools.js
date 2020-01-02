@@ -15,7 +15,7 @@ import {
   paintAllBucketHandler,
   paintBucketHandler
 } from "./paint-bucket/paintBucketHandlers";
-import { colorPickerHandler } from "./color-picker/color-picker";
+import colorPickerHandler from "./color-picker/color-picker";
 import eraserHandler from "./eraser/eraserHandler";
 import strokeHandler from "./stroke/strokeHandler";
 
