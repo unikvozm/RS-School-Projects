@@ -1,11 +1,8 @@
-import storage from './localStorage';
+import storage from "../components/utils/localStorage";
+import { canvas, canvasSize } from '../components/utils/Constants';
 
-const canvas = document.querySelector('.drawing-area__canvas');
-const previousColorEl = document.querySelector('.prev-color');
-const colorPicker = document.querySelector('.colors__color-picker');
-canvas.width = 512;
-canvas.height = 512;
-const ctx = canvas.getContext('2d');
+const previousColorEl = document.querySelector(".prev-color");
+const colorPicker = document.querySelector(".colors__color-picker");
 
 const drawingArea = {
   prevColor: storage.getPrevColor(),
@@ -14,22 +11,25 @@ const drawingArea = {
   activeTool: storage.getActiveTool(),
   pixelSize: storage.getPixelSize(),
 
-  setSize: (size) => {
+  setSize: size => {
     drawingArea.size = size;
     storage.setSize(drawingArea.size);
+    canvas.width = size;
+    canvas.height = size;
   },
 
-  setPixelSize: (size) => {
+  setPixelSize: size => {
     drawingArea.pixelSize = size;
     storage.setPixelSize(drawingArea.pixelSize);
   },
 
   clearCanvas: () => {
-    storage.setImage('');
+    storage.setImage("");
+    const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   },
 
-  setCurrentColor: (color) => {
+  setCurrentColor: color => {
     drawingArea.prevColor = drawingArea.currColor;
     drawingArea.currColor = color;
     storage.setPrevColor(drawingArea.prevColor);
@@ -38,34 +38,23 @@ const drawingArea = {
     previousColorEl.style.backgroundColor = drawingArea.prevColor;
   },
 
-  setActiveTool: (tool) => {
+  setActiveTool: tool => {
     drawingArea.activeTool = tool;
     storage.setActiveTool(tool);
   },
 
   renderCanvas: () => {
-    const canv = document.createElement('canvas');
-    canv.width = drawingArea.size;
-    canv.height = drawingArea.size;
-    canv.style.imageRendering = 'pixelated';
-
-    const canvCtx = canv.getContext('2d');
+    const canvCtx = canvas.getContext("2d");
     canvCtx.imageSmoothingEnabled = false;
-    let canvSrc = canvas.toDataURL();
-
-    const tempImg = new Image();
-    tempImg.src = canvSrc;
-    tempImg.addEventListener('load', () => {
-      canvCtx.drawImage(tempImg, 0, 0, drawingArea.size, drawingArea.size);
-      canvSrc = canv.toDataURL();
-
-      const img = new Image();
-      img.src = canvSrc;
-      img.addEventListener('load', () => {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      });
+    canvas.style.width = `${canvasSize}px`;
+    canvas.style.height = `${canvasSize}px`;
+    
+    const img = new Image();
+    img.src = storage.getImage();
+    img.addEventListener("load", () => {
+      canvCtx.drawImage(img, 0, 0);
     });
-  },
+  }
 };
 
 export default drawingArea;

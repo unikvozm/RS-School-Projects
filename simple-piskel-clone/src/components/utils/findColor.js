@@ -1,12 +1,11 @@
-import { canvas } from '../Constants';
+import { canvas, canvasSize } from './Constants';
+import drawingArea from '../../js/canvas';
 
 const ctx = canvas.getContext("2d");
 
 function findColor(event) {
-  const cell = event.target.getBoundingClientRect();
-
-  const xCell = event.clientX - cell.left;
-  const yCell = event.clientY - cell.top;
+  const xCell = Math.floor(event.offsetX / (canvasSize / drawingArea.size));
+  const yCell = Math.floor(event.offsetY / (canvasSize / drawingArea.size));
 
   const colorData = ctx.getImageData(xCell, yCell, 1, 1);
   return {

@@ -1,17 +1,16 @@
-import { canvas } from '../../Constants';
+import { canvas, canvasSize } from '../../utils/Constants';
 import drawingArea from '../../../js/canvas';
+import storage from '../../utils/localStorage';
 
 const ctx = canvas.getContext("2d");
 
 function eraserHandler(event) {
-	const cellSize = Math.round(
-	  (canvas.width / drawingArea.size) * drawingArea.pixelSize
-	);
+	const cellSize = drawingArea.pixelSize;
   
 	let lastX = event.offsetX;
 	let lastY = event.offsetY;
-	let xCell = Math.floor(lastX / cellSize);
-	let yCell = Math.floor(lastY / cellSize);
+	let xCell = Math.floor(lastX / (canvasSize / drawingArea.size));
+	let yCell = Math.floor(lastY / (canvasSize / drawingArea.size));
   
 	ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
   
@@ -34,9 +33,10 @@ function eraserHandler(event) {
 		  error += deltaX;
 		  lastY += stepY;
 		}
-		xCell = Math.floor(lastX / cellSize);
-		yCell = Math.floor(lastY / cellSize);
+		xCell = Math.floor(lastX / (canvasSize / drawingArea.size));
+		yCell = Math.floor(lastY / (canvasSize / drawingArea.size));
 		ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
+		storage.setImage(canvas.toDataURL());
 	  }
 	}
   

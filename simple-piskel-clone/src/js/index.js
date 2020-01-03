@@ -1,6 +1,6 @@
 import "../css/style.scss";
 import setValueInRange from "./size-slider";
-import storage from "./localStorage";
+import storage from "../components/utils/localStorage";
 import drawingArea from "./canvas";
 import setActiveTool from "../components/tools/tools";
 import {
@@ -13,15 +13,14 @@ import {
   eraserEl,
   toolsName,
   keyShortcuts
-} from "../components/Constants";
+} from "../components/utils/Constants";
 
 const slider = document.querySelector(".drawing-area__slider");
 const previousColor = document.querySelector(".prev-color");
 const colorPicker = document.querySelector(".colors__color-picker");
 const colors = document.querySelectorAll(".colors__color");
 
-const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false;
+// ctx.imageSmoothingEnabled = false;
 
 // Event listeners
 slider.onchange = () => setValueInRange();
@@ -31,16 +30,21 @@ window.onload = () => {
   previousColor.style.backgroundColor = drawingArea.prevColor;
   slider.value = drawingArea.size;
   setValueInRange();
+  const ctx = canvas.getContext("2d");
+  console.log(ctx);
   // TODO:
   // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
+  // canvas.width = drawingArea.size;
+  // canvas.height = drawingArea.size;
+  // ctx = canvas.getContext("2d");
 
-  const img = new Image();
-  img.src = storage.getImage();
-  if (img.src !== null) {
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0);
-    };
-  }
+  // const img = new Image();
+  // img.src = storage.getImage();
+  // if (img.src !== null) {
+  //   img.onload = () => {
+  //     ctx.drawImage(img, 0, 0);
+  //   };
+  // }
 };
 
 window.onbeforeunload = () => {

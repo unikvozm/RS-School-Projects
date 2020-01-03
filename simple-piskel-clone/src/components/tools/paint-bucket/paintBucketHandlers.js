@@ -1,27 +1,27 @@
-import { canvas } from "../../Constants";
+import { canvas, canvasSize } from "../../utils/Constants";
 import drawingArea from "../../../js/canvas";
 import findColor from "../../utils/findColor";
 import fromHexToRGBA from "../../utils/fromHexToRgba";
 import fullColorHex from "../../utils/rgbToHex";
 import isColorSame from "../../utils/isColorSame";
+import storage from '../../utils/localStorage';
 
 const ctx = canvas.getContext("2d");
 
 function paintAllBucketHandler() {
   ctx.fillStyle = drawingArea.currColor;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, drawingArea.size, drawingArea.size);
+  storage.setImage(canvas.toDataURL());
 }
 
 function paintBucketHandler(event) {
   const colorToFill = fromHexToRGBA(drawingArea.currColor);
   const colorToReplace = findColor(event);
-  const startX = event.offsetX;
-  const startY = event.offsetY;
+  const startX = Math.floor(event.offsetX / (canvasSize / drawingArea.size));
+  const startY = Math.floor(event.offsetY / (canvasSize / drawingArea.size));
   const pixelStack = [[startX, startY]];
   const colorLayer = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-  // console.log("before:", colorLayer);
-  // console.log('replace', colorToReplace);
-  // console.log('fill', colorToFill);
+
   if (
     fullColorHex(colorToReplace[0], colorToReplace[1], colorToReplace[2]) ===
     drawingArea.currColor
@@ -41,18 +41,13 @@ function paintBucketHandler(event) {
     }
     pixelPos += canvas.width * 4;
     y += 1;
-    // console.log('y', y);
-    // console.log('true/false',isColorSame(pixelPos, colorLayer, colorToReplace));
-    // console.log('y', y, 'height', canvas.height - 1, isColorSame(pixelPos, colorLayer, colorToReplace))
+
     while (y < canvas.height - 1 && isColorSame(pixelPos, colorLayer, colorToReplace)) {
       y += 1;
-      // console.log(colorLayer[pixelPos][0], colorLayer[pixelPos][1], colorLayer[pixelPos][2], colorLayer[pixelPos][3]);
-      // console.log( colorToFill.r,  colorToFill.g,  colorToFill.b,  colorToFill.a);
       colorLayer[pixelPos] = colorToFill.r;
       colorLayer[pixelPos + 1] = colorToFill.g;
       colorLayer[pixelPos + 2] = colorToFill.b;
       colorLayer[pixelPos + 3] = colorToFill.a;
-      // console.log(colorLayer[pixelPos], colorLayer[pixelPos + 1], colorLayer[pixelPos + 2], colorLayer[pixelPos + 3]);
 
       if (x > 0) {
         if (isColorSame(pixelPos - 4, colorLayer, colorToReplace)) {
@@ -80,6 +75,7 @@ function paintBucketHandler(event) {
   // console.log("after:", colorLayer);
   const imageData = new ImageData(colorLayer, canvas.width, canvas.height);
   ctx.putImageData(imageData, 0, 0);
+  storage.setImage(canvas.toDataURL());
 }
 
 export { paintAllBucketHandler, paintBucketHandler };

@@ -1,3 +1,5 @@
+import "./tools.scss";
+
 import drawingArea from "../../js/canvas";
 import {
   canvas,
@@ -9,7 +11,7 @@ import {
   colorPickerEl,
   eraserEl,
   toolsName
-} from "../Constants";
+} from "../utils/Constants";
 import penHandler from "./pen/penHandler";
 import {
   paintAllBucketHandler,
