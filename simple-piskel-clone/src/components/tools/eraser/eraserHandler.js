@@ -9,8 +9,8 @@ function eraserHandler(event) {
   
 	let lastX = event.offsetX;
 	let lastY = event.offsetY;
-	let xCell = Math.floor(lastX / (canvasSize / drawingArea.size));
-	let yCell = Math.floor(lastY / (canvasSize / drawingArea.size));
+	let xCell = Math.floor(lastX / (canvasSize / drawingArea.size * drawingArea.pixelSize));
+	let yCell = Math.floor(lastY / (canvasSize / drawingArea.size * drawingArea.pixelSize));
   
 	ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
   
@@ -33,8 +33,8 @@ function eraserHandler(event) {
 		  error += deltaX;
 		  lastY += stepY;
 		}
-		xCell = Math.floor(lastX / (canvasSize / drawingArea.size));
-		yCell = Math.floor(lastY / (canvasSize / drawingArea.size));
+		xCell = Math.floor(lastX / (canvasSize / drawingArea.size * drawingArea.pixelSize));
+		yCell = Math.floor(lastY / (canvasSize / drawingArea.size * drawingArea.pixelSize));
 		ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
 		storage.setImage(canvas.toDataURL());
 	  }

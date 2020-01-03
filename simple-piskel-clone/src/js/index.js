@@ -4,7 +4,12 @@ import storage from "../components/utils/localStorage";
 import drawingArea from "../components/canvas/canvas";
 import setActiveTool from "../components/tools/tools";
 import {
+  pixelSizeHandler,
+  setActivePixelSize
+} from "../components/pixelSizeHandler/pixelSize";
+import {
   canvas,
+  pixelSizeEl,
   penEl,
   strokeEl,
   paintBucketEl,
@@ -25,13 +30,15 @@ const colors = document.querySelectorAll(".colors__color");
 // Event listeners
 slider.onchange = () => setValueInRange();
 
+pixelSizeEl.addEventListener("click", pixelSizeHandler);
+
 window.onload = () => {
   colorPicker.value = drawingArea.currColor;
   previousColor.style.backgroundColor = drawingArea.prevColor;
   slider.value = drawingArea.size;
   setValueInRange();
   const ctx = canvas.getContext("2d");
-
+  setActivePixelSize();
   // TODO:
   // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
   // canvas.width = drawingArea.size;

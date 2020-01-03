@@ -1,7 +1,5 @@
 const canvas = document.querySelector(".drawing-area__canvas");
 const canvasSize = 512;
-// canvas.width = 512;
-// canvas.height = 512;
 
 const sizeEl = document.querySelector('.drawing-area__slider-value');
 const slider = document.querySelector('.drawing-area__slider');
@@ -14,6 +12,9 @@ const paintBucketEl = document.querySelector("#paint-bucket");
 const paintAllBucketEl = document.querySelector("#paint-all-bucket");
 const colorPickerEl = document.querySelector("#color-picker");
 const eraserEl = document.querySelector("#eraser");
+
+const pixelSizeEl = document.querySelector('.size');
+const pixelSizeEls = document.querySelectorAll('.size__box');
 
 const toolsName = {
   pen: 'pen',
@@ -37,6 +38,8 @@ export {
   canvas,
   canvasSize,
   sizeEl,
+  pixelSizeEl,
+  pixelSizeEls,
   slider,
   toolsEl,
   penEl,

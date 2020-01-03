@@ -9,8 +9,8 @@ function penHandler(event) {
   
 	let lastX = event.offsetX;
 	let lastY = event.offsetY;
-	let xCell = Math.floor(lastX / (canvasSize / drawingArea.size));
-	let yCell = Math.floor(lastY / (canvasSize / drawingArea.size));
+	let xCell = Math.floor(lastX / (canvasSize / drawingArea.size * drawingArea.pixelSize));
+	let yCell = Math.floor(lastY / (canvasSize / drawingArea.size * drawingArea.pixelSize));
 
 	ctx.fillStyle = drawingArea.currColor;
 	ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
@@ -34,8 +34,8 @@ function penHandler(event) {
 		  error += deltaX;
 		  lastY += stepY;
 		}
-		xCell = Math.floor(lastX / (canvasSize / drawingArea.size));
-		yCell = Math.floor(lastY / (canvasSize / drawingArea.size));
+		xCell = Math.floor(lastX / (canvasSize / drawingArea.size * drawingArea.pixelSize));
+		yCell = Math.floor(lastY / (canvasSize / drawingArea.size * drawingArea.pixelSize));
 		ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
 	  }
 	  storage.setImage(canvas.toDataURL());
