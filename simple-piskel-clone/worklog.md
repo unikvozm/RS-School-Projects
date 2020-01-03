@@ -5,7 +5,7 @@
 | Dec 28 | Dec 30 |	15h	| tools implementation |
 | Jan 1 | Jan 2 | 5.5h | fix flood fill tool |
 | Jan 3 | Jan 3 | 1.5h | video simple-piskel-clone review |
-| Jan 3 | Jan 3 | h | fix resizing canvas implementation |
+| Jan 3 | Jan 3 | 3h | fix resizing canvas implementation |
 
 
 

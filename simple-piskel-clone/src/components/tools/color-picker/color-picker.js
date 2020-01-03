@@ -1,4 +1,4 @@
-import drawingArea from "../../../js/canvas";
+import drawingArea from "../../canvas/canvas";
 import findColor from '../../utils/findColor';
 import fullColorHex from '../../utils/rgbToHex';
 

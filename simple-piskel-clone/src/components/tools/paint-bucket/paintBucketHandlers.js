@@ -1,14 +1,13 @@
 import { canvas, canvasSize } from "../../utils/Constants";
-import drawingArea from "../../../js/canvas";
+import drawingArea from "../../canvas/canvas";
 import findColor from "../../utils/findColor";
 import fromHexToRGBA from "../../utils/fromHexToRgba";
 import fullColorHex from "../../utils/rgbToHex";
 import isColorSame from "../../utils/isColorSame";
-import storage from '../../utils/localStorage';
-
-const ctx = canvas.getContext("2d");
+import storage from "../../utils/localStorage";
 
 function paintAllBucketHandler() {
+  const ctx = canvas.getContext("2d");
   ctx.fillStyle = drawingArea.currColor;
   ctx.fillRect(0, 0, drawingArea.size, drawingArea.size);
   storage.setImage(canvas.toDataURL());
@@ -20,7 +19,9 @@ function paintBucketHandler(event) {
   const startX = Math.floor(event.offsetX / (canvasSize / drawingArea.size));
   const startY = Math.floor(event.offsetY / (canvasSize / drawingArea.size));
   const pixelStack = [[startX, startY]];
-  const colorLayer = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  const ctx = canvas.getContext("2d");
+  const colorLayer = ctx.getImageData(0, 0, drawingArea.size, drawingArea.size)
+    .data;
 
   if (
     fullColorHex(colorToReplace[0], colorToReplace[1], colorToReplace[2]) ===
@@ -29,47 +30,50 @@ function paintBucketHandler(event) {
     return;
   }
   while (pixelStack.length) {
-    let goLeft = false;
-    let goRight = false;
+    let isLeftBorder = false;
+    let isRightBorder = false;
     const newPos = pixelStack.pop();
     const x = newPos[0];
     let y = newPos[1];
-    let pixelPos = (y * canvas.width + x) * 4;
+    let pixelPos = (y * drawingArea.size + x) * 4;
     while (y >= 0 && isColorSame(pixelPos, colorLayer, colorToReplace)) {
-      pixelPos -= canvas.width * 4;
+      pixelPos -= drawingArea.size * 4;
       y -= 1;
     }
-    pixelPos += canvas.width * 4;
+    pixelPos += drawingArea.size * 4;
     y += 1;
 
-    while (y < canvas.height - 1 && isColorSame(pixelPos, colorLayer, colorToReplace)) {
+    while (
+      y <= drawingArea.size - 1 &&
+      isColorSame(pixelPos, colorLayer, colorToReplace)
+    ) {
       y += 1;
       colorLayer[pixelPos] = colorToFill.r;
       colorLayer[pixelPos + 1] = colorToFill.g;
       colorLayer[pixelPos + 2] = colorToFill.b;
       colorLayer[pixelPos + 3] = colorToFill.a;
 
-      if (x > 0) {
+      if (x >= 0) {
         if (isColorSame(pixelPos - 4, colorLayer, colorToReplace)) {
-          if (!goLeft) {
+          if (!isLeftBorder) {
             pixelStack.push([x - 1, y]);
-            goLeft = true;
+            isLeftBorder = true;
           }
-        } else if (goLeft) {
-          goLeft = false;
+        } else if (isLeftBorder) {
+          isLeftBorder = false;
         }
       }
-      if (x < canvas.width - 1) {
+      if (x <= drawingArea.size - 1) {
         if (isColorSame(pixelPos + 4, colorLayer, colorToReplace)) {
-          if (!goRight) {
+          if (!isRightBorder) {
             pixelStack.push([x + 1, y]);
-            goRight = true;
+            isRightBorder = true;
           }
-        } else if (goRight) {
-          goRight = false;
+        } else if (isRightBorder) {
+          isRightBorder = false;
         }
       }
-      pixelPos += canvas.height * 4;
+      pixelPos += drawingArea.size * 4;
     }
   }
   // console.log("after:", colorLayer);

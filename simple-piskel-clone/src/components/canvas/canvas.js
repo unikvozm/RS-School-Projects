@@ -1,5 +1,7 @@
-import storage from "../components/utils/localStorage";
-import { canvas, canvasSize } from '../components/utils/Constants';
+import './canvas.scss';
+
+import storage from "../utils/localStorage";
+import { canvas, canvasSize } from '../utils/Constants';
 
 const previousColorEl = document.querySelector(".prev-color");
 const colorPicker = document.querySelector(".colors__color-picker");

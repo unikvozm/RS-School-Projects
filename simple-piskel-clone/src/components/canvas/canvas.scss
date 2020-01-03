@@ -1,0 +1,28 @@
+.drawing-area__canvas {
+  width: 512px;
+  height: 512px;
+  background-image: url("./canvasBackground.png");
+  background-repeat: repeat;
+  border: 1px solid #c4c4c4;
+  image-rendering: pixelated;
+}
+
+.cursor-pen {
+  cursor: url("../tools/pen/pen.png") 0 32, auto;
+}
+
+.cursor-stroke {
+  cursor: url("../tools/stroke/stroke.png") 0 32, auto;
+}
+
+.cursor-paint-bucket {
+  cursor: url("../tools/paint-bucket/paint-bucket.png") 0 32, auto;
+}
+
+.cursor-color-picker {
+  cursor: url("../tools/color-picker/dropper.png") 0 32, auto;
+}
+
+.cursor-eraser {
+  cursor: url("../tools/eraser/eraser.png") 0 32, auto;
+}

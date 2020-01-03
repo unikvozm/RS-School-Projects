@@ -1,6 +1,8 @@
-import drawingArea from './canvas';
-import { canvas, sizeEl, slider } from '../components/utils/Constants';
-import storage from '../components/utils/localStorage';
+import './sizeSlider.scss';
+
+import drawingArea from '../canvas/canvas';
+import { canvas, sizeEl, slider } from '../utils/Constants';
+import storage from '../utils/localStorage';
 
 function setValueInRange() {
   storage.setImage(canvas.toDataURL());

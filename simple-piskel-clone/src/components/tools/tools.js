@@ -1,6 +1,6 @@
 import "./tools.scss";
 
-import drawingArea from "../../js/canvas";
+import drawingArea from "../canvas/canvas";
 import {
   canvas,
   toolsEl,

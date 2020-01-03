@@ -1,7 +1,7 @@
 import "../css/style.scss";
-import setValueInRange from "./size-slider";
+import setValueInRange from "../components/resizing/sizeSlider";
 import storage from "../components/utils/localStorage";
-import drawingArea from "./canvas";
+import drawingArea from "../components/canvas/canvas";
 import setActiveTool from "../components/tools/tools";
 import {
   canvas,
@@ -31,20 +31,20 @@ window.onload = () => {
   slider.value = drawingArea.size;
   setValueInRange();
   const ctx = canvas.getContext("2d");
-  console.log(ctx);
+
   // TODO:
   // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
   // canvas.width = drawingArea.size;
   // canvas.height = drawingArea.size;
   // ctx = canvas.getContext("2d");
 
-  // const img = new Image();
-  // img.src = storage.getImage();
-  // if (img.src !== null) {
-  //   img.onload = () => {
-  //     ctx.drawImage(img, 0, 0);
-  //   };
-  // }
+  const img = new Image();
+  img.src = storage.getImage();
+  if (img.src !== null) {
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0);
+    };
+  }
 };
 
 window.onbeforeunload = () => {

@@ -1,5 +1,5 @@
 import { canvas, canvasSize } from '../../utils/Constants';
-import drawingArea from '../../../js/canvas';
+import drawingArea from '../../canvas/canvas';
 import storage from '../../utils/localStorage'; 
 
 const ctx = canvas.getContext("2d");
