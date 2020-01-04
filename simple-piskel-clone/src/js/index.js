@@ -1,6 +1,6 @@
 import "../css/style.scss";
 import setValueInRange from "../components/resizing/sizeSlider";
-import storage from "../components/utils/localStorage";
+import storage from "../components/utils/localStorage/localStorage";
 import drawingArea from "../components/canvas/canvas";
 import setActiveTool from "../components/tools/tools";
 import {
@@ -37,14 +37,13 @@ window.onload = () => {
   previousColor.style.backgroundColor = drawingArea.prevColor;
   slider.value = drawingArea.size;
   setValueInRange();
-  const ctx = canvas.getContext("2d");
   setActivePixelSize();
   // TODO:
   // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
   // canvas.width = drawingArea.size;
   // canvas.height = drawingArea.size;
   // ctx = canvas.getContext("2d");
-
+  const ctx = canvas.getContext("2d");
   const img = new Image();
   img.src = storage.getImage();
   if (img.src !== null) {

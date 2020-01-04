@@ -1,10 +1,10 @@
 import { canvas, canvasSize } from "../../utils/Constants";
 import drawingArea from "../../canvas/canvas";
 import findColor from "../../utils/findColor";
-import fromHexToRGBA from "../../utils/fromHexToRgba";
-import fullColorHex from "../../utils/rgbToHex";
+import fromHexToRGBA from "../../utils/fromHexToRgba/fromHexToRgba";
+import fullColorHex from "../../utils/rgbToHex/rgbToHex";
 import isColorSame from "../../utils/isColorSame";
-import storage from "../../utils/localStorage";
+import storage from "../../utils/localStorage/localStorage";
 
 function paintAllBucketHandler() {
   const ctx = canvas.getContext("2d");

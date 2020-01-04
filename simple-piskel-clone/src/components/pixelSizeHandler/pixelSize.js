@@ -2,7 +2,6 @@ import "./pixelSize.scss";
 
 import drawingArea from "../canvas/canvas";
 import { pixelSizeEls } from "../utils/Constants";
-import storage from "../utils/localStorage";
 
 function pixelSizeHandler(event) {
   const pixelSize = event.target.id;
@@ -14,7 +13,7 @@ function pixelSizeHandler(event) {
 }
 
 function setActivePixelSize() {
-  const pixelSize = storage.getPixelSize();
+  const {pixelSize} = drawingArea;
   pixelSizeEls.forEach(el => {
     el.classList.remove("size-selected");
   });

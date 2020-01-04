@@ -1,6 +1,6 @@
 import './canvas.scss';
 
-import storage from "../utils/localStorage";
+import storage from "../utils/localStorage/localStorage";
 import { canvas, canvasSize } from '../utils/Constants';
 
 const previousColorEl = document.querySelector(".prev-color");
