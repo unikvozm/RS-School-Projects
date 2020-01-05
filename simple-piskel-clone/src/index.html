@@ -36,63 +36,63 @@
         <div class="tools">
           <div id="pen" class="tools__tool">
             <img
-              src="./components/tools/pen/pen-icon.png"
+              src="./components/tools/pen/penIcon.png"
               alt="pen"
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Pen tool <span class="tools__tool-tip--key">(P)</span>
+              Pen tool <span class="tools__tool-tip--key" id="pen-key">(P)</span>
             </p>
           </div>
           <div id="stroke" class="tools__tool">
             <img
-              src="./components/tools/stroke/stroke-icon.png"
+              src="./components/tools/stroke/strokeIcon.png"
               alt="stroke"
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Stroke tool <span class="tools__tool-tip--key">(L)</span>
+              Stroke tool <span class="tools__tool-tip--key" id="stroke-key">(L)</span>
             </p>
           </div>
           <div id="paint-bucket" class="tools__tool">
             <img
-              src="./components/tools/paint-bucket/paint-bucket-icon.png"
+              src="./components/tools/paintBucket/paintBucketIcon.png"
               alt="paint bucket"
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Paint bucket tool <span class="tools__tool-tip--key">(B)</span>
+              Paint bucket tool <span class="tools__tool-tip--key" id="paint-bucket-key">(B)</span>
             </p>
           </div>
           <div id="paint-all-bucket" class="tools__tool">
             <img
-              src="./components/tools/paint-bucket/paint-all-icon.png"
+              src="./components/tools/paintBucket/paintAllIcon.png"
               alt="paint everything bucket"
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
               Paint all pixels of the same color
-              <span class="tools__tool-tip--key">(A)</span>
+              <span class="tools__tool-tip--key" id="magic-bucket-key">(A)</span>
             </p>
           </div>
           <div id="color-picker" class="tools__tool">
             <img
-              src="./components/tools/color-picker/color-picker-icon.png"
+              src="./components/tools/colorPicker/colorPickerIcon.png"
               alt="color picker"
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Color picker <span class="tools__tool-tip--key">(O)</span>
+              Color picker <span class="tools__tool-tip--key" id="color-picker-key">(O)</span>
             </p>
           </div>
           <div id="eraser" class="tools__tool">
             <img
-              src="./components/tools/eraser/eraser-icon.png"
+              src="./components/tools/eraser/eraserIcon.png"
               alt="eraser"
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Eraser tool <span class="tools__tool-tip--key">(E)</span>
+              Eraser tool <span class="tools__tool-tip--key" id="eraser-key">(E)</span>
             </p>
           </div>
         </div>
@@ -115,6 +115,12 @@
             <div class="colors__color-circle blue"></div>
             <p class="colors__color-name">blue</p>
           </div>
+        </div>
+        <div class="shortcuts">
+          <button class="shortcuts__btn">
+            <img src="./screens/keyShortcuts/keyIcon.png" alt="shortcuts" class="shortcuts__icon">
+          </button>
+          <div class="shortcuts__window window-closed"></div>
         </div>
       </section>
       <section class="drawing-area">

@@ -7,6 +7,7 @@ import {
   pixelSizeHandler,
   setActivePixelSize
 } from "../components/pixelSizeHandler/pixelSize";
+import { keyboardInit, keyboardOpen } from '../screens/keyShortcuts/keyChangeHandler';
 import {
   canvas,
   pixelSizeEl,
@@ -17,7 +18,8 @@ import {
   colorPickerEl,
   eraserEl,
   toolsName,
-  keyShortcuts
+  keyShortcuts,
+  keyboardBtn
 } from "../components/utils/Constants";
 
 const slider = document.querySelector(".drawing-area__slider");
@@ -32,12 +34,15 @@ slider.onchange = () => setValueInRange();
 
 pixelSizeEl.addEventListener("click", pixelSizeHandler);
 
+keyboardBtn.addEventListener('click', keyboardOpen);
+
 window.onload = () => {
   colorPicker.value = drawingArea.currColor;
   previousColor.style.backgroundColor = drawingArea.prevColor;
   slider.value = drawingArea.size;
   setValueInRange();
   setActivePixelSize();
+  keyboardInit();
   // TODO:
   // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
   // canvas.width = drawingArea.size;
@@ -96,7 +101,7 @@ eraserEl.addEventListener("click", () => setActiveTool(toolsName.eraser));
 
 // Listeners for Keyboard Shortcuts
 document.addEventListener("keyup", event => {
-  switch (event.code) {
+  switch (event.key) {
     case keyShortcuts.pen:
       setActiveTool(toolsName.pen);
       break;

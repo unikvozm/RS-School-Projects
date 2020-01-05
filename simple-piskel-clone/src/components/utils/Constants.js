@@ -3,6 +3,8 @@ const canvasSize = 512;
 
 const sizeEl = document.querySelector('.drawing-area__slider-value');
 const slider = document.querySelector('.drawing-area__slider');
+const keyboardWindow = document.querySelector('.shortcuts__window');
+const keyboardBtn = document.querySelector('.shortcuts__btn');
 
 // Tools:
 const toolsEl = document.querySelectorAll(".tools__tool");
@@ -26,12 +28,12 @@ const toolsName = {
 }
 
 const keyShortcuts = {
-  pen: 'keyP',
-  stroke: 'keyL',
-  paintBucket: 'keyB',
-  paintAllBucket: 'keyA',
-  colorPicker: 'keyO',
-  eraser: 'keyE',
+  pen: 'p',
+  stroke: 'l',
+  paintBucket: 'b',
+  paintAllBucket: 'a',
+  colorPicker: 'o',
+  eraser: 'e',
 }
 
 export {
@@ -42,6 +44,8 @@ export {
   pixelSizeEls,
   slider,
   toolsEl,
+  keyboardWindow,
+  keyboardBtn,
   penEl,
   strokeEl,
   paintBucketEl,

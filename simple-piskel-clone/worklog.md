@@ -8,8 +8,7 @@
 | Jan 3 | Jan 3 | 3h | fix resizing canvas implementation |
 | Jan 3 | Jan 4 | 1h | add pixelSizeChange implementation |
 | Jan 4 | Jan 4 | 1.5h | add several tests |
-
-
+| Jan 4 | Jan 5 | 5h | keyboard shortcut implementation |
 
 
 Total: 

@@ -76,7 +76,7 @@ function paintBucketHandler(event) {
       pixelPos += drawingArea.size * 4;
     }
   }
-  // console.log("after:", colorLayer);
+
   const imageData = new ImageData(colorLayer, canvas.width, canvas.height);
   ctx.putImageData(imageData, 0, 0);
   storage.setImage(canvas.toDataURL());

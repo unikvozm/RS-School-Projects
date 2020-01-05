@@ -16,8 +16,8 @@ import penHandler from "./pen/penHandler";
 import {
   paintAllBucketHandler,
   paintBucketHandler
-} from "./paint-bucket/paintBucketHandlers";
-import colorPickerHandler from "./color-picker/color-picker";
+} from "./paintBucket/paintBucketHandlers";
+import colorPickerHandler from "./colorPicker/colorPicker";
 import eraserHandler from "./eraser/eraserHandler";
 import strokeHandler from "./stroke/strokeHandler";
 
