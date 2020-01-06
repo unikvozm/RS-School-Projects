@@ -69,6 +69,26 @@ const storage = {
     }
     return localStorage.getItem('active tool');
   },
+
+  setKeyShortcuts: (objKeys) => {
+    localStorage.setItem('key shortcuts', JSON.stringify(objKeys));
+  },
+
+  getKeyShortcuts: () => {
+    if (localStorage.getItem('key shortcuts') === null) {
+      const keyShortcuts = {
+        pen: 'p',
+        stroke: 'l',
+        paintBucket: 'b',
+        paintAllBucket: 'a',
+        colorPicker: 'o',
+        eraser: 'e',
+      }
+      storage.setActiveTool(keyShortcuts);
+      return keyShortcuts;
+    }
+    return JSON.parse(localStorage.getItem('key shortcuts'));
+  },
 };
 
 export default storage;

@@ -11,6 +11,7 @@ import { keyboardInit, keyboardOpen } from '../screens/keyShortcuts/keyChangeHan
 import {
   canvas,
   pixelSizeEl,
+  slider,
   penEl,
   strokeEl,
   paintBucketEl,
@@ -22,12 +23,9 @@ import {
   keyboardBtn
 } from "../components/utils/Constants";
 
-const slider = document.querySelector(".drawing-area__slider");
 const previousColor = document.querySelector(".prev-color");
 const colorPicker = document.querySelector(".colors__color-picker");
 const colors = document.querySelectorAll(".colors__color");
-
-// ctx.imageSmoothingEnabled = false;
 
 // Event listeners
 slider.onchange = () => setValueInRange();
@@ -40,22 +38,11 @@ window.onload = () => {
   colorPicker.value = drawingArea.currColor;
   previousColor.style.backgroundColor = drawingArea.prevColor;
   slider.value = drawingArea.size;
+  drawingArea.renderCanvas();
   setValueInRange();
   setActivePixelSize();
   keyboardInit();
-  // TODO:
-  // tools[getIndexForActive(drawingArea.activeTool)].classList.add("active-tool");
-  // canvas.width = drawingArea.size;
-  // canvas.height = drawingArea.size;
-  // ctx = canvas.getContext("2d");
-  const ctx = canvas.getContext("2d");
-  const img = new Image();
-  img.src = storage.getImage();
-  if (img.src !== null) {
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0);
-    };
-  }
+  setActiveTool(drawingArea.activeTool);
 };
 
 window.onbeforeunload = () => {

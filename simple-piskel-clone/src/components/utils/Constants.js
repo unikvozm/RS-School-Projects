@@ -1,3 +1,5 @@
+import storage from "./localStorage/localStorage";
+
 const canvas = document.querySelector(".drawing-area__canvas");
 const canvasSize = 512;
 
@@ -27,14 +29,7 @@ const toolsName = {
   eraser: 'eraser'
 }
 
-const keyShortcuts = {
-  pen: 'p',
-  stroke: 'l',
-  paintBucket: 'b',
-  paintAllBucket: 'a',
-  colorPicker: 'o',
-  eraser: 'e',
-}
+const keyShortcuts = storage.getKeyShortcuts();
 
 export {
   canvas,

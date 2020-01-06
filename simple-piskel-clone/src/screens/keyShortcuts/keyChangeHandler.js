@@ -1,6 +1,7 @@
 import "./keyShortcuts.scss";
 
 import { keyShortcuts, keyboardWindow } from "../../components/utils/Constants";
+import storage from "../../components/utils/localStorage/localStorage";
 
 let newKeys = {};
 
@@ -88,6 +89,7 @@ function changeKeyShortcuts() {
       keyShortcuts[keyEl] = newKeys[keyEl];
     });
     changeKeysLayout();
+    storage.setKeyShortcuts(keyShortcuts);
   } else {
     document.querySelector(".keyboard__info").innerHTML =
       "Can't change to these keys";
