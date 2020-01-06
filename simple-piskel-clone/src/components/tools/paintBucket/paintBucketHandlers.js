@@ -1,9 +1,9 @@
 import { canvas, canvasSize } from "../../utils/Constants";
-import drawingArea from "../../canvas/canvas";
-import findColor from "../../utils/findColor";
+import drawingArea from "../../canvas/canvasFunctionality";
+import findColor from "../../utils/findColor/findColor";
 import fromHexToRGBA from "../../utils/fromHexToRgba/fromHexToRgba";
 import fullColorHex from "../../utils/rgbToHex/rgbToHex";
-import isColorSame from "../../utils/isColorSame";
+import isColorSame from "../../utils/isColorSame/isColorSame";
 import storage from "../../utils/localStorage/localStorage";
 
 function paintAllBucketHandler() {

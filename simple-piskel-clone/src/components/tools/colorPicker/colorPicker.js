@@ -1,5 +1,5 @@
-import drawingArea from "../../canvas/canvas";
-import findColor from '../../utils/findColor';
+import drawingArea from "../../canvas/canvasFunctionality";
+import findColor from '../../utils/findColor/findColor';
 import fullColorHex from '../../utils/rgbToHex/rgbToHex';
 
 function colorPickerHandler(event) {

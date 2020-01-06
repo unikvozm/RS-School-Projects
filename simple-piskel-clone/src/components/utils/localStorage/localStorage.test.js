@@ -15,4 +15,17 @@ test("after setActiveTool('pen'), getActiveTool() to be equal 'pen'", () => {
   expect(storage.getActiveTool()).toBe("pen");
 });
 
+test("getKeyShortcuts() to be equal to the object", () => {
+  const keyShortcuts = {
+    pen: 'p',
+    stroke: 'l',
+    paintBucket: 'b',
+    paintAllBucket: 'a',
+    colorPicker: 'o',
+    eraser: 'e',
+  }
+  storage.setKeyShortcuts(keyShortcuts);
+  expect(storage.getKeyShortcuts()).toEqual(keyShortcuts);
+});
+
 // TODO: test primary color, secondary color
