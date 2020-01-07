@@ -11,5 +11,7 @@
 | Jan 4      | Jan 5    | 5h         | keyboard shortcut implementation                 |
 | Jan 6      | Jan 6    | 1h         | fix local storage setup in initializing function |
 | Jan 6      | Jan 6    | 1h         | add several tests                                |
+| Jan 7      | Jan 7    | 0.5h       | fix flood fill tool implementation               |
+| Jan 7      | Jan 7    | 1.5h       | add stroke tool implementation                   |
 
 Total:
