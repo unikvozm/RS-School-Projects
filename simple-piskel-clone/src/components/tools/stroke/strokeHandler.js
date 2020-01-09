@@ -16,7 +16,8 @@ function strokeHandler(event) {
     lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
   );
 
-  ctx.fillStyle = drawingArea.currColor;
+  ctx.fillStyle =
+    event.button === 2 ? drawingArea.secondaryColor : drawingArea.primaryColor;
   ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
 
   function drawingLine(e) {

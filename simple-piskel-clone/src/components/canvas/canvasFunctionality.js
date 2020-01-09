@@ -1,19 +1,21 @@
 import storage from "../utils/localStorage/localStorage";
-import { canvas, canvasSize } from '../utils/Constants';
-
-const previousColorEl = document.querySelector(".prev-color");
-const colorPicker = document.querySelector(".colors__color-picker");
+import {
+  canvas,
+  canvasSize,
+  primaryColorEl,
+  secondaryColorEl
+} from "../utils/Constants";
 
 const drawingArea = {
-  prevColor: storage.getPrevColor(),
-  currColor: storage.getCurColor(),
+  primaryColor: storage.getPrimaryColor(),
+  secondaryColor: storage.getSecondaryColor(),
   size: storage.getSize(),
   activeTool: storage.getActiveTool(),
   pixelSize: storage.getPixelSize(),
 
   setSize: size => {
     drawingArea.size = size;
-    storage.setSize(drawingArea.size);
+    storage.setSize(size);
   },
 
   setPixelSize: size => {
@@ -27,13 +29,16 @@ const drawingArea = {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   },
 
-  setCurrentColor: color => {
-    drawingArea.prevColor = drawingArea.currColor;
-    drawingArea.currColor = color;
-    storage.setPrevColor(drawingArea.prevColor);
-    storage.setCurColor(drawingArea.currColor);
-    colorPicker.value = drawingArea.currColor;
-    previousColorEl.style.backgroundColor = drawingArea.prevColor;
+  setPrimaryColor: color => {
+    drawingArea.primaryColor = color;
+    storage.setPrimaryColor(color);
+    primaryColorEl.value = color;
+  },
+
+  setSecondaryColor: color => {
+    drawingArea.secondaryColor = color;
+    storage.setSecondaryColor(color);
+    secondaryColorEl.value = color;
   },
 
   setActiveTool: tool => {
@@ -46,7 +51,7 @@ const drawingArea = {
     canvCtx.imageSmoothingEnabled = false;
     canvas.style.width = `${canvasSize}px`;
     canvas.style.height = `${canvasSize}px`;
-    
+
     const img = new Image();
     img.src = storage.getImage();
     img.addEventListener("load", () => {

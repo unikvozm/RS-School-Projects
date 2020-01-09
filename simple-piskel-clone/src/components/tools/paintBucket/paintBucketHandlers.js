@@ -6,15 +6,18 @@ import fullColorHex from "../../utils/rgbToHex/rgbToHex";
 import isColorSame from "../../utils/isColorSame/isColorSame";
 import storage from "../../utils/localStorage/localStorage";
 
-function paintAllBucketHandler() {
+function paintAllBucketHandler(event) {
   const ctx = canvas.getContext("2d");
-  ctx.fillStyle = drawingArea.currColor;
+  console.log(event.button);
+  ctx.fillStyle = event.button === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
   ctx.fillRect(0, 0, drawingArea.size, drawingArea.size);
   storage.setImage(canvas.toDataURL());
 }
 
 function paintBucketHandler(event) {
-  const colorToFill = fromHexToRGBA(drawingArea.currColor);
+  console.log(event);
+
+  const colorToFill = fromHexToRGBA(drawingArea.primaryColor);
   const colorToReplace = findColor(event);
   const startX = Math.floor(event.offsetX / (canvasSize / drawingArea.size));
   const startY = Math.floor(event.offsetY / (canvasSize / drawingArea.size));

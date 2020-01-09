@@ -13,5 +13,6 @@
 | Jan 6      | Jan 6    | 1h         | add several tests                                |
 | Jan 7      | Jan 7    | 0.5h       | fix flood fill tool implementation               |
 | Jan 7      | Jan 7    | 1.5h       | add stroke tool implementation                   |
+| Jan 8      | Jan 8    | 2.5h       | change color handlers implementation             |
 
 Total:

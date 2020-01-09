@@ -27,7 +27,10 @@
     <main class="main">
       <section class="menu">
         <div class="size">
-          <p class="size__tip">Pen size <br> from 1 to 4 pixels</p>
+          <p class="size__tip">
+            Pen size <br />
+            from 1 to 4 pixels
+          </p>
           <div class="size__box size-1 size-selected" id="1"></div>
           <div class="size__box size-2" id="2"></div>
           <div class="size__box size-3" id="3"></div>
@@ -41,7 +44,8 @@
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Pen tool <span class="tools__tool-tip--key" id="pen-key">(P)</span>
+              Pen tool
+              <span class="tools__tool-tip--key" id="pen-key">(P)</span>
             </p>
           </div>
           <div id="stroke" class="tools__tool">
@@ -51,7 +55,8 @@
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Stroke tool <span class="tools__tool-tip--key" id="stroke-key">(L)</span>
+              Stroke tool
+              <span class="tools__tool-tip--key" id="stroke-key">(L)</span>
             </p>
           </div>
           <div id="paint-bucket" class="tools__tool">
@@ -61,7 +66,10 @@
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Paint bucket tool <span class="tools__tool-tip--key" id="paint-bucket-key">(B)</span>
+              Paint bucket tool
+              <span class="tools__tool-tip--key" id="paint-bucket-key"
+                >(B)</span
+              >
             </p>
           </div>
           <div id="paint-all-bucket" class="tools__tool">
@@ -72,7 +80,9 @@
             />
             <p class="tools__tool-tip">
               Paint all pixels of the same color
-              <span class="tools__tool-tip--key" id="magic-bucket-key">(A)</span>
+              <span class="tools__tool-tip--key" id="magic-bucket-key"
+                >(A)</span
+              >
             </p>
           </div>
           <div id="color-picker" class="tools__tool">
@@ -82,7 +92,10 @@
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Color picker <span class="tools__tool-tip--key" id="color-picker-key">(O)</span>
+              Color picker
+              <span class="tools__tool-tip--key" id="color-picker-key"
+                >(O)</span
+              >
             </p>
           </div>
           <div id="eraser" class="tools__tool">
@@ -92,35 +105,79 @@
               class="tools__tool-icon"
             />
             <p class="tools__tool-tip">
-              Eraser tool <span class="tools__tool-tip--key" id="eraser-key">(E)</span>
+              Eraser tool
+              <span class="tools__tool-tip--key" id="eraser-key">(E)</span>
             </p>
           </div>
         </div>
         <div class="colors">
           <div class="colors__color">
-            <div class="colors__color-circle current-color">
-              <input type="color" class="colors__color-picker" />
-            </div>
-            <p class="colors__color-name">Current color</p>
+            <input
+              type="color"
+              class="colors__color-picker"
+              id="primary-color"
+            />
+            <p class="colors__color-tip">
+              Primary color - <br />
+              left mouse button
+            </p>
           </div>
+          <img
+            class="colors__color-swap"
+            src="./components/frames/icons/swap.png"
+          />
           <div class="colors__color">
-            <div class="colors__color-circle prev-color"></div>
-            <p class="colors__color-name">Prev color</p>
-          </div>
-          <div class="colors__color">
-            <div class="colors__color-circle red"></div>
-            <p class="colors__color-name">red</p>
-          </div>
-          <div class="colors__color">
-            <div class="colors__color-circle blue"></div>
-            <p class="colors__color-name">blue</p>
+            <input
+              type="color"
+              class="colors__color-picker"
+              id="secondary-color"
+            />
+            <p class="colors__color-tip">
+              Secondary color - <br />
+              right mouse button
+            </p>
           </div>
         </div>
         <div class="shortcuts">
           <button class="shortcuts__btn">
-            <img src="./screens/keyShortcuts/keyIcon.png" alt="shortcuts" class="shortcuts__icon">
+            <img
+              src="./screens/keyShortcuts/keyIcon.png"
+              alt="shortcuts"
+              class="shortcuts__icon"
+            />
           </button>
           <div class="shortcuts__window window-closed"></div>
+        </div>
+      </section>
+      <section class="frames">
+        <ul class="frames__preview">
+          <li class="frames__frame active-frame">
+            <canvas class="frames__frame-canvas"></canvas>
+            <button class="frames__frame-number">1</button>
+            <p class="frames__frame-tip">Toggle for preview</p>
+            <img
+              class="frames__frame-del"
+              src="./components/frames/icons/delete.png"
+            />
+            <p class="frames__frame-tip">Delete this frame</p>
+            <img
+              class="frames__frame-move"
+              src="./components/frames/icons/move.png"
+            />
+            <p class="frames__frame-tip">Drag and drop to move</p>
+            <img
+              class="frames__frame-double"
+              src="./components/frames/icons/dublicate.png"
+            />
+            <p class="frames__frame-tip">Dublicate this frame</p>
+          </li>
+        </ul>
+        <div class="frames__add-new">
+          <img
+            class="frames__add-new--plus"
+            src="./components/frames/icons/plus.png"
+          />
+          <div class="frames__add-new--txt">Add new frame</div>
         </div>
       </section>
       <section class="drawing-area">

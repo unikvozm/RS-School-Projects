@@ -7,11 +7,20 @@ import {
   pixelSizeHandler,
   setActivePixelSize
 } from "../components/pixelSizeHandler/pixelSize";
-import { keyboardInit, keyboardOpen } from '../screens/keyShortcuts/keyChangeHandler';
+import {
+  keyboardInit,
+  keyboardOpen
+} from "../screens/keyShortcuts/keyChangeHandler";
+import {
+  colorsInit,
+  primaryColorHandler,
+  secondaryColorHandler
+} from "../components/colors/colors";
 import {
   canvas,
-  pixelSizeEl,
   slider,
+  keyboardBtn,
+  keyShortcuts,
   penEl,
   strokeEl,
   paintBucketEl,
@@ -19,24 +28,25 @@ import {
   colorPickerEl,
   eraserEl,
   toolsName,
-  keyShortcuts,
-  keyboardBtn
+  pixelSizeEl,
+  primaryColorEl,
+  secondaryColorEl
 } from "../components/utils/Constants";
 
-const previousColor = document.querySelector(".prev-color");
-const colorPicker = document.querySelector(".colors__color-picker");
-const colors = document.querySelectorAll(".colors__color");
+// Disabling context menu
+window.oncontextmenu = (e) => {
+  e.preventDefault();
+}
 
 // Event listeners
 slider.onchange = () => setValueInRange();
 
 pixelSizeEl.addEventListener("click", pixelSizeHandler);
 
-keyboardBtn.addEventListener('click', keyboardOpen);
+keyboardBtn.addEventListener("click", keyboardOpen);
 
 window.onload = () => {
-  colorPicker.value = drawingArea.currColor;
-  previousColor.style.backgroundColor = drawingArea.prevColor;
+  colorsInit();
   slider.value = drawingArea.size;
   drawingArea.renderCanvas();
   setValueInRange();
@@ -49,28 +59,8 @@ window.onbeforeunload = () => {
   storage.setImage(canvas.toDataURL());
 };
 
-colorPicker.onchange = () => {
-  drawingArea.setCurrentColor(colorPicker.value);
-  drawingArea.renderCanvas();
-};
-
-colors.forEach((color, index) => {
-  color.addEventListener("click", () => {
-    switch (index) {
-      case 1:
-        drawingArea.setCurrentColor(drawingArea.prevColor);
-        break;
-      case 2:
-        drawingArea.setCurrentColor("#f74141");
-        break;
-      case 3:
-        drawingArea.setCurrentColor("#00BCD4");
-        break;
-      default:
-        break;
-    }
-  });
-});
+primaryColorEl.onchange = primaryColorHandler;
+secondaryColorEl.onchange = secondaryColorHandler;
 
 // Listeners for an active tool
 penEl.addEventListener("click", () => setActiveTool(toolsName.pen));
