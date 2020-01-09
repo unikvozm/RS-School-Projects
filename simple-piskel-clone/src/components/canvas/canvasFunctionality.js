@@ -1,10 +1,5 @@
 import storage from "../utils/localStorage/localStorage";
-import {
-  canvas,
-  canvasSize,
-  primaryColorEl,
-  secondaryColorEl
-} from "../utils/Constants";
+import { canvas, canvasSize } from "../utils/Constants";
 
 const drawingArea = {
   primaryColor: storage.getPrimaryColor(),
@@ -32,13 +27,11 @@ const drawingArea = {
   setPrimaryColor: color => {
     drawingArea.primaryColor = color;
     storage.setPrimaryColor(color);
-    primaryColorEl.value = color;
   },
 
   setSecondaryColor: color => {
     drawingArea.secondaryColor = color;
     storage.setSecondaryColor(color);
-    secondaryColorEl.value = color;
   },
 
   setActiveTool: tool => {

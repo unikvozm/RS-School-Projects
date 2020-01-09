@@ -15,4 +15,13 @@ test("after setActiveTool('pen'), activeTool to be equal 'pen'", () => {
   expect(drawingArea.activeTool).toBe("pen");
 });
 
-// TODO: test primary color, secondary color, clearCanvas, renderCanvas
+test("after setPrimaryColor('#ff0000'), primaryColor to be equal '#ff0000'", () => {
+  drawingArea.setPrimaryColor("#ff0000");
+  expect(drawingArea.primaryColor).toBe("#ff0000");
+});
+
+test("after setSecondaryColor('#ff0000'), secondaryColorto be equal '#ff0000'", () => {
+  drawingArea.setSecondaryColor("#ff0000");
+  expect(drawingArea.secondaryColor).toBe("#ff0000");
+});
+

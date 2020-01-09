@@ -19,6 +19,8 @@ function colorsSwap() {
   const tempColor = drawingArea.primaryColor;
   drawingArea.setPrimaryColor(drawingArea.secondaryColor);
   drawingArea.setSecondaryColor(tempColor);
+  primaryColorEl.value = drawingArea.primaryColor;
+  secondaryColorEl.value = drawingArea.secondaryColor;
 }
 
 export { colorsInit, primaryColorHandler, secondaryColorHandler, colorsSwap };
