@@ -46,9 +46,12 @@
   },
   "dependencies": {
     "core-js": "^3.4.7",
+    "firebase": "^7.6.1",
     "regenerator-runtime": "^0.13.3"
   },
-  "jest": { 
-    "collectCoverageFrom" : ["src/**/*.js"]
-  }	
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  }
 }

@@ -47,6 +47,10 @@ const framesContainerEl = document.querySelector('.frames__preview');
 const framesDelBtns = document.querySelectorAll('.frames__frame-del');
 const framesAddNew = document.querySelector('.frames__add-new');
 
+// login
+const loginBtn = document.querySelector('.btn-auth');
+const headerEl = document.querySelector(".header");
+
 export {
   canvas,
   canvasSize,
@@ -71,4 +75,6 @@ export {
   framesContainerEl,
   framesDelBtns,
   framesAddNew,
+  loginBtn,
+  headerEl
 };

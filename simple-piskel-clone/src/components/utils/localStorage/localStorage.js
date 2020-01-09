@@ -88,6 +88,18 @@ const storage = {
       return keyShortcuts;
     }
     return JSON.parse(localStorage.getItem("key shortcuts"));
+  },
+
+  updateAuthStatus: (status) => {
+    localStorage.setItem("logged in", status);
+  },
+
+  getAuthStatus: () => {
+    if (localStorage.getItem("logged in") === null) {
+      storage.updateAuthStatus("false");
+      return "false";
+    }
+    return localStorage.getItem("logged in");
   }
 };
 

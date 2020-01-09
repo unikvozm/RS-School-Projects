@@ -1,0 +1,16 @@
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.user-name {
+  color: #888888;
+  padding-left: 5px;
+  text-align: left;
+}

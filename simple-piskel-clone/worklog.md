@@ -16,5 +16,6 @@
 | Jan 8      | Jan 8    | 2.5h       | change color handlers implementation             |
 | Jan 9      | Jan 9    | 0.5h       | fix right-click tools implementation             |
 | Jan 9      | Jan 9    | 0.5h       | add tests                                        |
+| Jan 9      | Jan 9    | 3h         | add Firebase authorisation                       |
 
-Total:
+Total: 44 h

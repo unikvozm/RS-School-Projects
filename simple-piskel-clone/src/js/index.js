@@ -18,6 +18,7 @@ import {
   colorsSwap
 } from "../components/colors/colors";
 import frames from '../components/frames/frames';
+import {auth, loginHandler} from '../components/auth/auth';
 import {
   canvas,
   slider,
@@ -35,6 +36,7 @@ import {
   secondaryColorEl,
   colorsSwapEl,
   framesAddNew,
+  loginBtn
 } from "../components/utils/Constants";
 
 // Disabling context menu
@@ -53,7 +55,10 @@ keyboardBtn.addEventListener("click", keyboardOpen);
 
 framesAddNew.addEventListener('click', frames.addNewFrame);
 
+loginBtn.addEventListener('click', loginHandler);
+
 window.onload = () => {
+  auth();
   colorsInit();
   slider.value = drawingArea.size;
   drawingArea.renderCanvas();
