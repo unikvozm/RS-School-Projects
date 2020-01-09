@@ -8,16 +8,16 @@ import storage from "../../utils/localStorage/localStorage";
 
 function paintAllBucketHandler(event) {
   const ctx = canvas.getContext("2d");
-  console.log(event.button);
-  ctx.fillStyle = event.button === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
+  ctx.fillStyle =
+    event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
   ctx.fillRect(0, 0, drawingArea.size, drawingArea.size);
   storage.setImage(canvas.toDataURL());
 }
 
 function paintBucketHandler(event) {
-  console.log(event);
-
-  const colorToFill = fromHexToRGBA(drawingArea.primaryColor);
+  let colorToFill =
+    event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
+  colorToFill = fromHexToRGBA(colorToFill);
   const colorToReplace = findColor(event);
   const startX = Math.floor(event.offsetX / (canvasSize / drawingArea.size));
   const startY = Math.floor(event.offsetY / (canvasSize / drawingArea.size));

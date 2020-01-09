@@ -15,4 +15,10 @@ function secondaryColorHandler() {
   drawingArea.setSecondaryColor(secondaryColorEl.value);
 }
 
-export { colorsInit, primaryColorHandler, secondaryColorHandler };
+function colorsSwap() {
+  const tempColor = drawingArea.primaryColor;
+  drawingArea.setPrimaryColor(drawingArea.secondaryColor);
+  drawingArea.setSecondaryColor(tempColor);
+}
+
+export { colorsInit, primaryColorHandler, secondaryColorHandler, colorsSwap };

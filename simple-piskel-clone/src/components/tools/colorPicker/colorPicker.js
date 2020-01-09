@@ -4,7 +4,6 @@ import fullColorHex from "../../utils/rgbToHex/rgbToHex";
 
 function colorPickerHandler(event) {
   const color = findColor(event);
-  console.log(event.which, event.button);
   if (event.which === 1) {
     drawingArea.setPrimaryColor(fullColorHex(color.r, color.g, color.b));
   } else {

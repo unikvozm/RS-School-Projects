@@ -24,9 +24,9 @@ import strokeHandler from "./stroke/strokeHandler";
 function removeAllEventListeners() {
   canvas.removeEventListener("mousedown", penHandler);
   canvas.removeEventListener("mousedown", strokeHandler);
-  canvas.removeEventListener("click", paintBucketHandler);
-  canvas.removeEventListener("click", paintAllBucketHandler);
-  canvas.removeEventListener("click", colorPickerHandler);
+  canvas.removeEventListener("mousedown", paintBucketHandler);
+  canvas.removeEventListener("mousedown", paintAllBucketHandler);
+  canvas.removeEventListener("mouseup", colorPickerHandler);
   canvas.removeEventListener("mousedown", eraserHandler);
 }
 
@@ -58,17 +58,17 @@ function setActiveTool(tool) {
     case toolsName.paintBucket:
       canvas.classList.add("cursor-paint-bucket");
       paintBucketEl.classList.add("active-tool");
-      canvas.addEventListener("click", paintBucketHandler);
+      canvas.addEventListener("mousedown", paintBucketHandler);
       break;
     case toolsName.paintAllBucket:
       canvas.classList.add("cursor-paint-bucket");
       paintAllBucketEl.classList.add("active-tool");
-      canvas.addEventListener("click", paintAllBucketHandler);
+      canvas.addEventListener("mousedown", paintAllBucketHandler);
       break;
     case toolsName.colorPicker:
       canvas.classList.add("cursor-color-picker");
       colorPickerEl.classList.add("active-tool");
-      canvas.addEventListener("click", colorPickerHandler);
+      canvas.addEventListener("mouseup", colorPickerHandler);
       break;
     case toolsName.eraser:
       canvas.classList.add("cursor-eraser");

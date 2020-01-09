@@ -40,6 +40,7 @@ const pixelSizeEls = document.querySelectorAll(".size__box");
 // colors
 const primaryColorEl = document.querySelector("#primary-color");
 const secondaryColorEl = document.querySelector("#secondary-color");
+const colorsSwapEl = document.querySelector('.colors__color-swap');
 
 export {
   canvas,
@@ -60,5 +61,6 @@ export {
   pixelSizeEl,
   pixelSizeEls,
   primaryColorEl,
-  secondaryColorEl
+  secondaryColorEl,
+  colorsSwapEl
 };

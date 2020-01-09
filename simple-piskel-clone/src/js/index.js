@@ -14,7 +14,8 @@ import {
 import {
   colorsInit,
   primaryColorHandler,
-  secondaryColorHandler
+  secondaryColorHandler,
+  colorsSwap
 } from "../components/colors/colors";
 import {
   canvas,
@@ -30,18 +31,21 @@ import {
   toolsName,
   pixelSizeEl,
   primaryColorEl,
-  secondaryColorEl
+  secondaryColorEl,
+  colorsSwapEl
 } from "../components/utils/Constants";
 
 // Disabling context menu
-window.oncontextmenu = (e) => {
+window.oncontextmenu = e => {
   e.preventDefault();
-}
+};
 
 // Event listeners
 slider.onchange = () => setValueInRange();
 
 pixelSizeEl.addEventListener("click", pixelSizeHandler);
+
+colorsSwapEl.addEventListener("click", colorsSwap);
 
 keyboardBtn.addEventListener("click", keyboardOpen);
 
