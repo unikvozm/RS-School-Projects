@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./img/favicon.png"
+    />
     <title>Simple Piskel Clone</title>
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
@@ -12,16 +17,15 @@
   </head>
   <body>
     <header class="header">
-      <div class="header__icon">
-        <div class="header__icon-stick"></div>
-        <div class="header__icon-stick"></div>
-        <div class="header__icon-stick"></div>
-      </div>
+      <a href="#" class="header__main-link"
+        ><img class="header__logo" src="./img/logo.png"
+      /></a>
       <h1 class="header__title">Simple Piskel Clone</h1>
-      <div class="header__dots">
-        <div class="header__dots-dot"></div>
-        <div class="header__dots-dot"></div>
-        <div class="header__dots-dot"></div>
+      <div class="header__btns">
+        <a href="#" class="header__btns-btn btn-create" target="_blank"
+          ><button class="header__btn">Create sprite</button></a
+        >
+        <button class="header__btn btn-auth">Sign in</button>
       </div>
     </header>
     <main class="main">
@@ -153,47 +157,36 @@
         <ul class="frames__preview">
           <li class="frames__frame active-frame">
             <canvas class="frames__frame-canvas"></canvas>
-            <button class="frames__frame-number">1</button>
-            <p class="frames__frame-tip">Toggle for preview</p>
-            <img
-              class="frames__frame-del"
-              src="./components/frames/icons/delete.png"
-            />
-            <p class="frames__frame-tip">Delete this frame</p>
-            <img
-              class="frames__frame-move"
-              src="./components/frames/icons/move.png"
-            />
-            <p class="frames__frame-tip">Drag and drop to move</p>
-            <img
-              class="frames__frame-double"
-              src="./components/frames/icons/dublicate.png"
-            />
-            <p class="frames__frame-tip">Dublicate this frame</p>
+            <button class="frames__frame-num frames__frame--btn">1</button>
+            <button class="frames__frame-del frames__frame--btn"></button>
+            <button class="frames__frame-move frames__frame--btn"></button>
+            <button class="frames__frame-double frames__frame--btn"></button>
           </li>
         </ul>
-        <div class="frames__add-new">
+        <button class="frames__add-new">
           <img
             class="frames__add-new--plus"
             src="./components/frames/icons/plus.png"
           />
-          <div class="frames__add-new--txt">Add new frame</div>
-        </div>
+          <p class="frames__add-new--txt">Add new frame</p>
+        </button>
       </section>
       <section class="drawing-area">
         <canvas class="drawing-area__canvas"
           >Your browser doesn't support canvas</canvas
         >
-        <input
-          type="range"
-          class="drawing-area__slider"
-          name="slider"
-          min="32"
-          max="128"
-          value="32"
-          step="32"
-        />
-        <label for="slider" class="drawing-area__slider-value">32</label>
+        <div class="drawing-area__slider-container">
+          <input
+            type="range"
+            class="drawing-area__slider"
+            name="slider"
+            min="32"
+            max="128"
+            value="32"
+            step="32"
+          />
+          <label for="slider" class="drawing-area__slider-value">32</label>
+        </div>
       </section>
     </main>
   </body>

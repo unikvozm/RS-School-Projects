@@ -17,6 +17,7 @@ import {
   secondaryColorHandler,
   colorsSwap
 } from "../components/colors/colors";
+import frames from '../components/frames/frames';
 import {
   canvas,
   slider,
@@ -32,7 +33,8 @@ import {
   pixelSizeEl,
   primaryColorEl,
   secondaryColorEl,
-  colorsSwapEl
+  colorsSwapEl,
+  framesAddNew,
 } from "../components/utils/Constants";
 
 // Disabling context menu
@@ -48,6 +50,8 @@ pixelSizeEl.addEventListener("click", pixelSizeHandler);
 colorsSwapEl.addEventListener("click", colorsSwap);
 
 keyboardBtn.addEventListener("click", keyboardOpen);
+
+framesAddNew.addEventListener('click', frames.addNewFrame);
 
 window.onload = () => {
   colorsInit();

@@ -1,0 +1,104 @@
+.frames {
+  width: 133px;
+  margin-right: 2px;
+  height: 85vh;
+  overflow: scroll;
+
+  &__preview {
+    width: 102px;
+    padding-left: 0;
+    margin: 0 auto;
+  }
+
+  &__frame {
+    list-style: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2px;
+    list-style: none;
+    width: 96px;
+    height: 96px;
+
+    &:hover > .frames__frame--btn {
+      opacity: 1;
+    }
+
+    &-canvas {
+      display: block;
+      margin: 0 auto;
+      position: absolute;
+      image-rendering: pixelated;
+      width: 96px;
+      height: 96px;
+      background-image: url("../canvas/canvasBackground.png");
+    }
+
+    &--btn {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    &-num {
+      top: 0;
+      left: 0;
+      background-color: yellow;
+      text-align: center;
+      line-height: 30px;
+      color: black;
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    &-del {
+      top: 0;
+      right: 0;
+      opacity: 0;
+      cursor: pointer;
+      background-image: url(./icons/delete.png);
+      background-color: rgba(100, 100, 100, 0.8);
+    }
+
+    &-move {
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      cursor: move;
+      background-image: url(./icons/move.png);
+      background-repeat: no-repeat;
+      background-color: rgba(100, 100, 100, 0.8);
+    }
+
+    &-double {
+      bottom: 0;
+      right: 0;
+      opacity: 0;
+      cursor: pointer;
+      background-image: url(./icons/dublicate.png);
+      background-color: rgba(100, 100, 100, 0.8);
+    }
+  }
+
+  &__add-new {
+    display: flex;
+    width: 102px;
+    height: 50px;
+    margin: 5px 9px;
+    background-color: #222222;
+    border: 3px solid #888888;
+    border-radius: 4px;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &--txt {
+	  color: #888888;
+	  padding-left: 5px;
+      text-align: left;
+    }
+  }
+}

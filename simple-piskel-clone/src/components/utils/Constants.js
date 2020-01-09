@@ -42,6 +42,11 @@ const primaryColorEl = document.querySelector("#primary-color");
 const secondaryColorEl = document.querySelector("#secondary-color");
 const colorsSwapEl = document.querySelector('.colors__color-swap');
 
+// frames
+const framesContainerEl = document.querySelector('.frames__preview');
+const framesDelBtns = document.querySelectorAll('.frames__frame-del');
+const framesAddNew = document.querySelector('.frames__add-new');
+
 export {
   canvas,
   canvasSize,
@@ -62,5 +67,8 @@ export {
   pixelSizeEls,
   primaryColorEl,
   secondaryColorEl,
-  colorsSwapEl
+  colorsSwapEl,
+  framesContainerEl,
+  framesDelBtns,
+  framesAddNew,
 };

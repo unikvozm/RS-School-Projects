@@ -9,7 +9,8 @@
     "lint": "eslint ./**/*.js",
     "lint-fix": "eslint --fix ./**/*.js",
     "clear": "del-cli dist",
-    "test": "jest"
+    "test": "jest",
+    "coverage:full": "jest --coverage --coverage-reporters=lcov"
   },
   "keywords": [],
   "author": "Natalia Volkova",
@@ -46,5 +47,8 @@
   "dependencies": {
     "core-js": "^3.4.7",
     "regenerator-runtime": "^0.13.3"
-  }
+  },
+  "jest": { 
+    "collectCoverageFrom" : ["src/**/*.js"]
+  }	
 }
