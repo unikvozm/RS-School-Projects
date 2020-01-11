@@ -1,5 +1,5 @@
-import setValueInRange from "./sizeSliderFunctionality";
+import setValueInRange from './sizeSliderFunctionality';
 
-test("setValueInRange function exists", () => {
+test('setValueInRange function exists', () => {
   expect(setValueInRange).toBeDefined();
 });

@@ -1,24 +1,25 @@
-import "../css/style.scss";
-import setValueInRange from "../components/resizing/sizeSlider";
-import storage from "../components/utils/localStorage/localStorage";
-import drawingArea from "../components/canvas/canvas";
-import setActiveTool from "../components/tools/tools";
+import './app.scss';
+
+import setValueInRange from '../../components/resizing/sizeSliderFunctionality';
+import storage from '../../components/utils/localStorage/localStorage';
+import drawingArea from '../../components/canvas/canvas';
+import setActiveTool from '../../components/tools/tools';
 import {
   pixelSizeHandler,
-  setActivePixelSize
-} from "../components/pixelSizeHandler/pixelSize";
+  setActivePixelSize,
+} from '../../components/pixelSizeHandler/pixelSize';
 import {
   keyboardInit,
-  keyboardOpen
-} from "../screens/keyShortcuts/keyChangeHandler";
+  keyboardOpen,
+} from '../keyShortcuts/keyChangeHandler';
 import {
   colorsInit,
   primaryColorHandler,
   secondaryColorHandler,
-  colorsSwap
-} from "../components/colors/colors";
-import frames from '../components/frames/frames';
-import {auth, loginHandler} from '../components/auth/auth';
+  colorsSwap,
+} from '../../components/colors/colors';
+import frames from '../../components/frames/frames';
+import { auth, loginHandler } from '../../components/auth/auth';
 import {
   canvas,
   slider,
@@ -36,22 +37,22 @@ import {
   secondaryColorEl,
   colorsSwapEl,
   framesAddNew,
-  loginBtn
-} from "../components/utils/Constants";
+  loginBtn,
+} from '../../components/utils/Constants';
 
 // Disabling context menu
-window.oncontextmenu = e => {
+window.oncontextmenu = (e) => {
   e.preventDefault();
 };
 
 // Event listeners
 slider.onchange = () => setValueInRange();
 
-pixelSizeEl.addEventListener("click", pixelSizeHandler);
+pixelSizeEl.addEventListener('click', pixelSizeHandler);
 
-colorsSwapEl.addEventListener("click", colorsSwap);
+colorsSwapEl.addEventListener('click', colorsSwap);
 
-keyboardBtn.addEventListener("click", keyboardOpen);
+keyboardBtn.addEventListener('click', keyboardOpen);
 
 framesAddNew.addEventListener('click', frames.addNewFrame);
 
@@ -62,6 +63,7 @@ window.onload = () => {
   colorsInit();
   slider.value = drawingArea.size;
   drawingArea.renderCanvas();
+  frames.updateActiveFrame();
   setValueInRange();
   setActivePixelSize();
   keyboardInit();
@@ -76,21 +78,15 @@ primaryColorEl.onchange = primaryColorHandler;
 secondaryColorEl.onchange = secondaryColorHandler;
 
 // Listeners for an active tool
-penEl.addEventListener("click", () => setActiveTool(toolsName.pen));
-strokeEl.addEventListener("click", () => setActiveTool(toolsName.stroke));
-paintBucketEl.addEventListener("click", () =>
-  setActiveTool(toolsName.paintBucket)
-);
-paintAllBucketEl.addEventListener("click", () =>
-  setActiveTool(toolsName.paintAllBucket)
-);
-colorPickerEl.addEventListener("click", () =>
-  setActiveTool(toolsName.colorPicker)
-);
-eraserEl.addEventListener("click", () => setActiveTool(toolsName.eraser));
+penEl.addEventListener('click', () => setActiveTool(toolsName.pen));
+strokeEl.addEventListener('click', () => setActiveTool(toolsName.stroke));
+paintBucketEl.addEventListener('click', () => setActiveTool(toolsName.paintBucket));
+paintAllBucketEl.addEventListener('click', () => setActiveTool(toolsName.paintAllBucket));
+colorPickerEl.addEventListener('click', () => setActiveTool(toolsName.colorPicker));
+eraserEl.addEventListener('click', () => setActiveTool(toolsName.eraser));
 
 // Listeners for Keyboard Shortcuts
-document.addEventListener("keyup", event => {
+document.addEventListener('keyup', (event) => {
   switch (event.key) {
     case keyShortcuts.pen:
       setActiveTool(toolsName.pen);

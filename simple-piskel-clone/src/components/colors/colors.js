@@ -1,6 +1,6 @@
-import "./colors.scss";
-import { primaryColorEl, secondaryColorEl } from "../utils/Constants";
-import drawingArea from "../canvas/canvasFunctionality";
+import './colors.scss';
+import { primaryColorEl, secondaryColorEl } from '../utils/Constants';
+import drawingArea from '../canvas/canvasFunctionality';
 
 function colorsInit() {
   primaryColorEl.value = drawingArea.primaryColor;
@@ -23,4 +23,6 @@ function colorsSwap() {
   secondaryColorEl.value = drawingArea.secondaryColor;
 }
 
-export { colorsInit, primaryColorHandler, secondaryColorHandler, colorsSwap };
+export {
+  colorsInit, primaryColorHandler, secondaryColorHandler, colorsSwap,
+};

@@ -1,9 +1,9 @@
-import { pixelSizeHandler, setActivePixelSize } from "./pixelSizeFunctionality";
+import { pixelSizeHandler, setActivePixelSize } from './pixelSizeFunctionality';
 
-test("pixelSizeHandler function exists", () => {
+test('pixelSizeHandler function exists', () => {
   expect(pixelSizeHandler).toBeDefined();
 });
 
-test("setActivePixelSize function exists", () => {
+test('setActivePixelSize function exists', () => {
   expect(setActivePixelSize).toBeDefined();
 });

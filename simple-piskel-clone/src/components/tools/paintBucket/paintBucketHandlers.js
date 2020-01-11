@@ -1,35 +1,33 @@
-import { canvas, canvasSize } from "../../utils/Constants";
-import drawingArea from "../../canvas/canvasFunctionality";
-import findColor from "../../utils/findColor/findColor";
-import fromHexToRGBA from "../../utils/fromHexToRgba/fromHexToRgba";
-import fullColorHex from "../../utils/rgbToHex/rgbToHex";
-import isColorSame from "../../utils/isColorSame/isColorSame";
-import storage from "../../utils/localStorage/localStorage";
+import { canvas, canvasSize } from '../../utils/Constants';
+import drawingArea from '../../canvas/canvasFunctionality';
+import findColor from '../../utils/findColor/findColor';
+import fromHexToRGBA from '../../utils/fromHexToRgba/fromHexToRgba';
+import fullColorHex from '../../utils/rgbToHex/rgbToHex';
+import isColorSame from '../../utils/isColorSame/isColorSame';
+import storage from '../../utils/localStorage/localStorage';
 
 function paintAllBucketHandler(event) {
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle =
-    event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
   ctx.fillRect(0, 0, drawingArea.size, drawingArea.size);
   storage.setImage(canvas.toDataURL());
 }
 
 function paintBucketHandler(event) {
-  let colorToFill =
-    event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
+  let colorToFill = event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
   colorToFill = fromHexToRGBA(colorToFill);
   const colorToReplace = findColor(event);
   const startX = Math.floor(event.offsetX / (canvasSize / drawingArea.size));
   const startY = Math.floor(event.offsetY / (canvasSize / drawingArea.size));
   const pixelStack = [[startX, startY]];
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d');
   const colorArr = ctx.getImageData(0, 0, drawingArea.size, drawingArea.size)
     .data;
 
   // If color to fill = color to replace => do nothing
   if (
-    fullColorHex(colorToReplace[0], colorToReplace[1], colorToReplace[2]) ===
-    drawingArea.currColor
+    fullColorHex(colorToReplace[0], colorToReplace[1], colorToReplace[2])
+    === drawingArea.currColor
   ) {
     return;
   }
@@ -49,8 +47,8 @@ function paintBucketHandler(event) {
     y += 1;
 
     while (
-      y <= drawingArea.size - 1 &&
-      isColorSame(pixelPos, colorArr, colorToReplace)
+      y <= drawingArea.size - 1
+      && isColorSame(pixelPos, colorArr, colorToReplace)
     ) {
       y += 1;
       colorArr[pixelPos] = colorToFill.r;

@@ -1,8 +1,8 @@
-import { canvas, canvasSize } from "../../utils/Constants";
-import drawingArea from "../../canvas/canvas";
-import storage from "../../utils/localStorage/localStorage";
+import { canvas, canvasSize } from '../../utils/Constants';
+import drawingArea from '../../canvas/canvas';
+import storage from '../../utils/localStorage/localStorage';
 
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext('2d');
 
 function eraserHandler(event) {
   const cellSize = drawingArea.pixelSize;
@@ -10,10 +10,10 @@ function eraserHandler(event) {
   let lastX = event.offsetX;
   let lastY = event.offsetY;
   let xCell = Math.floor(
-    lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+    lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
   );
   let yCell = Math.floor(
-    lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+    lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
   );
 
   ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
@@ -38,10 +38,10 @@ function eraserHandler(event) {
         lastY += stepY;
       }
       xCell = Math.floor(
-        lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+        lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
       );
       yCell = Math.floor(
-        lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+        lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
       );
       ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
       storage.setImage(canvas.toDataURL());
@@ -49,14 +49,14 @@ function eraserHandler(event) {
   }
 
   function removeListeners() {
-    canvas.removeEventListener("mousemove", clearing);
-    canvas.removeEventListener("mouseout", removeListeners);
-    canvas.removeEventListener("mouseup", removeListeners);
+    canvas.removeEventListener('mousemove', clearing);
+    canvas.removeEventListener('mouseout', removeListeners);
+    canvas.removeEventListener('mouseup', removeListeners);
   }
 
-  canvas.addEventListener("mousemove", clearing);
-  canvas.addEventListener("mouseout", removeListeners);
-  canvas.addEventListener("mouseup", removeListeners);
+  canvas.addEventListener('mousemove', clearing);
+  canvas.addEventListener('mouseout', removeListeners);
+  canvas.addEventListener('mouseup', removeListeners);
 }
 
 export default eraserHandler;

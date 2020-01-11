@@ -1,8 +1,8 @@
-import { canvas, canvasSize } from "../../utils/Constants";
-import drawingArea from "../../canvas/canvasFunctionality";
-import storage from "../../utils/localStorage/localStorage";
+import { canvas, canvasSize } from '../../utils/Constants';
+import drawingArea from '../../canvas/canvasFunctionality';
+import storage from '../../utils/localStorage/localStorage';
 
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext('2d');
 
 function strokeHandler(event) {
   const cellSize = drawingArea.pixelSize;
@@ -10,14 +10,13 @@ function strokeHandler(event) {
   let lastX = event.offsetX;
   let lastY = event.offsetY;
   let xCell = Math.floor(
-    lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+    lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
   );
   let yCell = Math.floor(
-    lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+    lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
   );
 
-  ctx.fillStyle =
-    event.button === 2 ? drawingArea.secondaryColor : drawingArea.primaryColor;
+  ctx.fillStyle = event.button === 2 ? drawingArea.secondaryColor : drawingArea.primaryColor;
   ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
 
   function drawingLine(e) {
@@ -40,10 +39,10 @@ function strokeHandler(event) {
         lastY += stepY;
       }
       xCell = Math.floor(
-        lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+        lastX / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
       );
       yCell = Math.floor(
-        lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize)
+        lastY / ((canvasSize / drawingArea.size) * drawingArea.pixelSize),
       );
       ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
     }
@@ -51,14 +50,14 @@ function strokeHandler(event) {
   }
 
   function removeListeners() {
-    canvas.removeEventListener("mouseup", drawingLine);
-    canvas.removeEventListener("mouseout", removeListeners);
-    canvas.removeEventListener("mouseup", removeListeners);
+    canvas.removeEventListener('mouseup', drawingLine);
+    canvas.removeEventListener('mouseout', removeListeners);
+    canvas.removeEventListener('mouseup', removeListeners);
   }
 
-  canvas.addEventListener("mouseup", drawingLine);
-  canvas.addEventListener("mouseout", removeListeners);
-  canvas.addEventListener("mouseup", removeListeners);
+  canvas.addEventListener('mouseup', drawingLine);
+  canvas.addEventListener('mouseout', removeListeners);
+  canvas.addEventListener('mouseup', removeListeners);
 }
 
 export default strokeHandler;

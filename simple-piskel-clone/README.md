@@ -7,4 +7,3 @@
  - **npm run lint**: to check for eslint errors,
  - **npm test**: to run tests,
  - **npm run coverage:full**: to check test coverage
-
