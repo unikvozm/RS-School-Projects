@@ -5,3 +5,4 @@ Private repository for @unikvozm
 - CodeJam Image API: https://focused-varahamihira-8573ce.netlify.com/codejam-image-api/dist/index.html;
 - Presentation: https://app.netlify.com/sites/jovial-ardinghelli-9b72f2/overview;
 - Fancy Weather: https://youthful-shaw-affff2.netlify.com/;
+- Simple Piskel Clone: https://relaxed-lamarr-d3d480.netlify.com/
