@@ -1,6 +1,6 @@
 # Simple Piskel Clone
 
- demo: https://keen-brahmagupta-64749a.netlify.com/
+ demo: https://relaxed-lamarr-d3d480.netlify.com/
 
  - **npm run dev**: to serve the app,
  - **npm run build**: to biuld the app,

@@ -103,11 +103,11 @@ const storage = {
   },
 
   getActiveFrameNum: () => {
-    if (localStorage.getItem('active frame') === null) {
+    if (localStorage.getItem('active frame #') === null) {
       storage.setActiveFrameNum(1);
       return 1;
     }
-    return localStorage.getItem('active frame');
+    return localStorage.getItem('active frame #');
   },
 
   setActiveFrameNum: (activeFrameNum) => {

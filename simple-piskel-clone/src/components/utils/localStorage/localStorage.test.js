@@ -42,3 +42,23 @@ test('getKeyShortcuts() to be equal to the object', () => {
   storage.setKeyShortcuts(keyShortcuts);
   expect(storage.getKeyShortcuts()).toEqual(keyShortcuts);
 });
+
+test("after updateAuthStatus(true), getAuthStatus() to be equal 'true'", () => {
+  storage.updateAuthStatus('true');
+  expect(storage.getAuthStatus()).toBe('true');
+});
+
+test("after setActiveFrameNum('2'), getActiveFrameNum() to be equal '2'", () => {
+  storage.setActiveFrameNum('2');
+  expect(storage.getActiveFrameNum()).toBe('2');
+});
+
+test("after setFramesTotalNum('2'), getFramesTotalNum() to be equal '2'", () => {
+  storage.setFramesTotalNum('2');
+  expect(storage.getFramesTotalNum()).toBe('2');
+});
+
+test("after setAllFrames(JSON.stringify([]), getAllFrames() to be equal []", () => {
+  storage.setAllFrames(JSON.stringify([]));
+  expect(storage.getAllFrames()).toEqual([]);
+});

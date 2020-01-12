@@ -18,6 +18,7 @@
 | Jan 9      | Jan 9    | 0.5h       | add tests                                        |
 | Jan 9      | Jan 9    | 3h         | add Firebase authorisation                       |
 | Jan 11     | Jan 11   | 2h         | update webpack to add a landing page             |
-| Jan 11     | Jan 13   | 4h         | add and fix frames implementation                |
+| Jan 11     | Jan 12   | 4h         | add and fix frames implementation                |
+| Jan 12     | Jan 12   | 2h         | implement landing page                           |
 
-Total: 50 h
+Total: 52 h
