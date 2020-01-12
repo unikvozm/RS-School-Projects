@@ -44,6 +44,7 @@ const colorsSwapEl = document.querySelector('.colors__color-swap');
 
 // frames
 const framesContainerEl = document.querySelector('.frames__preview');
+const framesEls = document.querySelectorAll('.frames__frame-canvas');
 const framesDelBtns = document.querySelectorAll('.frames__frame-del');
 const framesAddNew = document.querySelector('.frames__add-new');
 
@@ -73,6 +74,7 @@ export {
   secondaryColorEl,
   colorsSwapEl,
   framesContainerEl,
+  framesEls,
   framesDelBtns,
   framesAddNew,
   loginBtn,

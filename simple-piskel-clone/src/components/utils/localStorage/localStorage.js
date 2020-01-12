@@ -84,7 +84,7 @@ const storage = {
         colorPicker: 'o',
         eraser: 'e',
       };
-      storage.setActiveTool(keyShortcuts);
+      storage.setKeyShortcuts(keyShortcuts);
       return keyShortcuts;
     }
     return JSON.parse(localStorage.getItem('key shortcuts'));
@@ -102,18 +102,38 @@ const storage = {
     return localStorage.getItem('logged in');
   },
 
-  getActiveFrame: () => {
+  getActiveFrameNum: () => {
     if (localStorage.getItem('active frame') === null) {
-      storage.setActiveFrame(1);
+      storage.setActiveFrameNum(1);
       return 1;
     }
     return localStorage.getItem('active frame');
   },
 
-  setActiveFrame: (activeFrame) => {
-    localStorage.setItem('active frame', activeFrame);
+  setActiveFrameNum: (activeFrameNum) => {
+    localStorage.setItem('active frame #', activeFrameNum);
   },
 
+  getFramesTotalNum: () => {
+    if (localStorage.getItem('total frames') === null) {
+      storage.setFramesTotalNum(1);
+      return 1;
+    }
+    return localStorage.getItem('total frames');
+  },
+
+  setFramesTotalNum: (num) => {
+    localStorage.setItem('total frames', num);
+  },
+
+  getAllFrames: () => {
+    if (localStorage.getItem('frames') === null) {
+      storage.setAllFrames(JSON.stringify([]));
+    }
+    return JSON.parse(localStorage.getItem('frames'));
+  },
+
+  setAllFrames: (data) => localStorage.setItem('frames', data),
 };
 
 export default storage;

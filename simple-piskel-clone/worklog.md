@@ -17,5 +17,7 @@
 | Jan 9      | Jan 9    | 0.5h       | fix right-click tools implementation             |
 | Jan 9      | Jan 9    | 0.5h       | add tests                                        |
 | Jan 9      | Jan 9    | 3h         | add Firebase authorisation                       |
+| Jan 11     | Jan 11   | 2h         | update webpack to add a landing page             |
+| Jan 11     | Jan 13   | 4h         | add and fix frames implementation                |
 
-Total: 44 h
+Total: 50 h

@@ -8,10 +8,7 @@ import {
   pixelSizeHandler,
   setActivePixelSize,
 } from '../../components/pixelSizeHandler/pixelSize';
-import {
-  keyboardInit,
-  keyboardOpen,
-} from '../keyShortcuts/keyChangeHandler';
+import { keyboardInit, keyboardOpen } from '../keyShortcuts/keyChangeHandler';
 import {
   colorsInit,
   primaryColorHandler,
@@ -37,6 +34,8 @@ import {
   secondaryColorEl,
   colorsSwapEl,
   framesAddNew,
+  // framesDelBtns,
+  framesContainerEl,
   loginBtn,
 } from '../../components/utils/Constants';
 
@@ -56,22 +55,35 @@ keyboardBtn.addEventListener('click', keyboardOpen);
 
 framesAddNew.addEventListener('click', frames.addNewFrame);
 
+framesContainerEl.addEventListener(
+  'click',
+  (event) => frames.setActiveFrame(
+    event.target.getAttribute('data-item'),
+  ),
+);
+
+// framesDelBtns.forEach((el) => el.addEventListener('click',
+// frames.deleteFrame(el.getAttribute('btn-del'))));
+
 loginBtn.addEventListener('click', loginHandler);
 
 window.onload = () => {
   auth();
+  storage.updateAuthStatus(false);
   colorsInit();
   slider.value = drawingArea.size;
   drawingArea.renderCanvas();
-  frames.updateActiveFrame();
   setValueInRange();
   setActivePixelSize();
   keyboardInit();
   setActiveTool(drawingArea.activeTool);
+  frames.renderFrames();
 };
 
 window.onbeforeunload = () => {
   storage.setImage(canvas.toDataURL());
+  storage.setAllFrames(JSON.stringify(frames.framesArr));
+  storage.setFramesTotalNum(frames.items);
 };
 
 primaryColorEl.onchange = primaryColorHandler;

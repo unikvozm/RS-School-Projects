@@ -1,6 +1,7 @@
 import { canvas, canvasSize } from '../../utils/Constants';
 import drawingArea from '../../canvas/canvas';
 import storage from '../../utils/localStorage/localStorage';
+import frames from '../../frames/frames';
 
 const ctx = canvas.getContext('2d');
 
@@ -17,6 +18,8 @@ function eraserHandler(event) {
   );
 
   ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
+  storage.setImage(canvas.toDataURL());
+  frames.updateActiveFrame();
 
   function clearing(e) {
     const currX = e.offsetX;
@@ -45,6 +48,7 @@ function eraserHandler(event) {
       );
       ctx.clearRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
       storage.setImage(canvas.toDataURL());
+      frames.updateActiveFrame();
     }
   }
 

@@ -1,6 +1,7 @@
 import { canvas, canvasSize } from '../../utils/Constants';
 import drawingArea from '../../canvas/canvasFunctionality';
 import storage from '../../utils/localStorage/localStorage';
+import frames from '../../frames/frames';
 
 const ctx = canvas.getContext('2d');
 
@@ -18,6 +19,8 @@ function strokeHandler(event) {
 
   ctx.fillStyle = event.button === 2 ? drawingArea.secondaryColor : drawingArea.primaryColor;
   ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
+  storage.setImage(canvas.toDataURL());
+  frames.updateActiveFrame();
 
   function drawingLine(e) {
     const currX = e.offsetX;
@@ -47,6 +50,7 @@ function strokeHandler(event) {
       ctx.fillRect(xCell * cellSize, yCell * cellSize, cellSize, cellSize);
     }
     storage.setImage(canvas.toDataURL());
+    frames.updateActiveFrame();
   }
 
   function removeListeners() {

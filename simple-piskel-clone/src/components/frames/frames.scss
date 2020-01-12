@@ -1,5 +1,5 @@
 .frames {
-  width: 133px;
+  width: 143px;
   margin-right: 2px;
   height: 85vh;
   overflow: scroll;
@@ -19,6 +19,7 @@
     list-style: none;
     width: 96px;
     height: 96px;
+    background-image: url("../canvas/canvasBackground.png");
 
     &:hover > .frames__frame--btn {
       opacity: 1;
@@ -28,10 +29,10 @@
       display: block;
       margin: 0 auto;
       position: absolute;
-      image-rendering: pixelated;
       width: 96px;
       height: 96px;
-      background-image: url("../canvas/canvasBackground.png");
+      background-size: contain;
+      image-rendering: pixelated;
     }
 
     &--btn {
@@ -100,5 +101,18 @@
       padding-left: 5px;
       text-align: left;
     }
+  }
+}
+
+.active-frame {
+  border: 3px solid yellow;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -15px;
+    top: calc(50% - 6px);
+    border: 6px solid transparent;
+    border-left: 6px solid yellow;
   }
 }

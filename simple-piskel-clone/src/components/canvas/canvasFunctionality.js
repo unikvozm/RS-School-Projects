@@ -50,6 +50,9 @@ const drawingArea = {
     img.addEventListener('load', () => {
       canvCtx.drawImage(img, 0, 0);
     });
+
+    storage.setImage(canvas.toDataURL());
+    // frames.updateActiveFrame();
   },
 };
 

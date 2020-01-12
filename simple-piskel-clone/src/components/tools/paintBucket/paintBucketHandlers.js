@@ -5,12 +5,14 @@ import fromHexToRGBA from '../../utils/fromHexToRgba/fromHexToRgba';
 import fullColorHex from '../../utils/rgbToHex/rgbToHex';
 import isColorSame from '../../utils/isColorSame/isColorSame';
 import storage from '../../utils/localStorage/localStorage';
+import frames from '../../frames/frames';
 
 function paintAllBucketHandler(event) {
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = event.which === 1 ? drawingArea.primaryColor : drawingArea.secondaryColor;
   ctx.fillRect(0, 0, drawingArea.size, drawingArea.size);
   storage.setImage(canvas.toDataURL());
+  frames.updateActiveFrame();
 }
 
 function paintBucketHandler(event) {
@@ -84,6 +86,7 @@ function paintBucketHandler(event) {
   const imageData = new ImageData(colorArr, canvas.width, canvas.height);
   ctx.putImageData(imageData, 0, 0);
   storage.setImage(canvas.toDataURL());
+  frames.updateActiveFrame();
 }
 
 export { paintAllBucketHandler, paintBucketHandler };

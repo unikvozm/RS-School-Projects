@@ -9,6 +9,7 @@ function setValueInRange() {
   canvas.width = size;
   canvas.height = size;
   drawingArea.renderCanvas();
+
   const newPoint = (slider.value - slider.getAttribute('min'))
     / (slider.getAttribute('max') - slider.getAttribute('min'));
   let offset;
